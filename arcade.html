@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101219">
+  <meta name="description" content="Nine little browser games, one happy place. Fight, race, score, explore, and chase your next personal best in Candy Arcade.">
+  <title>Candy Arcade — Find your next one more try</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/arcade.css">
+  <script src="assets/core.js" defer></script>
+  <script src="assets/hub.js" defer></script>
+</head>
+<body>
+  <a href="#games" class="skip-link">Skip to games</a>
+  <header class="site-header">
+    <a href="arcade.html" class="brand" aria-label="Candy Arcade home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>CANDY<em>ARCADE</em></a>
+    <nav class="header-nav" aria-label="Main navigation"><a href="#games" class="active">Discover</a><a href="#progress">Your progress</a><span class="header-pill"><i class="online-dot"></i> ALWAYS FREE TO PLAY</span></nav>
+  </header>
+  <main class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow">SMALL GAMES. GREAT LITTLE ESCAPES.</span>
+        <h1 id="hero-title">Your next<br><span>one more try.</span></h1>
+        <p>Nine worlds to drop into. A few minutes to make your own. Pick a game and find your flow.</p>
+        <div class="hero-actions"><a href="#games" class="button primary">Find your game <span aria-hidden="true">↓</span></a><button class="button secondary" id="surprise-button" type="button">Surprise me <span aria-hidden="true">↗</span></button></div>
+        <p class="hero-footnote">No downloads. No account. Just play.</p>
+      </div>
+      <a class="hero-feature" href="games/sunset-sprint/index.html" aria-label="Play Sunset Sprint, our featured racing game">
+        <img src="assets/art/sunset-sprint.svg" alt="A coral sports car racing toward a golden sunset between palm trees" width="600" height="380" fetchpriority="high">
+        <span class="feature-label">IN THE SPOTLIGHT</span>
+        <div class="feature-bottom"><div><span class="eyebrow">RACING / CHASE THE HORIZON</span><h2>Sunset Sprint</h2></div><span class="round-arrow" aria-hidden="true">↗</span></div>
+      </a>
+    </section>
+    <section class="daily-strip" aria-labelledby="daily-title">
+      <div class="daily-icon" aria-hidden="true">✦</div>
+      <div class="daily-copy"><span class="eyebrow">A FRESH REASON TO PLAY</span><h2 id="daily-title">Today’s daily pick</h2><p id="daily-description">Same starting seed. Your own way to play.</p></div>
+      <span class="daily-date" id="daily-date"></span>
+      <a class="button secondary" id="daily-link" href="games/skybound/index.html?mode=daily">Take the challenge →</a>
+    </section>
+    <section id="games" aria-labelledby="collection-title">
+      <div class="section-heading"><div><h2 id="collection-title">A little something for every mood.</h2><p>Eight new adventures. One original favorite.</p></div><span class="small-link" id="game-count">9 games</span></div>
+      <div class="collection-tools">
+        <div class="filters" role="group" aria-label="Filter games by category">
+          <button class="filter active" type="button" data-filter="All" aria-pressed="true">All games</button>
+          <button class="filter" type="button" data-filter="Action" aria-pressed="false">Action</button>
+          <button class="filter" type="button" data-filter="Racing" aria-pressed="false">Racing</button>
+          <button class="filter" type="button" data-filter="Sports" aria-pressed="false">Sports</button>
+          <button class="filter" type="button" data-filter="Strategy" aria-pressed="false">Strategy</button>
+          <button class="filter" type="button" data-filter="Puzzle" aria-pressed="false">Puzzle</button>
+          <button class="filter" type="button" data-filter="Favorites" aria-pressed="false">♡ Saved</button>
+        </div>
+        <label class="search"><span aria-hidden="true">⌕</span><input id="game-search" type="search" placeholder="Find a game…" aria-label="Search games" autocomplete="off"></label>
+      </div>
+      <div class="game-grid" id="game-grid"></div>
+      <div class="empty-state" id="empty-state" hidden>No games here yet. Try another category or save a favorite.</div>
+      <p id="filter-status" class="sr-only" aria-live="polite"></p>
+      <noscript><p>Enable JavaScript to play. You can also open <a href="index.html">Candy Drop</a> or any game from the repository’s games folder.</p></noscript>
+    </section>
+    <section class="progress-section" id="progress" aria-labelledby="progress-title">
+      <div class="progress-title"><h2 id="progress-title">Make a little progress.</h2><p>Every game has a new personal best in it.</p></div>
+      <div class="progress-stat"><strong id="stat-explored">0/9</strong><span>games explored</span></div>
+      <div class="progress-stat"><strong id="stat-runs">0</strong><span>runs started</span></div>
+      <div class="progress-stat"><strong id="stat-medals">0</strong><span>classic medals earned</span></div>
+    </section>
+    <p class="local-note" id="storage-note">Your scores and saved games stay in this browser.</p>
+  </main>
+  <footer class="site-footer"><span>Made for the joy of playing. <a href="index.html">Start with Candy Drop ↗</a></span><span class="footer-note">A collection of small, original browser games.</span></footer>
+</body>
+</html>

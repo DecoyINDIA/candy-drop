@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Catch candy, dodge bombs, and chase your combo in the original Candy Drop. Explore eight more free games in Candy Arcade.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <title>Candy Drop 🍬</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,10 +23,19 @@
     height: 100vh;
     cursor: none;
   }
+  #legacy-nav { position: fixed; top: 82px; left: 14px; right: 14px; z-index: 5; display: flex; justify-content: space-between; pointer-events: none; gap: 8px; }
+  #legacy-nav a, #legacy-nav button { pointer-events: auto; color: #e8ddff; background: #24183be8; border: 1px solid #ffffff28; padding: 10px 13px; min-height: 42px; font: 600 12px system-ui,sans-serif; border-radius: 10px; text-decoration: none; cursor: pointer; touch-action: manipulation; }
+  #legacy-nav a { color: #c0f791; }
+  #legacy-nav button:disabled { opacity: .4; cursor: default; }
+  #legacy-nav a:focus-visible, #legacy-nav button:focus-visible { outline: 3px solid #c0f791; outline-offset: 3px; }
+  #legacy-nav .tools { display: flex; gap: 7px; }
+  @media (max-width: 420px) { #legacy-nav { left: 10px; right: 10px; } #legacy-nav a, #legacy-nav button { padding: 9px 11px; font-size: 11px; } }
 </style>
 </head>
 <body>
-<canvas id="game"></canvas>
+<nav id="legacy-nav" aria-label="Candy Drop navigation"><a href="arcade.html">← Arcade · 9 games</a><div class="tools"><button id="legacy-pause" type="button" disabled aria-label="Pause game">Pause</button><button id="legacy-sound" type="button" aria-label="Mute sound">Sound on</button></div></nav>
+<canvas id="game" tabindex="0" aria-label="Candy Drop. Move with mouse, touch, A and D, or arrow keys. Enter starts; P or Escape pauses.">Catch candy and avoid bombs. Enable JavaScript and use a canvas-compatible browser to play.</canvas>
+<script src="assets/core.js"></script>
 <script>
 'use strict';
 // ============================================================
@@ -34,6 +45,12 @@
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 let W = 0, H = 0, DPR = 1;
+const sharedProgress = window.ArcadeCore ? window.ArcadeCore.browserStorage() : null;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let paused = false, soundOn = sharedProgress ? sharedProgress.read().sound : true;
+let newRecord = false;
+function readBest() { try { const value = Number(localStorage.getItem('candydrop_best')); return Number.isFinite(value) ? Math.max(0, value) : 0; } catch (_) { return 0; } }
+function writeBest(value) { try { localStorage.setItem('candydrop_best', value); } catch (_) {} }
 
 function resize() {
   DPR = Math.min(window.devicePixelRatio || 1, 2);
@@ -59,13 +76,14 @@ const CANDY_COLORS = [
 // ---------- audio (tiny synth, no files) ----------
 let audioCtx = null;
 function ensureAudio() {
+  if (!soundOn) return;
   if (!audioCtx) {
     try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {}
   }
-  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
 }
 function beep(freq, dur, type, vol, slide) {
-  if (!audioCtx) return;
+  if (!audioCtx || !soundOn) return;
   const t = audioCtx.currentTime;
   const o = audioCtx.createOscillator();
   const g = audioCtx.createGain();
@@ -97,7 +115,7 @@ let particles = [];
 let popups = [];       // floating score text
 let stars = [];        // background twinkles
 
-let score = 0, best = +(localStorage.getItem('candydrop_best') || 0);
+let score = 0, best = Math.max(readBest(), sharedProgress?.read().games['candy-drop']?.best || 0);
 let lives = 3, level = 1, combo = 0, bestCombo = 0;
 let spawnTimer = 0, shake = 0, flash = 0, flashColor = '#fff';
 let levelBanner = 0, frenzy = 0;   // frenzy = star power seconds
@@ -137,13 +155,35 @@ canvas.addEventListener('touchmove', e => { e.preventDefault(); movePointer(e.to
 canvas.addEventListener('touchstart', e => { e.preventDefault(); handleTap(e.touches[0].clientX); }, { passive: false });
 canvas.addEventListener('mousedown', e => handleTap(e.clientX));
 window.addEventListener('keydown', e => {
+  if (e.target.closest('button,a') && (e.key === ' ' || e.key === 'Enter')) return;
+  if (['ArrowLeft', 'ArrowRight', ' ', 'Enter', 'Escape', 'p', 'P'].includes(e.key)) e.preventDefault();
+  if (e.key === 'Escape' || e.key.toLowerCase() === 'p') { if (!e.repeat) setPaused(!paused); return; }
   keys[e.key] = true;
-  if ((e.key === ' ' || e.key === 'Enter') && state !== STATE.PLAYING) startGame();
+  if ((e.key === ' ' || e.key === 'Enter') && state !== STATE.PLAYING && !e.repeat) startGame();
 });
 window.addEventListener('keyup', e => keys[e.key] = false);
+function setPaused(value) {
+  if (state !== STATE.PLAYING) return;
+  paused = value; keys = {};
+  document.getElementById('legacy-pause').textContent = paused ? 'Resume' : 'Pause';
+  document.getElementById('legacy-pause').setAttribute('aria-label', paused ? 'Resume game' : 'Pause game');
+}
+document.getElementById('legacy-pause').addEventListener('click', () => setPaused(!paused));
+function updateSoundButton() {
+  document.getElementById('legacy-sound').textContent = soundOn ? 'Sound on' : 'Sound off';
+  document.getElementById('legacy-sound').setAttribute('aria-label', soundOn ? 'Mute sound' : 'Enable sound');
+  document.getElementById('legacy-sound').setAttribute('aria-pressed', String(soundOn));
+}
+document.getElementById('legacy-sound').addEventListener('click', () => {
+  soundOn = !soundOn; sharedProgress?.change(data => { data.sound = soundOn; }); ensureAudio(); updateSoundButton();
+});
+updateSoundButton();
+window.addEventListener('blur', () => { keys = {}; setPaused(true); });
+document.addEventListener('visibilitychange', () => { if (document.hidden) setPaused(true); });
 
 function handleTap(x) {
   ensureAudio();
+  if (paused) { setPaused(false); return; }
   if (state === STATE.MENU) startGame();
   else if (state === STATE.OVER && overCooldown <= 0) startGame();
   else movePointer(x);
@@ -152,6 +192,11 @@ function handleTap(x) {
 let overCooldown = 0;
 
 function startGame() {
+  ensureAudio(); paused = false; keys = {}; newRecord = false;
+  sharedProgress?.begin('candy-drop');
+  document.getElementById('legacy-pause').disabled = false;
+  document.getElementById('legacy-pause').textContent = 'Pause';
+  document.getElementById('legacy-pause').setAttribute('aria-label', 'Pause game');
   state = STATE.PLAYING;
   score = 0; lives = 3; level = 1; combo = 0; bestCombo = 0;
   catchesThisLevel = 0; frenzy = 0;
@@ -203,6 +248,7 @@ function popup(x, y, text, color, big) {
 
 // ---------- update ----------
 function update(dt) {
+  if (paused) return;
   // player follows pointer / keys
   if (keys['ArrowLeft'] || keys['a']) player.targetX -= 560 * dt;
   if (keys['ArrowRight'] || keys['d']) player.targetX += 560 * dt;
@@ -243,6 +289,7 @@ function update(dt) {
         Math.abs(it.x - player.x) < player.w / 2 + it.r * 0.7) {
       items.splice(i, 1);
       onCatch(it);
+      if (state !== STATE.PLAYING) break;
       continue;
     }
     // missed (fell past)
@@ -331,12 +378,16 @@ function onCatch(it) {
 }
 
 function gameOver() {
+  if (state !== STATE.PLAYING) return;
   state = STATE.OVER;
+  document.getElementById('legacy-pause').disabled = true;
   overCooldown = 0.8;         // avoid instant accidental restart
+  newRecord = score > best;
   if (score > best) {
     best = score;
-    localStorage.setItem('candydrop_best', best);
+    writeBest(best);
   }
+  sharedProgress?.finish('candy-drop', score, [1000, 3000, 6000]);
   sfx.over();
   shake = 18;
 }
@@ -595,7 +646,7 @@ function drawCenteredPanel(lines) {
     ctx.font = l.font;
     ctx.fillStyle = l.color;
     if (l.glow) { ctx.shadowColor = l.glow; ctx.shadowBlur = 20; }
-    ctx.fillText(l.text, W / 2, y + (l.dy || 0));
+    ctx.fillText(l.text, W / 2, y + (l.dy || 0), Math.max(100, W - 30));
     ctx.shadowBlur = 0;
     y += l.gap || 46;
   }
@@ -623,7 +674,7 @@ function drawMenu(t) {
 function drawOver(t) {
   ctx.fillStyle = 'rgba(10,5,26,0.72)';
   ctx.fillRect(0, 0, W, H);
-  const isRecord = score >= best && score > 0;
+  const isRecord = newRecord;
   drawCenteredPanel([
     { text: 'GAME OVER', font: '900 52px "Segoe UI"', color: '#FF5C5C', glow: '#FF9090', gap: 64 },
     { text: score + ' points', font: '800 40px "Segoe UI"', color: '#FFD23F', glow: '#FFE888', gap: 44 },
@@ -650,7 +701,7 @@ function frame(t) {
   update(dt);
 
   ctx.save();
-  if (shake > 0) {
+  if (shake > 0 && !reducedMotion) {
     ctx.translate((Math.random() - 0.5) * shake, (Math.random() - 0.5) * shake);
   }
 
@@ -684,16 +735,24 @@ function frame(t) {
   ctx.restore();
 
   // screen flash
-  if (flash > 0) {
+  if (flash > 0 && !reducedMotion) {
     ctx.globalAlpha = flash * 0.35;
     ctx.fillStyle = flashColor;
     ctx.fillRect(0, 0, W, H);
     ctx.globalAlpha = 1;
   }
+  if (paused) {
+    ctx.fillStyle = 'rgba(10,5,26,.78)'; ctx.fillRect(0, 0, W, H);
+    drawCenteredPanel([
+      { text: 'PAUSED', font: '800 42px system-ui', color: '#c0f791', gap: 48 },
+      { text: 'Tap to resume · P / Escape', font: '500 17px system-ui', color: '#e8ddff' }
+    ]);
+  }
 
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
+if (new URLSearchParams(location.search).get('test') === '1') window.__candy = { start: startGame, pause: () => setPaused(true), resume: () => setPaused(false), inspect: () => ({ state, score, lives, level, paused, playerX: player.x, items: items.length }) };
 </script>
 </body>
 </html>
