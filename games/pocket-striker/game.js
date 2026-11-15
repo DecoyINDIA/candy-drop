@@ -17,7 +17,7 @@
       { id: 'right', label: '→', keys: ['ArrowRight', 'KeyD'] },
       { id: 'sprint', label: 'Sprint', keys: ['ShiftLeft', 'ShiftRight'] },
       { id: 'shoot', label: 'Shot', keys: ['Space'] },
-      { id: 'pass', label: 'Pass / swap', keys: ['KeyE'] }
+      { id: 'pass', label: 'Pass', keys: ['KeyE'] }
     ],
     medals: [500, 1200, 2200],
     create(api) {

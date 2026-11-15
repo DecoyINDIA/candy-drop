@@ -38,11 +38,27 @@ async function assertNoOverflow(page) {
   const size = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth }));
   assert.ok(size.document <= size.viewport + 1, `Horizontal overflow: ${size.document}px on a ${size.viewport}px viewport`);
 }
+async function assertHubLayout(page, mobile) {
+  const cardRatio = mobile ? 1.4 : 1.9, heroRatio = mobile ? 1.9 : 1.46;
+  const cards = await page.locator('.card-art').evaluateAll(images => images.map(image => ({ width: image.getBoundingClientRect().width, height: image.getBoundingClientRect().height })));
+  assert.equal(cards.length, 9);
+  for (const [index, card] of cards.entries()) {
+    assert.ok(card.width > 0 && card.height > 0 && Math.abs(card.width / card.height - cardRatio) < 0.08,
+      `Card ${index + 1} art must keep a ${cardRatio}:1 ratio, got ${card.width}×${card.height}`);
+  }
+  const hero = await page.locator('.hero-feature img').boundingBox();
+  assert.ok(hero && Math.abs(hero.width / hero.height - heroRatio) < 0.08,
+    `Hero art must keep a ${heroRatio}:1 ratio, got ${hero && `${hero.width}×${hero.height}`}`);
+  const icon = await page.locator('.search span').boundingBox(), input = await page.locator('#game-search').boundingBox();
+  assert.ok(icon && input && icon.x >= input.x - 3 && icon.y >= input.y - 3 &&
+    icon.x + icon.width <= input.x + input.width + 3 && icon.y + icon.height <= input.y + input.height + 3,
+  'The search icon must remain inside the input bounds');
+}
 async function screenshot(page, filename, locator) {
   if (locator) await locator.screenshot({ path: path.join(OUTPUT, filename), animations: 'disabled' });
   else await page.screenshot({ path: path.join(OUTPUT, filename), fullPage: true, animations: 'disabled' });
 }
-async function loadGame(page, slug) {
+async function loadGame(page, slug, options = {}) {
   // Freeze the installed browser clock after loading. Real keyboard/pointer events still run;
   // simulation progresses only when step() or clock.runFor() is requested by the test.
   await page.clock.install({ time: new Date('2026-11-15T11:59:00Z') });
@@ -52,6 +68,17 @@ async function loadGame(page, slug) {
   await assertPhase(page, 'menu');
   assert.ok(await page.locator('#overlay-panel .quick-rules li').count() >= 3);
   await assertNoOverflow(page);
+  if (options.menuScreenshot) {
+    const menu = await page.locator('#overlay-panel').evaluate(panel => ({
+      width: panel.clientWidth, scrollWidth: panel.scrollWidth,
+      height: panel.clientHeight, scrollHeight: panel.scrollHeight,
+      ruleFont: parseFloat(getComputedStyle(panel.querySelector('.quick-rules')).fontSize)
+    }));
+    assert.ok(menu.scrollWidth <= menu.width + 1 && menu.scrollHeight <= menu.height + 1,
+      'The mobile instructions must fit the menu without clipping');
+    assert.ok(menu.ruleFont >= 11, 'Mobile instructions must retain the readable type size');
+    await screenshot(page, `${slug}-mobile-menu.png`, page.locator('#game-shell'));
+  }
   await page.locator('#overlay-panel .button.primary').click();
   await assertPhase(page, 'playing');
   await step(page, 0); // Exercise the initial draw immediately, without advancing the simulation.
@@ -205,7 +232,7 @@ async function main() {
     for (const file of assets(ROOT)) { const url = BASE + '/' + path.relative(ROOT, file).split(path.sep).join('/'); const response = await page.request.get(url); assert.equal(response.status(), 200, `Asset failed: ${url}`); }
     await page.locator('img').evaluateAll(images => images.forEach(image => { image.loading = 'eager'; }));
     await page.waitForFunction(() => [...document.images].every(image => image.complete && image.naturalWidth > 0));
-    await assertNoOverflow(page); await screenshot(page, 'hub-desktop.png');
+    await assertNoOverflow(page); await assertHubLayout(page, false); await screenshot(page, 'hub-desktop.png');
   });
 
   for (const slug of SLUGS) await run(`${slug} desktop lifecycle`, {}, async page => {
@@ -247,10 +274,10 @@ async function main() {
     await page.goto(BASE + '/arcade.html', { waitUntil: 'load' }); assert.equal(await page.locator('.game-card').count(), 9);
     await page.locator('img').evaluateAll(images => images.forEach(image => { image.loading = 'eager'; }));
     await page.waitForFunction(() => [...document.images].every(image => image.complete && image.naturalWidth > 0));
-    await assertNoOverflow(page); await screenshot(page, 'hub-mobile.png');
+    await assertNoOverflow(page); await assertHubLayout(page, true); await screenshot(page, 'hub-mobile.png');
   });
   for (const slug of SLUGS) await run(`${slug} mobile controls`, { mobile: true }, async (page, context) => {
-    await loadGame(page, slug); await assertNoOverflow(page);
+    await loadGame(page, slug, { menuScreenshot: ['sunset-sprint', 'mini-golf-club'].includes(slug) }); await assertNoOverflow(page);
     const targets = await page.locator('.control-button').evaluateAll(buttons => buttons.map(button => ({ label: button.textContent, width: button.getBoundingClientRect().width, height: button.getBoundingClientRect().height })));
     assert.ok(targets.length >= 2);
     for (const target of targets) assert.ok(target.width >= 43.5 && target.height >= 43.5, `${target.label} touch target is too small: ${target.width}×${target.height}`);
