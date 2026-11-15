@@ -1,0 +1,14 @@
+{
+  "name": "candy-arcade",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Candy Drop and eight original, dependency-free browser games.",
+  "scripts": {
+    "start": "node scripts/serve.cjs",
+    "pages": "node scripts/generate-pages.cjs",
+    "test": "node --test tests/core.test.cjs tests/games.test.cjs",
+    "test:browser": "node tests/browser-smoke.cjs"
+  },
+  "devDependencies": { "playwright": "1.62.1" },
+  "engines": { "node": ">=22" }
+}

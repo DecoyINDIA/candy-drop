@@ -1,0 +1,58 @@
+/* Optional contributor helper. The generated HTML is committed and needs no build. */
+'use strict';
+const fs = require('node:fs');
+const path = require('node:path');
+const { CATALOG } = require('../assets/core.js');
+const root = path.join(__dirname, '..');
+for (const game of CATALOG.filter(g => g.id !== 'candy-drop')) {
+  const directory = path.join(root, 'games', game.id);
+  fs.mkdirSync(directory, { recursive: true });
+  fs.writeFileSync(path.join(directory, 'index.html'), `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101219">
+  <meta name="description" content="Play ${game.title} in your browser. ${game.hook} Free, instant, with keyboard and touch controls.">
+  <title>${game.title} — Candy Arcade</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/arcade.css">
+  <script src="../../assets/core.js" defer></script>
+  <script src="../../assets/arcade.js" defer></script>
+  <script src="game.js" defer></script>
+</head>
+<body class="game-page">
+  <a class="skip-link" href="#instructions">Skip to instructions</a>
+  <header class="site-header">
+    <a class="brand" href="../../arcade.html" aria-label="Candy Arcade home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>CANDY<em>ARCADE</em></a>
+    <nav class="header-nav" aria-label="Main navigation"><a href="../../arcade.html">All games</a><a href="../../arcade.html#progress">Your progress</a><a href="../../index.html">Candy Drop</a></nav>
+  </header>
+  <main class="game-main">
+    <div class="game-heading"><div><div class="breadcrumb"><a href="../../arcade.html">← The arcade</a><span>/</span><span>${game.category}</span></div><h1>${game.title}</h1></div><span class="game-tip">${game.tag}</span></div>
+    <section class="game-shell" id="game-shell" aria-label="${game.title}">
+      <div class="game-toolbar">
+        <div class="scoreboard"><div class="score-block"><span class="eyebrow">SCORE</span><strong id="score-value">0</strong></div><div class="score-block best"><span class="eyebrow">PERSONAL BEST</span><strong id="best-value">0</strong></div><span class="mode-label" id="mode-label">CLASSIC</span></div>
+        <div class="toolbar-buttons"><button class="icon-button" type="button" id="pause-button" aria-label="Pause game" title="Pause / resume (P or Escape)" disabled>Ⅱ</button><button class="icon-button" type="button" id="sound-button" aria-label="Mute sound" title="Sound on / off">♪</button><button class="icon-button" type="button" id="fullscreen-button" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button></div>
+      </div>
+      <div class="stage">
+        <canvas id="game" width="960" height="600" tabindex="0">${game.title} requires canvas support and JavaScript. The rules and keyboard controls are below.</canvas>
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
+        <div id="overlay" class="overlay"><div class="overlay-panel" id="overlay-panel" role="region" aria-label="Game menu"></div></div>
+      </div>
+      <div id="game-hud" class="game-hud" aria-label="Game statistics"></div>
+      <div class="controls-area"><span class="controls-note">KEYBOARD OR TOUCH</span><div id="controls" class="controls" role="group" aria-label="Game controls"></div><button id="help-button" class="help-button" type="button">How to play ?</button></div>
+    </section>
+    <p class="sr-only" id="game-status" role="status" aria-live="polite"></p>
+    <div class="game-details">
+      <details class="instructions" id="instructions"><summary>Find your flow · How to play</summary><ul id="rules"></ul><div class="key-list" id="key-list"></div><p class="local-note">P or Escape pauses. Switching tabs pauses automatically. On a phone, rotate for a wider view.</p></details>
+      <aside class="medal-info"><span class="stars" aria-hidden="true">✦ ✦ ✦</span><h2>A little better every time.</h2><p id="medal-targets"></p><p>Scores stay in this browser. Classic and daily records are separate.</p></aside>
+    </div>
+    <a class="game-bottom-link" href="../../arcade.html">← Find your next favorite</a>
+    <noscript><p>Enable JavaScript to play this game.</p></noscript>
+  </main>
+  <footer class="site-footer"><span>Small games. Great little escapes.</span><a href="../../arcade.html">Explore all 9 games ↗</a></footer>
+</body>
+</html>
+`);
+}
+console.log('Generated 8 standalone game entry pages.');
