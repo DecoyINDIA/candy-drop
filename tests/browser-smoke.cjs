@@ -202,7 +202,7 @@ async function endAndReplay(page, slug) {
   assert.ok(saved.games[slug].completed >= 1, 'A completed run must persist');
   assert.ok(saved.games[slug].best >= ended.score, 'Personal best must include the completed score');
   await page.getByRole('button', { name: /Play again/ }).click();
-  await assertPhase(page, 'playing'); assert.equal((await state(page)).score, expectedScore, 'restart restores the game-specific initial score'); assert.equal((await state(page)).time, 0);
+  await assertPhase(page, 'playing'); assert.equal((await state(page)).score, 0); assert.equal((await state(page)).time, 0);
 }
 
 async function main() {
