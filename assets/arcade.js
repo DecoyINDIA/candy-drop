@@ -80,8 +80,13 @@
       function resize() {
         const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
         const width = Math.max(1, canvas.clientWidth), height = Math.max(1, canvas.clientHeight);
-        canvas.width = Math.round(width * pixelRatio); canvas.height = Math.round(height * pixelRatio);
+        const pixelsWide = Math.round(width * pixelRatio), pixelsHigh = Math.round(height * pixelRatio);
+        if (canvas.width !== pixelsWide || canvas.height !== pixelsHigh) {
+          canvas.width = pixelsWide; canvas.height = pixelsHigh;
+        }
         applyView();
+        // A canvas resize clears its pixels. Repaint even while paused or between frames.
+        if (game) draw();
       }
       new ResizeObserver(resize).observe(canvas);
       function paintHud(items) {
@@ -300,6 +305,10 @@
       }
       document.addEventListener('fullscreenchange', fitFullscreen);
       window.addEventListener('resize', fitFullscreen);
+      const chromeObserver = new ResizeObserver(fitFullscreen);
+      for (const node of $('game-shell').children) {
+        if (!node.classList.contains('stage')) chromeObserver.observe(node);
+      }
       $('help-button').addEventListener('click', () => { if (state === 'playing') pause(); $('instructions').open = true; $('instructions').scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'nearest' }); });
       const rules = $('rules'); for (const rule of config.howTo) rules.append(el('li', '', rule));
       const keyList = $('key-list');

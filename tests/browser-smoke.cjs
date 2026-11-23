@@ -59,6 +59,10 @@ async function assertHubLayout(page, mobile) {
   'The search icon must remain inside the input bounds');
 }
 async function screenshot(page, filename, locator) {
+  if (await page.locator('#game').count()) {
+    const painted = await page.locator('#game').evaluate(canvas => canvas.getContext('2d').getImageData(Math.floor(canvas.width / 2), Math.floor(canvas.height / 2), 1, 1).data[3] > 0);
+    assert.ok(painted, 'The game must remain drawn after resizing, including with the animation clock frozen');
+  }
   if (locator) await locator.screenshot({ path: path.join(OUTPUT, filename), animations: 'disabled' });
   else await page.screenshot({ path: path.join(OUTPUT, filename), fullPage: true, animations: 'disabled' });
 }
@@ -98,7 +102,7 @@ async function restartThroughMenu(page, expectedScore = 0) {
 
 async function run(name, options, fn) {
   const context = await browser.newContext({
-    viewport: options.mobile ? { width: options.width || 390, height: 844 } : { width: 1365, height: 1000 },
+    viewport: options.mobile ? { width: options.width || 390, height: options.height || 844 } : { width: 1365, height: 1000 },
     deviceScaleFactor: options.mobile ? 2 : 1,
     isMobile: !!options.mobile, hasTouch: !!options.mobile,
     reducedMotion: 'reduce'
@@ -364,6 +368,24 @@ async function main() {
     await page.waitForFunction(() => !document.fullscreenElement);
     assert.equal(await page.locator('#game').evaluate(n => n === document.activeElement), true);
     await assertNoOverflow(page);
+  });
+
+  await run('Fullscreen live HUD resizing', { mobile: true, height: 500 }, async page => {
+    await loadGame(page, 'orchard-keeper');
+    await page.locator('#fullscreen-button').tap();
+    await page.waitForFunction(() => document.fullscreenElement?.id === 'game-shell');
+    await press(page, 't', .15); await press(page, 't', .15);
+    await page.clock.runFor(120);
+    assert.equal((await inspect(page)).seed, 2);
+    const layout = await page.locator('#game-shell').evaluate(shell => ({
+      measured: Math.ceil([...shell.children].filter(n => !n.classList.contains('stage')).reduce((h, n) => h + n.getBoundingClientRect().height, 0)),
+      recorded: parseFloat(shell.style.getPropertyValue('--game-chrome')),
+      controlsBottom: shell.querySelector('.controls-area').getBoundingClientRect().bottom,
+      height: innerHeight
+    }));
+    assert.equal(layout.recorded, layout.measured, 'Fullscreen must remeasure chrome after live status changes');
+    assert.ok(layout.controlsBottom <= layout.height + 1, 'Live wrapping must keep the controls inside fullscreen');
+    await screenshot(page, 'orchard-keeper-fullscreen-live-hud.png');
   });
 
   await run('Small phone board and toolbar layout', { mobile: true, width: 320 }, async page => {

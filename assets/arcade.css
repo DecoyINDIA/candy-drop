@@ -73,6 +73,7 @@ button {
   position:fixed;
   left:16px;
   top:-80px;
+  clip-path:inset(100%);
   z-index:100;
   background:var(--mint);
   color:#161b16;
@@ -81,6 +82,7 @@ button {
 }
 .skip-link:focus {
   top:12px;
+  clip-path:none;
 }
 .site-header {
   max-width:1256px;
