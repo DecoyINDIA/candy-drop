@@ -98,7 +98,7 @@ async function restartThroughMenu(page, expectedScore = 0) {
 
 async function run(name, options, fn) {
   const context = await browser.newContext({
-    viewport: options.mobile ? { width: 390, height: 844 } : { width: 1365, height: 1000 },
+    viewport: options.mobile ? { width: options.width || 390, height: 844 } : { width: 1365, height: 1000 },
     deviceScaleFactor: options.mobile ? 2 : 1,
     isMobile: !!options.mobile, hasTouch: !!options.mobile,
     reducedMotion: 'reduce'
@@ -235,7 +235,9 @@ async function main() {
     const links = await page.locator('.card-link').evaluateAll(nodes => nodes.map(n => n.href)); assert.equal(new Set(links).size, links.length);
     await page.locator('#game-sort').selectOption('az'); assert.equal(await page.locator('.game-card h3').first().textContent(), CATALOG.map(g => g.title).sort((a,b) => a.localeCompare(b))[0]);
     await page.locator('#game-sort').selectOption('discover');
-    await page.locator('[data-filter="New"]').click(); assert.ok(parseInt(await page.locator('#game-count').textContent(), 10) >= 48);
+    await page.locator('[data-filter="New"]').click();
+    const latest = CATALOG.reduce((date, g) => g.added > date ? g.added : date, '');
+    assert.equal(parseInt(await page.locator('#game-count').textContent(), 10), CATALOG.filter(g => g.added === latest).length);
     await page.locator('[data-filter="All"]').click();
     // Check every shipped browser asset, including lazy-loaded card art and all game entry points.
     function assets(dir) { return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => entry.name.startsWith('.') || ['node_modules', 'test-results', 'tests', 'scripts', 'docs'].includes(entry.name) ? [] : entry.isDirectory() ? assets(path.join(dir, entry.name)) : /\.(?:html|css|js|svg)$/.test(entry.name) ? [path.join(dir, entry.name)] : []); }
@@ -315,9 +317,11 @@ async function main() {
   });
   for (const slug of ALL_SLUGS) await run(`${slug} mobile controls`, { mobile: true }, async (page, context) => {
     await loadGame(page, slug, { menuScreenshot: !SLUGS.includes(slug) || ['sunset-sprint', 'mini-golf-club'].includes(slug) }); await assertNoOverflow(page);
-    const targets = await page.locator('.control-button').evaluateAll(buttons => buttons.map(button => ({ label: button.textContent, width: button.getBoundingClientRect().width, height: button.getBoundingClientRect().height })));
+    const targets = await page.locator('.control-button, .icon-button:not([hidden])').evaluateAll(buttons => buttons.map(button => ({ label: button.textContent, width: button.getBoundingClientRect().width, height: button.getBoundingClientRect().height })));
     assert.ok(targets.length >= 1);
     for (const target of targets) assert.ok(target.width >= 43.5 && target.height >= 43.5, `${target.label} touch target is too small: ${target.width}×${target.height}`);
+    const stats = await page.locator('.hud-item strong').evaluateAll(nodes => nodes.map(n => ({ text:n.textContent, width:n.clientWidth, content:n.scrollWidth })));
+    for (const stat of stats) assert.ok(stat.content <= stat.width + 1, `Mobile status must fit its column: ${stat.text}`);
     const box = await page.locator('#game').boundingBox(); assert.ok(Math.abs(box.width / box.height - 1.6) < 0.02, 'Active canvas must preserve its aspect ratio');
     await step(page, slug === 'neon-dojo' ? 1.8 : 0.1);
     const control = page.locator('.control-button').first(); await control.scrollIntoViewIfNeeded(); const target = await control.boundingBox();
@@ -328,6 +332,48 @@ async function main() {
     await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); await step(page);
     assert.ok(!(await control.getAttribute('class')).includes('held'), 'Releasing touch must release the control');
     await assertNoOverflow(page); await screenshot(page, `${slug}-mobile.png`, page.locator('#game-shell'));
+    const focus = CATALOG.find(g => g.id === slug).focus;
+    if (focus) {
+      const beforeZoom = await inspect(page);
+      await page.getByRole('button', { name: 'Enlarge board', exact: true }).tap(); await step(page, 0);
+      assert.deepEqual(await inspect(page), beforeZoom, 'Changing the view must preserve game state');
+      const enlarged = await page.locator('#game').boundingBox();
+      assert.ok(Math.abs(enlarged.width / enlarged.height - focus[2] / focus[3]) < .02);
+      await assertNoOverflow(page);
+      await screenshot(page, `${slug}-mobile-enlarged.png`, page.locator('#game-shell'));
+    }
+  });
+
+  await run('Enlarged board fullscreen proportions', {}, async page => {
+    await loadGame(page, 'mine-garden');
+    await page.getByRole('button', { name: 'Enlarge board', exact: true }).click(); await step(page, 0);
+    assert.equal(await page.locator('#game').evaluate(n => n === document.activeElement), true, 'Pointer toolbar actions return keyboard play to the canvas');
+    await press(page, 'Space');
+    assert.ok((await inspect(page)).revealed > 0, 'Space after clicking Zoom must reveal a square, not toggle Zoom');
+    assert.equal(await page.locator('#focus-button').getAttribute('aria-pressed'), 'true');
+    await page.locator('#sound-button').click();
+    assert.equal(await page.locator('#game').evaluate(n => n === document.activeElement), true);
+    await page.locator('#fullscreen-button').click();
+    await page.waitForFunction(() => document.fullscreenElement?.id === 'game-shell');
+    const bounds = await page.locator('#game').boundingBox();
+    const viewport = page.viewportSize();
+    assert.ok(Math.abs(bounds.width / bounds.height - 1) < .02, 'Fullscreen must retain the enlarged board proportions');
+    assert.ok(bounds.x >= -1 && bounds.y >= -1 && bounds.x + bounds.width <= viewport.width + 1 && bounds.y + bounds.height <= viewport.height + 1);
+    await screenshot(page, 'mine-garden-fullscreen-enlarged.png');
+    await page.locator('#fullscreen-button').click();
+    await page.waitForFunction(() => !document.fullscreenElement);
+    assert.equal(await page.locator('#game').evaluate(n => n === document.activeElement), true);
+    await assertNoOverflow(page);
+  });
+
+  await run('Small phone board and toolbar layout', { mobile: true, width: 320 }, async page => {
+    await loadGame(page, 'patchwork-park', { menuScreenshot: true });
+    await assertNoOverflow(page);
+    const buttons = await page.locator('.control-button, .icon-button:not([hidden])').evaluateAll(nodes => nodes.map(n => ({ w: n.getBoundingClientRect().width, h: n.getBoundingClientRect().height })));
+    for (const button of buttons) assert.ok(button.w >= 43.5 && button.h >= 43.5);
+    await page.getByRole('button', { name: 'Enlarge board', exact: true }).tap(); await step(page, 0);
+    await assertNoOverflow(page);
+    await screenshot(page, 'patchwork-park-small-phone.png', page.locator('#game-shell'));
   });
 
   await run('Enlarged board touch coordinates and state preservation', { mobile: true }, async (page, context) => {

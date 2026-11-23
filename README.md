@@ -1,6 +1,6 @@
 # Candy Arcade
 
-**76 browser games. No signup. No downloads. Just play.**
+**100 browser games. No signup. No downloads. Just play.**
 
 ## [Play the collection →](https://decoyindia.github.io/candy-drop/arcade.html)
 
@@ -12,13 +12,22 @@ A growing collection of small games with distinct rules, original vector and can
 
 The hub includes category filters, full-catalog search, new arrivals, saved favorites, sorting, a rotating daily pick, and a quick route back to familiar games. It shows twelve cards at a time; **Show more games** reveals the next page. Search and sorting always operate on the entire collection.
 
-### Action · 15
+### Action · 19
 
 | Game | What brings you back | Session |
 | --- | --- | --- |
 | [Neon Dojo](https://decoyindia.github.io/candy-drop/games/neon-dojo/index.html) | Read the rival. Land the counter. | 1–3 min |
 | [Skybound](https://decoyindia.github.io/candy-drop/games/skybound/index.html) | Leap the rooftops. Keep your flow. | 1 min |
 | [Starfall](https://decoyindia.github.io/candy-drop/games/starfall/index.html) | A small ship. A very big mission. | 2–3 min |
+| [Dungeon Lantern](https://decoyindia.github.io/candy-drop/games/dungeon-lantern/index.html) | Five keys. A guardian. A little courage. | 1–3 min |
+| [Tether Twins](https://decoyindia.github.io/candy-drop/games/tether-twins/index.html) | Two little worlds. One way through. | 1 min |
+| [Echo Dodge](https://decoyindia.github.io/candy-drop/games/echo-dodge/index.html) | Leave your past a little room. | 1 min |
+| [Spark Sweep](https://decoyindia.github.io/candy-drop/games/spark-sweep/index.html) | Bring empty space into the light. | 1–2 min |
+| [Gravity Shift](https://decoyindia.github.io/candy-drop/games/gravity-shift/index.html) | The floor is a choice. Find your landing. | 1 min |
+| [Treasure Diver](https://decoyindia.github.io/candy-drop/games/treasure-diver/index.html) | Find something worth bringing home. | 1–3 min |
+| [Paper Flight](https://decoyindia.github.io/candy-drop/games/paper-flight/index.html) | Fold some courage. Ride the air. | 1 min |
+| [Rocket Landing](https://decoyindia.github.io/candy-drop/games/rocket-landing/index.html) | A quiet moon. Three soft arrivals. | 1–3 min |
+| [Harbor Rescue](https://decoyindia.github.io/candy-drop/games/harbor-rescue/index.html) | Follow the current. Bring everyone home. | 1–3 min |
 | [Prism Breaker](https://decoyindia.github.io/candy-drop/games/prism-breaker/index.html) | Find your angle. Break a little brighter. | 1–3 min |
 | [Serpent Garden](https://decoyindia.github.io/candy-drop/games/serpent-garden/index.html) | A growing appetite. A thoughtful route. | 1–3 min |
 | [Meteor Drift](https://decoyindia.github.io/candy-drop/games/meteor-drift/index.html) | Trust your thrusters. Find clear skies. | 1–3 min |
@@ -26,27 +35,27 @@ The hub includes category filters, full-catalog search, new arrivals, saved favo
 | [Ghost Lantern](https://decoyindia.github.io/candy-drop/games/ghost-lantern/index.html) | Carry a little light. Bring it home. | 1–3 min |
 | [Shield Spin](https://decoyindia.github.io/candy-drop/games/shield-spin/index.html) | Keep a little star alive. | 1–2 min |
 | [Blade Bloom](https://decoyindia.github.io/candy-drop/games/blade-bloom/index.html) | A bright harvest. One sweeping gesture. | 1 min |
-| [Gravity Shift](https://decoyindia.github.io/candy-drop/games/gravity-shift/index.html) | The floor is a choice. Find your landing. | 1 min |
-| [Treasure Diver](https://decoyindia.github.io/candy-drop/games/treasure-diver/index.html) | Find something worth bringing home. | 1–3 min |
-| [Paper Flight](https://decoyindia.github.io/candy-drop/games/paper-flight/index.html) | Fold some courage. Ride the air. | 1 min |
-| [Rocket Landing](https://decoyindia.github.io/candy-drop/games/rocket-landing/index.html) | A quiet moon. Three soft arrivals. | 1–3 min |
-| [Harbor Rescue](https://decoyindia.github.io/candy-drop/games/harbor-rescue/index.html) | Follow the current. Bring everyone home. | 1–3 min |
 
-### Racing · 4
+### Racing · 5
 
 | Game | What brings you back | Session |
 | --- | --- | --- |
 | [Sunset Sprint](https://decoyindia.github.io/candy-drop/games/sunset-sprint/index.html) | Chase the horizon. Beat the clock. | 1–2 min |
+| [Drift Circuit](https://decoyindia.github.io/candy-drop/games/drift-circuit/index.html) | Find the line. Let the rear tires follow. | 1–2 min |
+| [Rally Courier](https://decoyindia.github.io/candy-drop/games/rally-courier/index.html) | Five parcels and a city of useful shortcuts. | 1–2 min |
 | [Downhill Dash](https://decoyindia.github.io/candy-drop/games/downhill-dash/index.html) | Carve forty gates through a mountain morning. | 1–2 min |
 | [Sail Sprint](https://decoyindia.github.io/candy-drop/games/sail-sprint/index.html) | Six buoys and a breeze that rewards good lines. | 1–2 min |
-| [Rally Courier](https://decoyindia.github.io/candy-drop/games/rally-courier/index.html) | Five parcels and a city of useful shortcuts. | 1–2 min |
 
-### Sports · 10
+### Sports · 13
 
 | Game | What brings you back | Session |
 | --- | --- | --- |
 | [Pocket Striker](https://decoyindia.github.io/candy-drop/games/pocket-striker/index.html) | One pitch. Every touch matters. | 75-second match |
 | [Mini Golf Club](https://decoyindia.github.io/candy-drop/games/mini-golf-club/index.html) | Six holes. One perfect little round. | 4–6 min |
+| [Volley Vista](https://decoyindia.github.io/candy-drop/games/volley-vista/index.html) | Meet the ball high. Make the beach yours. | 1–2 min |
+| [Sprint Start](https://decoyindia.github.io/candy-drop/games/sprint-start/index.html) | Wait for the gun. Run on rhythm. | 15–30 sec |
+| [Pool Parlor](https://decoyindia.github.io/candy-drop/games/pool-parlor/index.html) | Six balls and twelve shots to clear the table. | 1–3 min |
+| [Penalty Keeper](https://decoyindia.github.io/candy-drop/games/penalty-keeper/index.html) | Read the shot. Commit to the dive. Own the goal. | 1 min |
 | [Rooftop Rally](https://decoyindia.github.io/candy-drop/games/rooftop-rally/index.html) | Find the paddle edge. Make the rooftop yours. | 1–3 min |
 | [Hoops Minute](https://decoyindia.github.io/candy-drop/games/hoops-minute/index.html) | One minute. A drifting rim. Find your arc. | 1 min |
 | [Pocket Bowler](https://decoyindia.github.io/candy-drop/games/pocket-bowler/index.html) | Read the oil. Pick up the spare. Chase 300. | 2–4 min |
@@ -54,24 +63,42 @@ The hub includes category filters, full-catalog search, new arrivals, saved favo
 | [Wicket Rush](https://decoyindia.github.io/candy-drop/games/wicket-rush/index.html) | Find the gap and chase 36 in two overs. | 1–2 min |
 | [Archery Grove](https://decoyindia.github.io/candy-drop/games/archery-grove/index.html) | Ten arrows. Read the breeze, trust your aim. | 1–3 min |
 | [Curling Cove](https://decoyindia.github.io/candy-drop/games/curling-cove/index.html) | Three ends. Place, protect, and own the button. | 2–4 min |
-| [Penalty Keeper](https://decoyindia.github.io/candy-drop/games/penalty-keeper/index.html) | Read the shot. Commit to the dive. Own the goal. | 1 min |
 
-### Strategy · 6
+### Strategy · 12
 
 | Game | What brings you back | Session |
 | --- | --- | --- |
 | [Orbit Guard](https://decoyindia.github.io/candy-drop/games/orbit-guard/index.html) | Build smart. Hold the final wave. | 3–5 min |
+| [Harbor Master](https://decoyindia.github.io/candy-drop/games/harbor-master/index.html) | Draw safe sea lanes. Bring sixteen ships home. | 1–2 min |
+| [Snowball Siege](https://decoyindia.github.io/candy-drop/games/snowball-siege/index.html) | Read the breeze. Find your arc. | 1–3 min |
+| [City Blocks](https://decoyindia.github.io/candy-drop/games/city-blocks/index.html) | Build a neighborhood that works together. | 2–4 min |
+| [Power Grid](https://decoyindia.github.io/candy-drop/games/power-grid/index.html) | Six districts. One grid. Keep the city glowing. | 2–4 min |
+| [Ant Colony](https://decoyindia.github.io/candy-drop/games/ant-colony/index.html) | Every ant has a job. Every raid needs a plan. | 2–4 min |
+| [Weather Station](https://decoyindia.github.io/candy-drop/games/weather-station/index.html) | Read tomorrow’s sky. Protect the village. | 2–4 min |
+| [Train Yard](https://decoyindia.github.io/candy-drop/games/train-yard/index.html) | Three switches. Eighteen trains. Keep it moving. | 1–2 min |
+| [Reef Keeper](https://decoyindia.github.io/candy-drop/games/reef-keeper/index.html) | Sixteen days to give a reef its future. | 2–4 min |
 | [Tidal Tactics](https://decoyindia.github.io/candy-drop/games/tidal-tactics/index.html) | Find the fleet beneath the silence. | 2–4 min |
 | [Orchard Keeper](https://decoyindia.github.io/candy-drop/games/orchard-keeper/index.html) | Nine plots and two minutes to grow a good season. | 2 min |
 | [Colony Balance](https://decoyindia.github.io/candy-drop/games/colony-balance/index.html) | Twenty decisions. A whole colony depends on you. | 3–5 min |
-| [Train Yard](https://decoyindia.github.io/candy-drop/games/train-yard/index.html) | Three switches. Eighteen trains. Keep it moving. | 1–2 min |
-| [Reef Keeper](https://decoyindia.github.io/candy-drop/games/reef-keeper/index.html) | Sixteen days to give a reef its future. | 2–4 min |
 
-### Puzzle · 22
+### Puzzle · 30
 
 | Game | What brings you back | Session |
 | --- | --- | --- |
 | [Merge Lab](https://decoyindia.github.io/candy-drop/games/merge-lab/index.html) | Make room for your next big idea. | At your pace |
+| [Sum Cross](https://decoyindia.github.io/candy-drop/games/sum-cross/index.html) | A satisfying crossing of little sums. | 4–7 min |
+| [Queens Court](https://decoyindia.github.io/candy-drop/games/queens-court/index.html) | Eight queens. Room for every diagonal. | 4–8 min |
+| [Patchwork Park](https://decoyindia.github.io/candy-drop/games/patchwork-park/index.html) | Give every little plot a place. | 4–8 min |
+| [Logic Locks](https://decoyindia.github.io/candy-drop/games/logic-locks/index.html) | Four numbers. One neat way through. | 4–7 min |
+| [Word Ladder](https://decoyindia.github.io/candy-drop/games/word-ladder/index.html) | One letter takes you somewhere new. | 3–6 min |
+| [Island Bridges](https://decoyindia.github.io/candy-drop/games/island-bridges/index.html) | A few islands. One connected world. | 4–8 min |
+| [Mirror Memory](https://decoyindia.github.io/candy-drop/games/mirror-memory/index.html) | Remember a little melody. Turn it around. | 2–4 min |
+| [Loop Garden](https://decoyindia.github.io/candy-drop/games/loop-garden/index.html) | A few quiet clues. One continuous walk. | 4–8 min |
+| [Marble Maze](https://decoyindia.github.io/candy-drop/games/marble-maze/index.html) | Three keys. One winding way home. | 2–3 min |
+| [Laser Lock](https://decoyindia.github.io/candy-drop/games/laser-lock/index.html) | A little reflection opens a whole new room. | 3–6 min |
+| [Word Forge](https://decoyindia.github.io/candy-drop/games/word-forge/index.html) | Six letters. A workshop of possibilities. | 4–8 min |
+| [Balance Box](https://decoyindia.github.io/candy-drop/games/balance-box/index.html) | The right weight in the right place. | 3–6 min |
+| [Trail Weaver](https://decoyindia.github.io/candy-drop/games/trail-weaver/index.html) | A place for every path. | 4–8 min |
 | [Mine Garden](https://decoyindia.github.io/candy-drop/games/mine-garden/index.html) | Read the numbers. Grow a safe garden. | 3–6 min |
 | [Memory Lane](https://decoyindia.github.io/candy-drop/games/memory-lane/index.html) | Sixteen cards. Eight familiar faces. | 2–4 min |
 | [Light Circuit](https://decoyindia.github.io/candy-drop/games/light-circuit/index.html) | One switch changes the whole idea. | 3–6 min |
@@ -88,29 +115,29 @@ The hub includes category filters, full-catalog search, new arrivals, saved favo
 | [Nonogram Nook](https://decoyindia.github.io/candy-drop/games/nonogram-nook/index.html) | The picture is in the numbers. | 3–6 min |
 | [Code Breaker](https://decoyindia.github.io/candy-drop/games/code-breaker/index.html) | Four colors. One satisfying click. | 3–6 min |
 | [Peg Parlor](https://decoyindia.github.io/candy-drop/games/peg-parlor/index.html) | A few thoughtful jumps. Just one peg. | 3–6 min |
-| [Marble Maze](https://decoyindia.github.io/candy-drop/games/marble-maze/index.html) | Three keys. One winding way home. | 2–3 min |
-| [Laser Lock](https://decoyindia.github.io/candy-drop/games/laser-lock/index.html) | A little reflection opens a whole new room. | 3–6 min |
-| [Word Forge](https://decoyindia.github.io/candy-drop/games/word-forge/index.html) | Six letters. A workshop of possibilities. | 4–8 min |
-| [Balance Box](https://decoyindia.github.io/candy-drop/games/balance-box/index.html) | The right weight in the right place. | 3–6 min |
-| [Trail Weaver](https://decoyindia.github.io/candy-drop/games/trail-weaver/index.html) | A place for every path. | 4–8 min |
 
 ### Tabletop · 8
 
 | Game | What brings you back | Session |
 | --- | --- | --- |
+| [Mahjong Meadow](https://decoyindia.github.io/candy-drop/games/mahjong-meadow/index.html) | Make a little space. Match the edges. | 3–6 min |
+| [Ultimate Grid](https://decoyindia.github.io/candy-drop/games/ultimate-grid/index.html) | Small moves. Much bigger questions. | 3–6 min |
 | [Four in a Row](https://decoyindia.github.io/candy-drop/games/four-in-row/index.html) | Build a fork. Connect your four. | 2–4 min |
 | [Reversi Room](https://decoyindia.github.io/candy-drop/games/reversi-room/index.html) | A quiet corner can change everything. | 3–5 min |
 | [Royal Checkers](https://decoyindia.github.io/candy-drop/games/royal-checkers/index.html) | Read the jump beyond the jump. | 3–6 min |
 | [Dice District](https://decoyindia.github.io/candy-drop/games/dice-district/index.html) | Five dice. Thirteen good decisions. | 3–5 min |
 | [Domino Trail](https://decoyindia.github.io/candy-drop/games/domino-trail/index.html) | Follow the numbers. Clear your hand. | 2–5 min |
 | [Pinball Grove](https://decoyindia.github.io/candy-drop/games/pinball-grove/index.html) | Five flowers. One more ball. | 1–3 min |
-| [Mahjong Meadow](https://decoyindia.github.io/candy-drop/games/mahjong-meadow/index.html) | Make a little space. Match the edges. | 3–6 min |
-| [Ultimate Grid](https://decoyindia.github.io/candy-drop/games/ultimate-grid/index.html) | Small moves. Much bigger questions. | 3–6 min |
 
-### Timing · 10
+### Timing · 12
 
 | Game | What brings you back | Session |
 | --- | --- | --- |
+| [Boomerang Bay](https://decoyindia.github.io/candy-drop/games/boomerang-bay/index.html) | Find the curve. Time the return. | 1 min |
+| [Magnet Miner](https://decoyindia.github.io/candy-drop/games/magnet-miner/index.html) | Wait for something worthwhile. | 1–3 min |
+| [Reaction Lab](https://decoyindia.github.io/candy-drop/games/reaction-lab/index.html) | A quiet moment. One clear signal. | 1 min |
+| [Cargo Crane](https://decoyindia.github.io/candy-drop/games/cargo-crane/index.html) | A little momentum. A careful release. | 1–2 min |
+| [Chroma Switch](https://decoyindia.github.io/candy-drop/games/chroma-switch/index.html) | Read the color. Find your opening. | 1–2 min |
 | [Flappy Fin](https://decoyindia.github.io/candy-drop/games/flappy-fin/index.html) | A tiny fin. A perfect little rhythm. | 1 min |
 | [Tunnel Dash](https://decoyindia.github.io/candy-drop/games/tunnel-dash/index.html) | Read the opening. Stay one gate ahead. | 1 min |
 | [Rhythm Rail](https://decoyindia.github.io/candy-drop/games/rhythm-rail/index.html) | Four rails. Find your little groove. | 43 seconds |
@@ -118,9 +145,6 @@ The hub includes category filters, full-catalog search, new arrivals, saved favo
 | [Perfect Pour](https://decoyindia.github.io/candy-drop/games/perfect-pour/index.html) | A steady hand. Just enough. | 1 min |
 | [Café Rush](https://decoyindia.github.io/candy-drop/games/cafe-rush/index.html) | Brew, froth, finish. Keep the morning moving. | 90 sec |
 | [Orbit Hop](https://decoyindia.github.io/candy-drop/games/orbit-hop/index.html) | Let go. Find a new world. | 1–2 min |
-| [Cargo Crane](https://decoyindia.github.io/candy-drop/games/cargo-crane/index.html) | A little momentum. A careful release. | 1–2 min |
-| [Chroma Switch](https://decoyindia.github.io/candy-drop/games/chroma-switch/index.html) | Read the color. Find your opening. | 1–2 min |
-| [Reaction Lab](https://decoyindia.github.io/candy-drop/games/reaction-lab/index.html) | A quiet moment. One clear signal. | 1 min |
 
 ### Original · 1
 

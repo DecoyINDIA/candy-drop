@@ -1704,3 +1704,12 @@ kbd {
 
 /* Board zoom changes the view, never the simulation or pointer coordinates. */
 #focus-button[aria-pressed="true"] { color:var(--game-accent); border-color:var(--game-accent); }
+
+@media(max-width:620px) {
+  .game-toolbar { flex-wrap:wrap; gap:8px; }
+  .toolbar-buttons { margin-left:auto; }
+  .icon-button { width:44px; height:44px; flex-shrink:0; }
+  .hud-item { padding:0 6px; }
+  .hud-item .eyebrow { font-size:8px; overflow-wrap:anywhere; }
+  .hud-item strong { white-space:normal; overflow-wrap:anywhere; line-height:1.4; }
+}

@@ -16,7 +16,18 @@
       let day = 1, coral = 45, fish = 30, food = 38, pollution = 20, coins = 26, protection = 0, selected = 0, delay = 0, clock = 0, score = 0, ended = false, message = 'A HEALTHY REEF STARTS WITH ONE GOOD DECISION.';
       const fishArt = Array.from({ length: 20 }, () => ({ x: 90 + api.random() * 780, y: 165 + api.random() * 170, phase: api.random() * Math.PI * 2, size: 7 + api.random() * 7 }));
       function value() { return coral * 9 + fish * 12 + (100 - pollution) * 7 + coins * 5 + (day - 1) * 20; }
-      function hud() { score = Math.round(value()); api.score(score); api.hud([{ label: 'Day', value: Math.min(16, day) + ' / 16' }, { label: 'Coral', value: coral + ' / 60' }, { label: 'Fish', value: fish + ' / 45' }, { label: 'Pollution', value: pollution + ' / max 45' }, { label: 'Funds', value: coins }]); }
+      function hud() {
+        score = Math.round(value()); api.score(score);
+        const forecast = ['Calm', 'Bloom', 'Storm', 'Tide'][weather[Math.min(15, day - 1)]];
+        const action = ['Restore', 'Feed', 'Clean', 'Tour', 'Shield'][selected];
+        api.hud([
+          { label: 'Day ' + Math.min(16, day) + ' / 16', value: forecast },
+          { label: 'Coral / fish', value: coral + ' / ' + fish },
+          { label: 'Poll. / funds', value: pollution + ' / ' + coins },
+          { label: 'Food / need', value: food + ' / ' + (Math.ceil(fish / 10) + 1) },
+          { label: 'Action / funds', value: action + (selected === 3 ? ' +14' : ' −' + COSTS[selected]) }
+        ]);
+      }
       function tend() {
         if (delay > 0) return; if (coins < COSTS[selected]) { api.toast('Not enough funds. A guided tour earns 14.'); return; } coins -= COSTS[selected];
         if (selected === 0) coral += 15; if (selected === 1) food += 24; if (selected === 2) pollution -= 24; if (selected === 3) { coins += 14; pollution += 3; } if (selected === 4) { fish += 10; protection = 4; }

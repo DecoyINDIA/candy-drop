@@ -14,7 +14,7 @@ function memoryAdapter(initial = null) {
 }
 
 test('catalog exposes the expanded collection and preserves the original route', () => {
-  assert.ok(Core.CATALOG.length >= 57);
+  assert.ok(Core.CATALOG.length >= 100);
   assert.equal(new Set(Core.CATALOG.map(game => game.id)).size, Core.CATALOG.length);
   assert.equal(Core.href(Core.CATALOG.find(game => game.id === 'candy-drop')), 'index.html');
   assert.equal(Core.href(Core.CATALOG[0], '../../'), '../../games/neon-dojo/index.html');

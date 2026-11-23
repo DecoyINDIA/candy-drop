@@ -16,7 +16,7 @@
       const WEATHER = [{ name: 'Clear sky', water: 0, energy: 0 }, { name: 'Dust storm', water: 1, energy: 4 }, { name: 'Cold night', water: 0, energy: 5 }, { name: 'Dry wind', water: 3, energy: 1 }, { name: 'Mild day', water: 0, energy: 0 }];
       const log = ['Arrival complete. Supplies unloaded.'];
       function reserves() { return Math.round(food + water + energy + morale); }
-      function hud() { score = (day - 1) * 50 + reserves() * 5; api.score(score); api.hud([{ label: 'Day', value: Math.min(day, 20) + ' / 20' }, { label: 'Food', value: food }, { label: 'Water', value: water }, { label: 'Power', value: energy }, { label: 'Morale', value: morale }]); }
+      function hud() { score = (day - 1) * 50 + reserves() * 5; api.score(score); api.hud([{ label: 'Day', value: Math.min(day, 20) + ' / 20' }, { label: 'Food / water', value: food + ' / ' + water }, { label: 'Power / morale', value: energy + ' / ' + morale }, { label: 'Action', value: selected === 4 ? 'Build ' + ['food','water','power'][focus] : ['Grow food','Get water','Generate','Crew rest'][selected] }, { label: 'Forecast', value: WEATHER[weather[Math.min(19, day - 1)]].name }]); }
       function commit() {
         if (delay > 0) return;
         if (selected === 4 && (facilities[focus] >= 2 || food < 9 || water < 9 || energy < 13)) { api.toast(facilities[focus] >= 2 ? 'This facility is fully upgraded.' : 'Building needs 8 food, 8 water and 12 power, plus a reserve.'); return; }

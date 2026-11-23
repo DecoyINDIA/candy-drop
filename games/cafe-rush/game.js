@@ -21,7 +21,7 @@
       const brew = { item: '', left: 0, total: 3 }, froth = { left: 0, total: 2.5 };
       function addOrder(type) { const patience = 26 + api.random() * 8; orders.push({ id: nextId++, type, left: patience, max: patience }); }
       addOrder(0); addOrder(1);
-      function hud() { api.score(score); api.hud([{ label: 'Shift', value: Math.ceil(time) + 's' }, { label: 'Served', value: served }, { label: 'Reputation', value: (5 - lost) + ' / 5' }, { label: 'Tip streak', value: '×' + (1 + Math.min(streak, 10) / 10).toFixed(1) }]); }
+      function hud() { api.score(score); api.hud([{ label: 'Shift', value: Math.ceil(time) + 's' }, { label: 'Served', value: served }, { label: 'Reputation', value: (5 - lost) + ' / 5' }, { label: 'Tip streak', value: '×' + (1 + Math.min(streak, 10) / 10).toFixed(1) }, { label: 'Selected order', value: orders[selected] ? RECIPES[orders[selected].type].name : 'None' }]); }
       function prepare(item) {
         if (stock[item] >= 4) { message = item.toUpperCase() + ' STOCK IS FULL'; return; }
         if (item === 'coffee' || item === 'tea') { if (brew.left > 0) { message = 'THE KETTLE IS STILL BREWING'; return; } brew.item = item; brew.left = brew.total; }

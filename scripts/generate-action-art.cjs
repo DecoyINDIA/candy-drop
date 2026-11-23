@@ -240,6 +240,95 @@ const scenes = {};
   scenes['harbor-rescue'] = shell('#86bcc4', '#6a9ead', s);
 }
 
+// The final action collection: eight distinct games illustrated as small scenes.
+{
+  let s = ''; for (let i = 0; i < 26; i++) s += circle(i * 113 % 600, i * 79 % 380, 5 + i % 4 * 3, '#8b9f8055');
+  s += ellipse(300, 190, 203, 112, 'none', 'stroke="#dcd1af" stroke-width="85"') + ellipse(300, 190, 203, 112, 'none', 'stroke="#59636b" stroke-width="73"') + ellipse(300, 190, 203, 112, 'none', 'stroke="#a2aaa0" stroke-width="1.8" stroke-dasharray="16 14"');
+  s += line('M468 115q45 42 28 89M477 114q45 42 28 89', '#23354770', 4);
+  for (let r = 0; r < 5; r++) for (let c = 0; c < 2; c++) s += rect(477 + c * 10, 213 + r * 10, 10, 10, 0, (r + c) % 2 ? '#dedfc9' : '#364750');
+  const raceCar = (x, y, angle, color) => `<g transform="translate(${x} ${y}) rotate(${angle})">${rect(-19, -15, 11, 6, 1, '#273846')}${rect(9, -15, 9, 6, 1, '#273846')}${rect(-19, 9, 11, 6, 1, '#273846')}${rect(9, 9, 9, 6, 1, '#273846')}${rect(-27, -12, 54, 24, 7, color)}${rect(-3, -9, 16, 18, 3, '#415b6e')}${rect(21, -9, 3, 5, 1, '#f5e4b7')}${rect(21, 4, 3, 5, 1, '#f5e4b7')}</g>`;
+  s += raceCar(492, 169, 106, '#e5a0aa') + raceCar(165, 272, 168, '#a7b4d2') + raceCar(304, 77, 2, '#dec28a');
+  s += ellipse(300, 190, 56, 32, '#a5b394') + line('M272 184h56M281 196h38', '#78907c', 4);
+  scenes['drift-circuit'] = shell('#b9c3a5', '#a5b995', s);
+}
+{
+  let s = rect(76, 44, 448, 294, 15, '#55565d') + rect(88, 56, 424, 270, 4, '#2c3e46');
+  for (let x = 90; x < 520; x += 35) s += line(`M${x} 56V326`, '#83948d1f', 1);
+  for (let y = 60; y < 330; y += 35) s += line(`M88 ${y}H512`, '#83948d1f', 1);
+  s += rect(501, 161, 14, 69, 1, '#c0ac79') + rect(511, 168, 6, 55, 0, '#18313d');
+  for (const [x, y] of [[211, 115], [382, 283]]) s += ellipse(x + 5, y + 10, 24, 16, '#192b3980') + circle(x, y, 25, '#697976') + circle(x - 3, y - 4, 17, '#8b9b8e');
+  s += circle(244, 226, 75, '#edd18e17') + circle(244, 226, 43, '#edd18e1c') + rect(233, 224, 22, 34, 6, '#80b9a8') + circle(244, 217, 13, '#e1bf8e');
+  s += line('M255 225L288 205', '#e6e8c5', 5) + line('M286 175Q317 205 294 238', '#f4dc9d', 5);
+  s += rect(344, 175, 48, 54, 12, '#be97ab') + shape('M346 176L343 158 357 171 369 155 381 171 393 158 390 176Z', '#dfbd8c') + rect(353, 190, 8, 8, 2, '#2e334b') + rect(376, 190, 8, 8, 2, '#2e334b');
+  s += circle(368, 202, 62, 'none', 'stroke="#dfc28c88" stroke-width="2" stroke-dasharray="4 7"');
+  s += rect(425, 95, 24, 28, 6, '#a8b38e') + rect(430, 103, 5, 5, 0, '#29424c') + rect(439, 103, 5, 5, 0, '#29424c');
+  s += circle(299, 291, 9, '#e9c98b') + rect(305, 288, 25, 6, 1, '#e9c98b') + rect(320, 290, 5, 11, 1, '#e9c98b');
+  scenes['dungeon-lantern'] = shell('#202d37', '#2b2a39', s);
+}
+{
+  let s = shape('M0 209Q153 170 303 214T600 204V380H0Z', '#91b6b7') + shape('M0 305Q128 273 242 335L281 380H0Z', '#c0b18e');
+  for (let i = 0; i < 15; i++) s += line(`M${i * 67 % 590} ${242 + i % 5 * 23}h25`, '#dce4ce55', 2);
+  s += line('M157 303Q224 125 376 146T445 233Q391 345 198 308', '#d0b16e', 3, 'stroke-dasharray="5 8"');
+  for (const [i, x, y] of [[1, 225, 194], [2, 318, 155], [3, 404, 180]]) s += circle(x, y, 23, 'none', 'stroke="#bd8952" stroke-width="5"') + circle(x, y, 13, '#f4dca9') + `<text x="${x}" y="${y + 5}" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="800" fill="#627978">${i}</text>`;
+  s += circle(159, 308, 40, 'none', 'stroke="#e4d3a4" stroke-width="2" stroke-dasharray="4 6"') + rect(149, 310, 22, 38, 6, '#668e83') + circle(160, 301, 12, '#dfb78c');
+  s += `<g transform="translate(429 225) rotate(33)">${line('M-23 16L0-13 25 14', '#9a6c44', 13)}${line('M-23 16L0-13 25 14', '#edca87', 5)}</g>`;
+  scenes['boomerang-bay'] = shell('#dfe2cd', '#a8c4bc', s);
+}
+{
+  let s = rect(0, 80, 600, 300, 0, '#654b55') + shape('M0 110Q142 91 302 117T600 102V380H0Z', '#4f3c49');
+  for (let i = 0; i < 5; i++) s += line(`M0 ${136 + i * 51}Q170 ${102 + i * 51}300 ${146 + i * 51}T600 ${127 + i * 51}`, '#bc8b6d25', 3);
+  const ore = (x, y, r, color) => shape(`M${x - r} ${y}l${r * .55}-${r * .8} ${r * .94} ${-r * .05} ${r * .58} ${r * .68} ${-r * .34} ${r * .8} ${-r * .96} ${r * .24}Z`, color) + ellipse(x - r * .2, y - r * .3, r * .32, r * .13, '#f4d99466');
+  s += ore(152, 207, 29, '#dbb36c') + ore(432, 298, 34, '#ddb368') + ore(273, 303, 23, '#ddb368') + ore(462, 177, 27, '#99909c') + ore(190, 313, 28, '#89818e');
+  s += shape('M367 206l16 21-16 21-16-21Z', '#91c8ca') + line('M367 208l-4 19 4 20', '#d5ebd8', 2);
+  s += rect(224, 42, 153, 19, 3, '#a18d70') + rect(274, 27, 52, 42, 7, '#566974') + circle(300, 47, 13, '#dcbd7c');
+  s += line('M300 66L345 154', '#d0c4a7', 3) + line('M300 66L246 158', '#c6bcaa4d', 2, 'stroke-dasharray="4 7"');
+  s += ore(350, 179, 24, '#ddb66b') + line('M335 148Q331 169 349 169Q363 169 361 153', '#b2c9c2', 5);
+  scenes['magnet-miner'] = shell('#3a313d', '#403241', s);
+}
+{
+  let s = circle(431, 92, 39, '#edf0d8') + shape('M0 265Q140 213 284 263T600 257V380H0Z', '#b1c8ce') + rect(0, 291, 600, 89, 0, '#edf0e4');
+  for (let i = 0; i < 8; i++) s += shape(`M${i * 85 + 9} 219l-20 55h40Z`, '#84a7ac');
+  const snowBlock = (x, y) => rect(x, y, 24, 24, 3, '#b7cdd5', 'stroke="#8daeba" stroke-width="1"') + rect(x + 2, y + 2, 20, 4, 1, '#f6f6e8');
+  for (const [x, y] of [[131, 266], [131, 240], [131, 214], [190, 266], [190, 240], [402, 266], [402, 240], [461, 266]]) s += snowBlock(x, y);
+  s += line('M171 262Q274 38 412 206', '#698d9b', 2.5, 'stroke-dasharray="4 8"') + circle(412, 207, 8, '#fffdf0');
+  s += circle(166, 267, 15, '#8eb5a9') + circle(166, 253, 10, '#f7efda') + line('M173 253l18-22', '#6a8490', 7);
+  s += circle(443, 269, 15, '#c797ad') + circle(443, 254, 10, '#f7efda') + line('M437 254l-15-21', '#6a8490', 7);
+  for (const [x, y, a] of [[420, 229, 24], [438, 218, -30], [396, 215, 13]]) s += `<g transform="translate(${x} ${y}) rotate(${a})">${rect(-7, -6, 14, 12, 2, '#e8f0e3')}</g>`;
+  s += line('M279 86h52m-10-7 10 7-10 7', '#7192a0', 3);
+  scenes['snowball-siege'] = shell('#adc4d2', '#d8e4dd', s);
+}
+{
+  let s = ''; for (let r = 50; r < 330; r += 43) s += circle(300, 190, r, 'none', 'stroke="#bbb6db16" stroke-width="1"');
+  s += rect(352, 32, 31, 92, 2, '#9484ac') + rect(352, 173, 31, 44, 2, '#9484ac') + rect(352, 266, 31, 82, 2, '#9484ac');
+  for (const y of [124, 169, 217, 262]) s += rect(352, y, 31, 4, 1, '#c3b1d4');
+  s += circle(367, 148, 10, 'none', 'stroke="#b1ded0" stroke-width="2" stroke-dasharray="3 4"') + circle(367, 242, 10, 'none', 'stroke="#b1ded0" stroke-width="2" stroke-dasharray="3 4"');
+  s += circle(236, 193, 55, 'none', 'stroke="#b0b5d84d" stroke-width="2"') + line('M214 144L258 242', '#a8d8cf', 4) + circle(214, 144, 15, '#eabd91') + circle(258, 242, 15, '#c8b0e4') + circle(210, 140, 4, '#f7e4c3') + circle(254, 238, 4, '#edddf4');
+  s += line('M271 139Q291 159 289 190m-7-11 7 11 7-11', '#c7c0df66', 3);
+  s += rect(508, 32, 31, 129, 2, '#7d7299') + rect(508, 227, 31, 121, 2, '#7d7299');
+  scenes['tether-twins'] = shell('#25314b', '#42344f', s);
+}
+{
+  let s = rect(69, 45, 462, 290, 20, '#1a2337', 'stroke="#797294" stroke-width="2"');
+  for (let x = 86; x < 530; x += 31) s += line(`M${x} 56V325`, '#b5bbd315', 1);
+  for (let y = 64; y < 330; y += 31) s += line(`M80 ${y}H520`, '#b5bbd315', 1);
+  s += line('M148 249Q149 114 250 120T361 225Q402 280 472 184', '#9dd8cd55', 4);
+  s += line('M148 249Q149 114 250 120', '#d59eb25c', 7) + line('M250 120Q332 119 352 207', '#b5a2d458', 7);
+  s += circle(174, 157, 17, '#d79fb3') + circle(313, 146, 17, '#b4a1d3') + circle(370, 235, 17, '#deb18480');
+  s += circle(370, 235, 27, 'none', 'stroke="#deb184" stroke-width="2" stroke-dasharray="4 5"');
+  s += `<g transform="translate(470 187) rotate(-64)">${shape('M23 0L-15-16-7 0-15 16Z', '#b6e1d4')}${shape('M-6-7L4 0-6 7Z', '#5a8a8c')}</g>`;
+  for (const [x, y] of [[217, 241], [390, 113], [455, 278]]) s += shape(`M${x} ${y - 8}l8 8-8 8-8-8Z`, '#e9c786');
+  scenes['echo-dodge'] = shell('#28243b', '#332c44', s);
+}
+{
+  let s = rect(78, 47, 444, 286, 7, '#18313c');
+  const size = 20; for (let y = 0; y < 13; y++) for (let x = 0; x < 21; x++) { const filled = x === 0 || x === 20 || y === 0 || y === 12 || x < 8 || x < 13 && y > 7; s += rect(90 + x * size, 60 + y * size, 18, 18, 1, filled ? '#70a69a' : '#2d4854'); if (filled) s += rect(93 + x * size, 62 + y * size, 12, 2, 0, '#b2d5b84d'); }
+  s += line('M340 290V210H420V130', '#e8cd8d', 3);
+  for (const [x, y] of [[340, 270], [340, 250], [340, 230], [340, 210], [360, 210], [380, 210], [400, 210], [420, 210], [420, 190], [420, 170], [420, 150]]) s += rect(x - 4, y - 4, 8, 8, 1, '#f2d793');
+  s += rect(412, 122, 16, 16, 4, '#fff0bc') + circle(350, 142, 13, '#dda3ba') + circle(350, 142, 21, 'none', 'stroke="#eac1d177" stroke-width="2"');
+  s += shape('M190 59l9 10-9 10-9-10Z', '#f0b17e') + shape('M500 269l9 10-9 10-9-10Z', '#f0b17e');
+  scenes['spark-sweep'] = shell('#2b484a', '#2a3c45', s);
+}
+
 fs.mkdirSync(out, { recursive: true });
 for (const [id, svg] of Object.entries(scenes)) fs.writeFileSync(path.join(out, id + '.svg'), svg);
 console.log(`Generated ${Object.keys(scenes).length} original action card illustrations.`);

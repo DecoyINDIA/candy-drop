@@ -271,10 +271,12 @@
       document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
       $('pause-button').addEventListener('click', () => state === 'playing' ? pause() : resume());
       function soundButton() { $('sound-button').textContent = icon(soundOn ? 'sound' : 'muted'); $('sound-button').setAttribute('aria-label', soundOn ? 'Mute sound' : 'Enable sound'); $('sound-button').setAttribute('aria-pressed', String(soundOn)); }
-      $('sound-button').addEventListener('click', () => { soundOn = !soundOn; save.change(data => { data.sound = soundOn; }); initAudio(); soundButton(); }); soundButton();
-      $('fullscreen-button').addEventListener('click', async () => {
+      function returnToGame(event) { if (state === 'playing' && event.detail > 0) canvas.focus({ preventScroll: true }); }
+      $('sound-button').addEventListener('click', event => { soundOn = !soundOn; save.change(data => { data.sound = soundOn; }); initAudio(); soundButton(); returnToGame(event); }); soundButton();
+      $('fullscreen-button').addEventListener('click', async event => {
         try { if (document.fullscreenElement) await document.exitFullscreen(); else await $('game-shell').requestFullscreen(); }
         catch (_) { api.toast('Fullscreen is unavailable. Try rotating your device for a wider view.'); }
+        returnToGame(event);
       });
       function fitFullscreen() {
         if (document.fullscreenElement !== $('game-shell')) return;
@@ -283,7 +285,7 @@
       }
       if (focusButton && Array.isArray(focusView) && focusView.length === 4) {
         focusButton.hidden = false;
-        focusButton.addEventListener('click', () => {
+        focusButton.addEventListener('click', event => {
           resetInput(); zoomed = !zoomed;
           const [, , width, height] = view();
           $('game-shell').style.setProperty('--view-ratio', String(width / height));
@@ -293,6 +295,7 @@
           focusButton.textContent = zoomed ? '−' : '+';
           fitFullscreen(); resize(); draw();
           $('game-status').textContent = zoomed ? 'Board enlarged. Game controls are unchanged.' : 'Full scene restored.';
+          returnToGame(event);
         });
       }
       document.addEventListener('fullscreenchange', fitFullscreen);

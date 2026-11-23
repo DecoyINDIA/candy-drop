@@ -39,8 +39,13 @@
       const enemies = [], bullets = [], impacts = [];
 
       function ui() {
+        const tower = pads[selected].tower;
+        const type = types[tower ? tower.type : chosen];
+        const name = type.name[0] + type.name.slice(1).toLowerCase();
+        const action = tower ? tower.level === 3 ? 'Max level' : 'Upgrade' : 'Build';
+        const price = tower ? tower.level === 3 ? 'MAX' : 75 * tower.level : type.cost;
         api.score(score);
-        api.hud([{ label: 'Wave', value: wave + ' / 8' }, { label: 'Credits', value: credits }, { label: 'Reactor', value: integrity + ' / 15' }, { label: 'Phase', value: active ? 'Defend' : 'Build' }]);
+        api.hud([{ label: 'Wave', value: wave + ' / 8' }, { label: 'Credits', value: credits }, { label: 'Reactor', value: integrity + ' / 15' }, { label: 'Phase', value: active ? 'Defend' : 'Build' }, { label: 'Pad ' + (selected + 1) + ' · ' + action, value: name + ' ' + price }]);
       }
       ui();
       function say(text) { notice = text; noticeTime = 3; api.toast(text); }

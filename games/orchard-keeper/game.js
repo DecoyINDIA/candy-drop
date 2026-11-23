@@ -13,7 +13,7 @@
       let time = 120, clock = 0, coins = 36, water = 14, selected = 0, seed = 0, harvests = 0, contracts = 0, score = 0, ended = false, message = 'PLANT A LITTLE. GROW A LOT.';
       const plots = Array.from({ length: 9 }, () => ({ crop: -1, age: 0 })), weather = ['Sun', 'Cloud', 'Rain', 'Sun', 'Rain', 'Sun'], market = Array.from({ length: 4 }, () => Math.floor(api.random() * 3));
       let weatherIndex = 0, wanted = market[0];
-      function hud() { score = Math.round(coins * 10 + harvests * 25); api.score(score); api.hud([{ label: 'Coins', value: coins + ' / 220' }, { label: 'Water', value: Math.floor(water) }, { label: 'Season', value: Math.ceil(time) + 's' }, { label: 'Weather', value: weather[weatherIndex] }]); }
+      function hud() { score = Math.round(coins * 10 + harvests * 25); api.score(score); api.hud([{ label: 'Coins', value: coins + ' / 220' }, { label: 'Water', value: Math.floor(water) }, { label: 'Season', value: Math.ceil(time) + 's' }, { label: 'Weather', value: weather[weatherIndex] }, { label: 'Seeds / coins', value: ['Carrot','Berry','Pumpkin'][seed] + ' · ' + CROPS[seed].cost }]); }
       function work() {
         const p = plots[selected];
         if (p.crop < 0) { const c = CROPS[seed]; if (coins < c.cost || water < c.water) { message = coins < c.cost ? 'NEED MORE COINS FOR THESE SEEDS.' : 'LOW WATER. REFILL OR WAIT FOR RAIN.'; api.toast(message); return; } coins -= c.cost; water -= c.water; p.crop = seed; p.age = 0; message = c.name.toUpperCase() + ' PLANTED'; api.sound('click'); }

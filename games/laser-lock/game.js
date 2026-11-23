@@ -79,7 +79,7 @@
           hud();
         },
         draw(c) {
-          c.save(); c.fillStyle = '#122c35'; c.fillRect(0, 0, 960, 600); c.textAlign = 'left'; c.fillStyle = '#d6f4e5'; c.font = '800 31px system-ui'; c.fillText('A LITTLE', 28, 181, 190); c.fillText('REFLECTION.', 28, 222, 190);
+          c.save(); c.fillStyle = '#122c35'; c.fillRect(0, 0, 960, 600); c.textAlign = 'left'; c.fillStyle = '#d6f4e5'; c.font = '800 31px system-ui'; c.fillText('A LITTLE', 28, 181, 190); c.fillText('REFLECTION.', 28, 222, 160);
           c.fillStyle = '#8eafb1'; c.font = '16px system-ui'; ['Follow the light.', 'Consider the turn.', 'Let the room open.'].forEach((t, i) => c.fillText(t, 30, 282 + i * 27));
           c.fillStyle = '#21434c'; c.beginPath(); c.roundRect(X - 9, Y - 9, N * S + 18, H * S + 18, 18); c.fill();
           const beam = trace();
