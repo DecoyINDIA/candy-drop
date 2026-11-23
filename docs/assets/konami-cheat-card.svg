@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 300" width="100%" height="100%">
+  
+  <defs>
+    <!-- CRT Scanlines pattern -->
+    <pattern id="crt-scanlines" width="100" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="100" y2="0" stroke="#000000" stroke-width="1.2" opacity="0.32"/>
+    </pattern>
+
+    <!-- Retro Wireframe Grid pattern -->
+    <pattern id="retro-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#2a1f4d" stroke-width="1.2" stroke-opacity="0.6"/>
+    </pattern>
+
+    <!-- Glowing Filters -->
+    <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="8" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-magenta" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="8" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur1"/>
+      <feGaussianBlur stdDeviation="6" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="cabinet-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#02040a" flood-opacity="0.75"/>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="bg-synthwave" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0518"/>
+      <stop offset="45%" stop-color="#140a2e"/>
+      <stop offset="75%" stop-color="#241242"/>
+      <stop offset="100%" stop-color="#0d081e"/>
+    </linearGradient>
+
+    <linearGradient id="neon-text-candy" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3377"/>
+      <stop offset="40%" stop-color="#ff0055"/>
+      <stop offset="70%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#ffe600"/>
+    </linearGradient>
+
+    <linearGradient id="gold-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5a0"/>
+      <stop offset="30%" stop-color="#ffc700"/>
+      <stop offset="70%" stop-color="#d48800"/>
+      <stop offset="100%" stop-color="#fff080"/>
+    </linearGradient>
+
+    <linearGradient id="cabinet-body" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="15%" stop-color="#182234"/>
+      <stop offset="50%" stop-color="#202b40"/>
+      <stop offset="85%" stop-color="#182234"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+
+    <linearGradient id="cabinet-screen-bezel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#101520"/>
+      <stop offset="100%" stop-color="#05080f"/>
+    </linearGradient>
+
+    <radialGradient id="screen-crt-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a3854" stop-opacity="0.8"/>
+      <stop offset="80%" stop-color="#08101a" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#03060a" stop-opacity="1.0"/>
+    </radialGradient>
+  </defs>
+  
+
+  <!-- Laminated Card Background -->
+  <rect x="0" y="0" width="740" height="300" fill="url(#bg-synthwave)" rx="16"/>
+
+  <!-- Circuit Trace Pattern / Diagonal Hazard Stripes Top & Bottom -->
+  <g opacity="0.4">
+    <line x1="0" y1="0" x2="14" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="0" y1="284" x2="14" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="26" y1="0" x2="40" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="26" y1="284" x2="40" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="52" y1="0" x2="66" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="52" y1="284" x2="66" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="78" y1="0" x2="92" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="78" y1="284" x2="92" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="104" y1="0" x2="118" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="104" y1="284" x2="118" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="130" y1="0" x2="144" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="130" y1="284" x2="144" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="156" y1="0" x2="170" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="156" y1="284" x2="170" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="182" y1="0" x2="196" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="182" y1="284" x2="196" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="208" y1="0" x2="222" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="208" y1="284" x2="222" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="234" y1="0" x2="248" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="234" y1="284" x2="248" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="260" y1="0" x2="274" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="260" y1="284" x2="274" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="286" y1="0" x2="300" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="286" y1="284" x2="300" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="312" y1="0" x2="326" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="312" y1="284" x2="326" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="338" y1="0" x2="352" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="338" y1="284" x2="352" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="364" y1="0" x2="378" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="364" y1="284" x2="378" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="390" y1="0" x2="404" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="390" y1="284" x2="404" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="416" y1="0" x2="430" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="416" y1="284" x2="430" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="442" y1="0" x2="456" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="442" y1="284" x2="456" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="468" y1="0" x2="482" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="468" y1="284" x2="482" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="494" y1="0" x2="508" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="494" y1="284" x2="508" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="520" y1="0" x2="534" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="520" y1="284" x2="534" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="546" y1="0" x2="560" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="546" y1="284" x2="560" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="572" y1="0" x2="586" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="572" y1="284" x2="586" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="598" y1="0" x2="612" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="598" y1="284" x2="612" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="624" y1="0" x2="638" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="624" y1="284" x2="638" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="650" y1="0" x2="664" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="650" y1="284" x2="664" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="676" y1="0" x2="690" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="676" y1="284" x2="690" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="702" y1="0" x2="716" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="702" y1="284" x2="716" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="728" y1="0" x2="742" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="728" y1="284" x2="742" y2="300" stroke="#ffe600" stroke-width="4"/><line x1="754" y1="0" x2="768" y2="16" stroke="#ffe600" stroke-width="4"/>
+              <line x1="754" y1="284" x2="768" y2="300" stroke="#ffe600" stroke-width="4"/>
+  </g>
+
+  <!-- Outer Neon Frame -->
+  <rect x="14" y="16" width="712" height="268" rx="12" fill="none" stroke="#ffe600" stroke-width="2" stroke-dasharray="14 8"/>
+  <rect x="18" y="20" width="704" height="260" rx="10" fill="none" stroke="#251b47" stroke-width="1.5"/>
+
+  <!-- Top Confidential Classification Pill -->
+  <g transform="translate(370, 50)">
+    <rect x="-240" y="-16" width="480" height="32" rx="16" fill="#0c0e18" stroke="#ff0066" stroke-width="2"/>
+    <text x="0" y="5" font-family="'Courier New', monospace" font-size="12" font-weight="900" text-anchor="middle" fill="#ff0066" letter-spacing="3">
+      ★ TOP SECRET // ARCADE OVERRIDE PROTOCOL ★
+    </text>
+  </g>
+
+  <text x="370" y="96" font-family="'Impact', 'Arial Black', sans-serif" font-size="28" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="3">
+    THE LEGENDARY KONAMI CHEAT CODE
+  </text>
+  <text x="370" y="112" font-family="'Courier New', monospace" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#ffe600" letter-spacing="2">
+    ENTER SEQUENCE ON TITLE SCREENS FOR MAXIMUM POWER
+  </text>
+
+  <!-- 10 Controller Buttons Row -->
+  
+      <!-- Key 1: UP -->
+      <g transform="translate(27, 120)">
+        <!-- Button Drop Shadow -->
+        <rect x="0" y="4" width="56" height="56" rx="8" fill="#000000"/>
+        <!-- Button Bevel -->
+        <rect x="0" y="0" width="56" height="56" rx="8" fill="#141c2c" stroke="#00f0ff" stroke-width="2"/>
+        <rect x="4" y="4" width="48" height="48" rx="6" fill="#0b101b"/>
+        <!-- Key Symbol -->
+        <text x="28" y="34" font-family="'Impact', 'Arial Black', sans-serif" font-size="24" font-weight="900" fill="#00f0ff" text-anchor="middle">↑</text>
+        <!-- Key Sublabel -->
+        <text x="28" y="46" font-family="'Courier New', monospace" font-size="7" font-weight="900" fill="#8899aa" text-anchor="middle">UP</text>
+      </g>
+    
+
+      <!-- Key 2: UP -->
+      <g transform="translate(97, 120)">
+        <!-- Button Drop Shadow -->
+        <rect x="0" y="4" width="56" height="56" rx="8" fill="#000000"/>
+        <!-- Button Bevel -->
+        <rect x="0" y="0" width="56" height="56" rx="8" fill="#141c2c" stroke="#00f0ff" stroke-width="2"/>
+        <rect x="4" y="4" width="48" height="48" rx="6" fill="#0b101b"/>
+        <!-- Key Symbol -->
+        <text x="28" y="34" font-family="'Impact', 'Arial Black', sans-serif" font-size="24" font-weight="900" fill="#00f0ff" text-anchor="middle">↑</text>
+        <!-- Key Sublabel -->
+        <text x="28" y="46" font-family="'Courier New', monospace" font-size="7" font-weight="900" fill="#8899aa" text-anchor="middle">UP</text>
+      </g>
+    
+
+      <!-- Key 3: DOWN -->
+      <g transform="translate(167, 120)">
+        <!-- Button Drop Shadow -->
+        <rect x="0" y="4" width="56" height="56" rx="8" fill="#000000"/>
+        <!-- Button Bevel -->
+        <rect x="0" y="0" width="56" height="56" rx="8" fill="#141c2c" stroke="#00f0ff" stroke-width="2"/>
+        <rect x="4" y="4" width="48" height="48" rx="6" fill="#0b101b"/>
+        <!-- Key Symbol -->
+        <text x="28" y="34" font-family="'Impact', 'Arial Black', sans-serif" font-size="24" font-weight="900" fill="#00f0ff" text-anchor="middle">↓</text>
+        <!-- Key Sublabel -->
+        <text x="28" y="46" font-family="'Courier New', monospace" font-size="7" font-weight="900" fill="#8899aa" text-anchor="middle">DOWN</text>
+      </g>
+    
+
+      <!-- Key 4: DOWN -->
+      <g transform="translate(237, 120)">
+        <!-- Button Drop Shadow -->
+        <rect x="0" y="4" width="56" height="56" rx="8" fill="#000000"/>
+        <!-- Button Bevel -->
+        <rect x="0" y="0" width="56" height="56" rx="8" fill="#141c2c" stroke="#00f0ff" stroke-width="2"/>
+        <rect x="4" y="4" width="48" height="48" rx="6" fill="#0b101b"/>
+        <!-- Key Symbol -->
+        <text x="28" y="34" font-family="'Impact', 'Arial Black', sans-serif" font-size="24" font-weight="900" fill="#00f0ff" text-anchor="middle">↓</text>
+        <!-- Key Sublabel -->
+        <text x="28" y="46" font-family="'Courier New', monospace" font-size="7" font-weight="900" fill="#8899aa" text-anchor="middle">DOWN</text>
+      </g>
+    
+
+      <!-- Key 5: LEFT -->
+      <g transform="translate(307, 120)">
+        <!-- Button Drop Shadow -->
+        <rect x="0" y="4" width="56" height="56" rx="8" fill="#000000"/>
+        <!-- Button Bevel -->
+        <rect x="0" y="0" width="56" height="56" rx="8" fill="#141c2c" stroke="#00f0ff" stroke-width="2"/>
+        <rect x="4" y="4" width="48" height="48" rx="6" fill="#0b101b"/>
+        <!-- Key Symbol -->
+        <text x="28" y="34" font-family="'Impact', 'Arial Black', sans-serif" font-size="24" font-weight="900" fill="#00f0ff" text-anchor="middle">←</text>
+        <!-- Key Sublabel -->
+        <text x="28" y="46" font-family="'Courier New', monospace" font-size="7" font-weight="900" fill="#8899aa" text-anchor="middle">LEFT</text>
+      </g>
+    
+
+      <!-- Key 6: RIGHT -->
+      <g transform="translate(377, 120)">
+        <!-- Button Drop Shadow -->
+        <rect x="0" y="4" width="56" height="56" rx="8" fill="#000000"/>
+        <!-- Button Bevel -->
+        <rect x="0" y="0" width="56" height="56" rx="8" fill="#141c2c" stroke="#00f0ff" stroke-width="2"/>
+        <rect x="4" y="4" width="48" height="48" rx="6" fill="#0b101b"/>
+        <!-- Key Symbol -->
+        <text x="28" y="34" font-family="'Impact', 'Arial Black', sans-serif" font-size="24" font-weight="900" fill="#00f0ff" text-anchor="middle">→</text>
+        <!-- Key Sublabel -->
+        <text x="28" y="46" font-family="'Courier New', monospace" font-size="7" font-weight="900" fill="#8899aa" text-anchor="middle">RIGHT</text>
+      </g>
+    
+
+      <!-- Key 7: LEFT -->
+      <g transform="translate(447, 120)">
+        <!-- Button Drop Shadow -->
+        <rect x="0" y="4" width="56" height="56" rx="8" fill="#000000"/>
+        <!-- Button Bevel -->
+        <rect x="0" y="0" width="56" height="56" rx="8" fill="#141c2c" stroke="#00f0ff" stroke-width="2"/>
+        <rect x="4" y="4" width="48" height="48" rx="6" fill="#0b101b"/>
+        <!-- Key Symbol -->
+        <text x="28" y="34" font-family="'Impact', 'Arial Black', sans-serif" font-size="24" font-weight="900" fill="#00f0ff" text-anchor="middle">←</text>
+        <!-- Key Sublabel -->
+        <text x="28" y="46" font-family="'Courier New', monospace" font-size="7" font-weight="900" fill="#8899aa" text-anchor="middle">LEFT</text>
+      </g>
+    
+
+      <!-- Key 8: RIGHT -->
+      <g transform="translate(517, 120)">
+        <!-- Button Drop Shadow -->
+        <rect x="0" y="4" width="56" height="56" rx="8" fill="#000000"/>
+        <!-- Button Bevel -->
+        <rect x="0" y="0" width="56" height="56" rx="8" fill="#141c2c" stroke="#00f0ff" stroke-width="2"/>
+        <rect x="4" y="4" width="48" height="48" rx="6" fill="#0b101b"/>
+        <!-- Key Symbol -->
+        <text x="28" y="34" font-family="'Impact', 'Arial Black', sans-serif" font-size="24" font-weight="900" fill="#00f0ff" text-anchor="middle">→</text>
+        <!-- Key Sublabel -->
+        <text x="28" y="46" font-family="'Courier New', monospace" font-size="7" font-weight="900" fill="#8899aa" text-anchor="middle">RIGHT</text>
+      </g>
+    
+
+      <!-- Key 9: BTN B -->
+      <g transform="translate(587, 120)">
+        <!-- Button Drop Shadow -->
+        <rect x="0" y="4" width="56" height="56" rx="8" fill="#000000"/>
+        <!-- Button Bevel -->
+        <rect x="0" y="0" width="56" height="56" rx="8" fill="#141c2c" stroke="#ff0066" stroke-width="2"/>
+        <rect x="4" y="4" width="48" height="48" rx="6" fill="#0b101b"/>
+        <!-- Key Symbol -->
+        <text x="28" y="34" font-family="'Impact', 'Arial Black', sans-serif" font-size="24" font-weight="900" fill="#ff0066" text-anchor="middle">B</text>
+        <!-- Key Sublabel -->
+        <text x="28" y="46" font-family="'Courier New', monospace" font-size="7" font-weight="900" fill="#8899aa" text-anchor="middle">BTN B</text>
+      </g>
+    
+
+      <!-- Key 10: BTN A -->
+      <g transform="translate(657, 120)">
+        <!-- Button Drop Shadow -->
+        <rect x="0" y="4" width="56" height="56" rx="8" fill="#000000"/>
+        <!-- Button Bevel -->
+        <rect x="0" y="0" width="56" height="56" rx="8" fill="#141c2c" stroke="#ffe600" stroke-width="2"/>
+        <rect x="4" y="4" width="48" height="48" rx="6" fill="#0b101b"/>
+        <!-- Key Symbol -->
+        <text x="28" y="34" font-family="'Impact', 'Arial Black', sans-serif" font-size="24" font-weight="900" fill="#ffe600" text-anchor="middle">A</text>
+        <!-- Key Sublabel -->
+        <text x="28" y="46" font-family="'Courier New', monospace" font-size="7" font-weight="900" fill="#8899aa" text-anchor="middle">BTN A</text>
+      </g>
+    
+
+  <!-- Unlocked Perks Row -->
+  <g transform="translate(370, 222)">
+    <!-- Perk 1 -->
+    <rect x="-310" y="-14" width="140" height="28" rx="6" fill="#121828" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="-240" y="4" font-family="'Courier New', monospace" font-size="10" font-weight="900" text-anchor="middle" fill="#00f0ff">⚡ +30 LIVES</text>
+
+    <!-- Perk 2 -->
+    <rect x="-150" y="-14" width="140" height="28" rx="6" fill="#121828" stroke="#ff0066" stroke-width="1.5"/>
+    <text x="-80" y="4" font-family="'Courier New', monospace" font-size="10" font-weight="900" text-anchor="middle" fill="#ff0066">🔓 100 UNLOCKED</text>
+
+    <!-- Perk 3 -->
+    <rect x="10" y="-14" width="140" height="28" rx="6" fill="#121828" stroke="#00e575" stroke-width="1.5"/>
+    <text x="80" y="4" font-family="'Courier New', monospace" font-size="10" font-weight="900" text-anchor="middle" fill="#00e575">🎮 SOUND TEST</text>
+
+    <!-- Perk 4 -->
+    <rect x="170" y="-14" width="140" height="28" rx="6" fill="#121828" stroke="#ffe600" stroke-width="1.5"/>
+    <text x="240" y="4" font-family="'Courier New', monospace" font-size="10" font-weight="900" text-anchor="middle" fill="#ffe600">🏆 GOD MODE</text>
+  </g>
+
+  <!-- Bottom Operator Verification -->
+  <text x="370" y="266" font-family="'Courier New', monospace" font-size="9" font-weight="bold" text-anchor="middle" fill="#8899aa" letter-spacing="1.5">
+    CLASSIFIED R&amp;D DIAGNOSTIC MATRIX • AUTH: ARCADE MASTER 2026 • ZERO REBUILD REQUIRED
+  </text>
+</svg>

@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101219">
+  <meta name="description" content="Arcade Universe Interactive Companion Portal & Showcase. Explore 100 zero-dependency browser games, interactive Web Audio synthesizer, deterministic PRNG simulator, and random cabinet launcher.">
+  <title>Arcade Universe · Companion Portal & Interactive Launcher</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script src="assets/core.js"></script>
+  <style>
+    :root {
+      --bg: #101219;
+      --bg-surface: #171a26;
+      --bg-card: #1f2333;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #2e3449;
+      --accent-pink: #fb719f;
+      --accent-amber: #ffb86b;
+      --accent-green: #a4e87b;
+      --accent-purple: #b2a0ff;
+      --accent-cyan: #5eead4;
+      --accent-gold: #fcd34d;
+      --glow-pink: rgba(251, 113, 159, 0.4);
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* CRT Scanline Overlay Effect */
+    .crt-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+      z-index: 9999;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+    body.no-crt .crt-overlay { display: none; }
+
+    /* Header & Marquee */
+    .portal-header {
+      background: #141722;
+      border-bottom: 2px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-mark {
+      display: grid;
+      grid-template-columns: 8px 8px;
+      gap: 3px;
+    }
+    .brand-mark i {
+      width: 8px; height: 8px; border-radius: 2px;
+    }
+    .brand-mark i:nth-child(1) { background: var(--accent-pink); }
+    .brand-mark i:nth-child(2) { background: var(--accent-amber); }
+    .brand-mark i:nth-child(3) { background: var(--accent-cyan); }
+    .brand-mark i:nth-child(4) { background: var(--accent-gold); }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .brand-title span { color: var(--accent-pink); }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #fff;
+      background: var(--bg-card);
+    }
+    .nav-links a.highlight {
+      color: #101219;
+      background: var(--accent-gold);
+      box-shadow: 0 0 12px rgba(252, 211, 77, 0.4);
+    }
+
+    .crt-toggle-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+    .crt-toggle-btn:hover { color: #fff; border-color: var(--text-muted); }
+
+    /* Hero Section */
+    .portal-hero {
+      padding: 3rem 1.5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      width: 100%;
+    }
+
+    .neon-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      background: rgba(251, 113, 159, 0.12);
+      border: 1px solid var(--accent-pink);
+      color: var(--accent-pink);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: pulseGlow 2.5s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(251, 113, 159, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(251, 113, 159, 0.6); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, #fb719f, #ffb86b, #fcd34d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Interactive Arcade Cabinet Console */
+    .cabinet-console {
+      background: linear-gradient(180deg, #1b1e2c 0%, #13151f 100%);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto 3.5rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      align-items: center;
+      text-align: left;
+    }
+
+    .coin-door {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .coin-stats {
+      font-family: var(--font-mono);
+      background: #0b0d13;
+      border: 1px solid var(--border);
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--accent-gold);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .insert-coin-btn {
+      background: linear-gradient(180deg, #ff3366 0%, #cc0033 100%);
+      color: white;
+      border: none;
+      padding: 1.1rem 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #880022, 0 10px 20px rgba(255, 51, 102, 0.4);
+      transition: all 0.1s;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .insert-coin-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #880022, 0 4px 10px rgba(255, 51, 102, 0.4);
+    }
+
+    .lucky-cabinet-card {
+      background: #0d0f17;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .lucky-cabinet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .lucky-art-frame {
+      width: 100%;
+      height: 160px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #1a1c28;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lucky-art-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lucky-info h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+    .lucky-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .play-lucky-btn {
+      background: var(--accent-cyan);
+      color: #0b0d13;
+      text-decoration: none;
+      text-align: center;
+      padding: 0.7rem;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+    }
+    .play-lucky-btn:hover { opacity: 0.9; }
+
+    /* Interactive Sound Synthesizer Studio */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .interactive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .interactive-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .synth-pad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+    .synth-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 1rem 0.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .synth-btn span.waveform {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+    }
+    .synth-btn:hover {
+      background: #2a3045;
+      border-color: var(--accent-pink);
+    }
+    .synth-btn:active {
+      transform: scale(0.96);
+      background: var(--accent-pink);
+      color: #101219;
+    }
+
+    .slider-control {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--accent-pink);
+    }
+
+    #oscilloscope {
+      width: 100%;
+      height: 90px;
+      background: #090b10;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    /* PRNG Simulator */
+    .prng-input-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .prng-input-group input {
+      flex: 1;
+      background: #090b10;
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+    .prng-input-group button {
+      background: var(--accent-purple);
+      color: #101219;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .prng-stream-output {
+      background: #090b10;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      max-height: 140px;
+      overflow-y: auto;
+      color: var(--accent-cyan);
+    }
+
+    /* 100 Games Showcase & Filter */
+    .showcase-section {
+      max-width: 1200px;
+      margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .filter-tab {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .filter-tab:hover { color: #fff; border-color: var(--text-muted); }
+    .filter-tab.active {
+      background: var(--accent-pink);
+      color: #101219;
+      border-color: var(--accent-pink);
+      font-weight: 800;
+    }
+
+    .search-box {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .portal-game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .game-portal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .game-portal-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-pink);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 160px;
+      background: #141722;
+      overflow: hidden;
+    }
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .game-portal-card:hover .card-thumb img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 0.5rem;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .card-badge {
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .card-action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Konami Modal */
+    #konami-banner {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #ff007f, #7928ca, #0070f3);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      box-shadow: 0 10px 30px rgba(255, 0, 127, 0.5);
+      z-index: 10000;
+      animation: popIn 0.3s ease-out;
+    }
+    @keyframes popIn {
+      0% { transform: translate(-50%, -20px) scale(0.8); opacity: 0; }
+      100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+    }
+
+    /* Footer */
+    .portal-footer {
+      background: #0c0e15;
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      margin-top: auto;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .footer-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer-links a:hover { color: var(--accent-pink); }
+  </style>
+</head>
+<body>
+  <div class="crt-overlay" id="crtOverlay"></div>
+  <div id="konami-banner">🕹️ CHEAT CODE ACTIVATED: 99 ARCADE CREDITS &amp; GOD MODE!</div>
+
+  <header class="portal-header">
+    <a href="arcade.html" class="brand-group" aria-label="Candy Arcade Hub">
+      <div class="brand-mark"><i></i><i></i><i></i><i></i></div>
+      <div class="brand-title">Arcade <span>Universe</span></div>
+    </a>
+    <nav class="nav-links">
+      <a href="arcade.html">Arcade Hub</a>
+      <a href="index.html">Candy Drop</a>
+      <a href="docs/ABOUT.md">Design Manifesto</a>
+      <a href="docs/REPO_METADATA.md">Metadata</a>
+      <a href="docs/game-api.md">API Contract</a>
+      <a href="arcade.html" class="highlight">▶ Play 100 Games</a>
+      <button class="crt-toggle-btn" id="crtToggle" type="button" title="Toggle CRT scanline filter">CRT: ON</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="portal-hero">
+      <div class="neon-badge">Zero Dependencies · Zero Installs · 100% Pure Web</div>
+      <h1 class="hero-title">100 Games. Infinite Flow.<br><span class="gradient-text">Pure Web Craftsmanship.</span></h1>
+      <p class="hero-subtitle">The companion portal and interactive engineering showcase for Arcade Universe. Step up to the virtual cabinet, explore the procedural audio sound chip, test the deterministic PRNG, or launch into 100 handcrafted browser worlds.</p>
+
+      <div class="cabinet-console">
+        <div class="coin-door">
+          <div class="coin-stats">
+            <span>ARCADE STATUS: ONLINE</span>
+            <span id="creditCount">CREDITS: 04</span>
+          </div>
+          <button class="insert-coin-btn" id="insertCoinBtn" type="button">
+            <span>🪙</span> Insert Coin to Draw
+          </button>
+          <p style="font-size:0.8rem; color:var(--text-muted);">Clicking inserts a virtual token, synthesizes Web Audio coin chime, and draws a mystery cabinet.</p>
+        </div>
+
+        <div class="lucky-cabinet-card" id="luckyCabinet">
+          <div class="lucky-cabinet-header">
+            <span>Featured Spotlight</span>
+            <span id="luckyGenre" style="color:var(--accent-amber);">Racing</span>
+          </div>
+          <div class="lucky-art-frame">
+            <img id="luckyArt" src="assets/art/sunset-sprint.svg" alt="Featured arcade game artwork">
+          </div>
+          <div class="lucky-info">
+            <h3 id="luckyTitle">Sunset Sprint</h3>
+            <p id="luckyHook">Chase the horizon. Beat the clock.</p>
+          </div>
+          <a id="luckyPlayBtn" class="play-lucky-btn" href="games/sunset-sprint/index.html">Step Up &amp; Play Cabinet →</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="interactive-grid">
+      <!-- Synthesizer Section -->
+      <div class="interactive-card">
+        <div>
+          <h2 class="section-title" style="font-size:1.35rem;">Procedural Sound Chip</h2>
+          <p class="section-subtitle" style="margin-bottom:0.75rem; font-size:0.85rem;">Zero audio files. 100% real-time Web Audio API oscillator synthesis with exponential frequency glides.</p>
+        </div>
+
+        <canvas id="oscilloscope" width="400" height="90"></canvas>
+
+        <div class="synth-pad-grid">
+          <button class="synth-btn" data-sound="hit" type="button">
+            <strong>HIT</strong>
+            <span class="waveform">Triangle 170→65</span>
+          </button>
+          <button class="synth-btn" data-sound="good" type="button">
+            <strong>GOOD</strong>
+            <span class="waveform">Sine 540→900</span>
+          </button>
+          <button class="synth-btn" data-sound="bad" type="button">
+            <strong>BAD</strong>
+            <span class="waveform">Saw 150→45</span>
+          </button>
+          <button class="synth-btn" data-sound="win" type="button">
+            <strong>WIN</strong>
+            <span class="waveform">Tri 523→1046</span>
+          </button>
+          <button class="synth-btn" data-sound="click" type="button">
+            <strong>CLICK</strong>
+            <span class="waveform">Sine 390→520</span>
+          </button>
+          <button class="synth-btn" data-sound="shoot" type="button">
+            <strong>SHOOT</strong>
+            <span class="waveform">Tri 680→120</span>
+          </button>
+        </div>
+
+        <div class="slider-control">
+          <div class="slider-header">
+            <span>PITCH MODULATION</span>
+            <span id="pitchDisplay">1.00x</span>
+          </div>
+          <input type="range" id="pitchSlider" min="0.4" max="2.4" step="0.05" value="1.0">
+        </div>
+      </div>
+
+      <!-- Seeded PRNG Section -->
+      <div class="interactive-card">
+        <div>
+          <h2 class="section-title" style="font-size:1.35rem;">Deterministic PRNG</h2>
+          <p class="section-subtitle" style="margin-bottom:0.75rem; font-size:0.85rem;">FNV-1a 32-bit hash + Mulberry32 integer bit-mixing. Powers synchronized daily tournaments across all browsers.</p>
+        </div>
+
+        <div class="prng-input-group">
+          <input type="text" id="prngSeedInput" value="arcade-2026" placeholder="Enter custom seed text...">
+          <button id="prngRunBtn" type="button">Hash &amp; Generate</button>
+        </div>
+
+        <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted); display:flex; justify-content:space-between;">
+          <span>32-BIT FNV-1a HASH:</span>
+          <span id="prngHashValue" style="color:var(--accent-gold);">0x00000000</span>
+        </div>
+
+        <div class="prng-stream-output" id="prngOutput">
+          // Click "Hash &amp; Generate" to test Mulberry32 stream...
+        </div>
+      </div>
+    </div>
+
+    <!-- 100 Games Filter & Showcase -->
+    <section class="showcase-section">
+      <h2 class="section-title">The 100-Game Floor</h2>
+      <p class="section-subtitle">Filter by genre wing or search titles and mechanics.</p>
+
+      <div class="filter-bar" id="genreFilters">
+        <button class="filter-tab active" data-genre="all" type="button">All Cabinets (100)</button>
+        <button class="filter-tab" data-genre="Action" type="button">Action (19)</button>
+        <button class="filter-tab" data-genre="Racing" type="button">Racing (5)</button>
+        <button class="filter-tab" data-genre="Sports" type="button">Sports (13)</button>
+        <button class="filter-tab" data-genre="Strategy" type="button">Strategy (12)</button>
+        <button class="filter-tab" data-genre="Puzzle" type="button">Puzzle (30)</button>
+        <button class="filter-tab" data-genre="Tabletop" type="button">Tabletop (8)</button>
+        <button class="filter-tab" data-genre="Timing" type="button">Timing (12)</button>
+        <button class="filter-tab" data-genre="Original" type="button">Original (1)</button>
+      </div>
+
+      <input type="text" id="portalSearch" class="search-box" placeholder="Search by game name, hook, or tag (e.g. drift, soccer, maze, logic)...">
+
+      <div class="portal-game-grid" id="portalGameGrid"></div>
+    </section>
+  </main>
+
+  <footer class="portal-footer">
+    <div class="footer-links">
+      <a href="arcade.html">Arcade Hub</a>
+      <a href="index.html">Candy Drop (Genesis)</a>
+      <a href="docs/ABOUT.md">Design Manifesto</a>
+      <a href="docs/REPO_METADATA.md">Metadata &amp; Brand Pillars</a>
+      <a href="docs/game-api.md">Game API Contract</a>
+    </div>
+    <p>Arcade Universe · Handcrafted with vanilla JavaScript, HTML5 Canvas 2D, and Web Audio API. Zero dependencies.</p>
+  </footer>
+
+  <script>
+    'use strict';
+    // -------------------------------------------------------------
+    // ARCADE COMPANION PORTAL LOGIC
+    // -------------------------------------------------------------
+    const Core = window.ArcadeCore || {};
+    const CATALOG = Core.CATALOG || [];
+
+    // 1. Web Audio Procedural Sound Chip
+    let audioCtx = null;
+    let oscilloscopeCanvas = document.getElementById('oscilloscope');
+    let oscCtx = oscilloscopeCanvas.getContext('2d');
+    let pitchMod = 1.0;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioClass) audioCtx = new AudioClass();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+      return audioCtx;
+    }
+
+    function playSynthSound(kind, pitch = pitchMod) {
+      const ctx = getAudioContext();
+      if (!ctx || ctx.state !== 'running') return;
+
+      const notes = {
+        hit:   [170, 65, 0.10, 'triangle'],
+        good:  [540, 900, 0.14, 'sine'],
+        bad:   [150, 45, 0.22, 'sawtooth'],
+        win:   [523, 1046, 0.35, 'triangle'],
+        click: [390, 520, 0.07, 'sine'],
+        shoot: [680, 120, 0.065, 'triangle']
+      };
+
+      const [from, to, duration, type] = notes[kind] || notes.click;
+      try {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const t = ctx.currentTime;
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(Math.max(20, from * pitch), t);
+        osc.frequency.exponentialRampToValueAtTime(Math.max(20, to * pitch), t + duration);
+
+        gain.gain.setValueAtTime(kind === 'shoot' ? 0.04 : 0.08, t);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(t);
+        osc.stop(t + duration);
+
+        visualizeSoundWave(type, from * pitch, to * pitch, duration);
+      } catch (e) {
+        console.warn('Audio playback error', e);
+      }
+    }
+
+    function visualizeSoundWave(type, fStart, fEnd, duration) {
+      if (!oscCtx) return;
+      const w = oscilloscopeCanvas.width;
+      const h = oscilloscopeCanvas.height;
+      oscCtx.fillStyle = '#090b10';
+      oscCtx.fillRect(0, 0, w, h);
+
+      oscCtx.lineWidth = 2;
+      oscCtx.strokeStyle = type === 'sawtooth' ? '#fb719f' : (type === 'sine' ? '#5eead4' : '#ffb86b');
+      oscCtx.beginPath();
+
+      const cycles = (fStart / 100) * 3;
+      for (let x = 0; x < w; x++) {
+        const progress = x / w;
+        let y = h / 2;
+        if (type === 'sine') {
+          y += Math.sin(progress * Math.PI * 2 * cycles) * (h * 0.35);
+        } else if (type === 'triangle') {
+          y += (Math.abs((progress * cycles) % 1 - 0.5) * 4 - 1) * (h * 0.35);
+        } else {
+          y += (((progress * cycles) % 1) * 2 - 1) * (h * 0.35);
+        }
+        if (x === 0) oscCtx.moveTo(x, y);
+        else oscCtx.lineTo(x, y);
+      }
+      oscCtx.stroke();
+    }
+
+    // Attach Synth Button Listeners
+    document.querySelectorAll('.synth-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const kind = btn.dataset.sound;
+        playSynthSound(kind);
+      });
+    });
+
+    const pitchSlider = document.getElementById('pitchSlider');
+    const pitchDisplay = document.getElementById('pitchDisplay');
+    pitchSlider.addEventListener('input', (e) => {
+      pitchMod = parseFloat(e.target.value);
+      pitchDisplay.textContent = pitchMod.toFixed(2) + 'x';
+    });
+
+    // 2. Insert Coin & Lucky Cabinet Draw
+    let credits = 4;
+    const creditCountEl = document.getElementById('creditCount');
+    const insertCoinBtn = document.getElementById('insertCoinBtn');
+    const luckyCabinet = document.getElementById('luckyCabinet');
+    const luckyArt = document.getElementById('luckyArt');
+    const luckyTitle = document.getElementById('luckyTitle');
+    const luckyGenre = document.getElementById('luckyGenre');
+    const luckyHook = document.getElementById('luckyHook');
+    const luckyPlayBtn = document.getElementById('luckyPlayBtn');
+
+    insertCoinBtn.addEventListener('click', () => {
+      credits++;
+      creditCountEl.textContent = 'CREDITS: ' + String(credits).padStart(2, '0');
+      playSynthSound('click', 1.2);
+      setTimeout(() => playSynthSound('good', 1.5), 80);
+
+      // Spin random cabinet
+      const nonGenesis = CATALOG.filter(g => g.id !== 'candy-drop');
+      const pick = nonGenesis[Math.floor(Math.random() * nonGenesis.length)];
+
+      luckyCabinet.style.opacity = '0.5';
+      setTimeout(() => {
+        luckyTitle.textContent = pick.title;
+        luckyGenre.textContent = pick.category;
+        luckyGenre.style.color = pick.color || 'var(--accent-amber)';
+        luckyHook.textContent = pick.hook;
+        luckyArt.src = 'assets/art/' + pick.id + '.svg';
+        luckyPlayBtn.href = 'games/' + pick.id + '/index.html';
+        luckyCabinet.style.opacity = '1';
+        playSynthSound('win', 1.0);
+      }, 150);
+    });
+
+    // 3. PRNG Simulator
+    const prngSeedInput = document.getElementById('prngSeedInput');
+    const prngRunBtn = document.getElementById('prngRunBtn');
+    const prngHashValue = document.getElementById('prngHashValue');
+    const prngOutput = document.getElementById('prngOutput');
+
+    function runPrngTest() {
+      const seedText = prngSeedInput.value || 'arcade-2026';
+      const hashVal = Core.hash ? Core.hash(seedText) : 0;
+      prngHashValue.textContent = '0x' + hashVal.toString(16).toUpperCase().padStart(8, '0');
+
+      const rng = Core.random ? Core.random(seedText) : Math.random;
+      let lines = ['// Deterministic Mulberry32 stream for seed: "' + seedText + '"'];
+      for (let i = 1; i <= 8; i++) {
+        const val = rng();
+        lines.push(`RNG #${i}: ${val.toFixed(8)}  (Hex: 0x${Math.floor(val * 4294967296).toString(16).padStart(8, '0')})`);
+      }
+      prngOutput.textContent = lines.join('\n');
+      playSynthSound('click', 1.4);
+    }
+    prngRunBtn.addEventListener('click', runPrngTest);
+    runPrngTest();
+
+    // 4. CRT Toggle
+    const crtToggle = document.getElementById('crtToggle');
+    crtToggle.addEventListener('click', () => {
+      document.body.classList.toggle('no-crt');
+      const isOn = !document.body.classList.contains('no-crt');
+      crtToggle.textContent = 'CRT: ' + (isOn ? 'ON' : 'OFF');
+      playSynthSound('click', isOn ? 1.5 : 0.8);
+    });
+
+    // 5. Konami Code Listener
+    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+    let konamiIndex = 0;
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === konamiSequence[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiSequence.length) {
+          activateKonamiCode();
+          konamiIndex = 0;
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    });
+
+    function activateKonamiCode() {
+      credits = 99;
+      creditCountEl.textContent = 'CREDITS: 99';
+      const banner = document.getElementById('konami-banner');
+      banner.style.display = 'block';
+      playSynthSound('win', 1.3);
+      setTimeout(() => playSynthSound('win', 1.6), 180);
+      setTimeout(() => playSynthSound('win', 2.0), 360);
+      setTimeout(() => { banner.style.display = 'none'; }, 5000);
+    }
+
+    // 6. 100 Games Grid Rendering & Filtering
+    const portalGameGrid = document.getElementById('portalGameGrid');
+    const genreFilters = document.getElementById('genreFilters');
+    const portalSearch = document.getElementById('portalSearch');
+    let currentGenre = 'all';
+
+    function renderGames() {
+      const q = (portalSearch.value || '').trim().toLowerCase();
+      portalGameGrid.innerHTML = '';
+
+      const filtered = CATALOG.filter(game => {
+        const matchesGenre = currentGenre === 'all' || game.group === currentGenre;
+        const matchesQuery = !q ||
+          game.title.toLowerCase().includes(q) ||
+          game.hook.toLowerCase().includes(q) ||
+          game.category.toLowerCase().includes(q) ||
+          game.tag.toLowerCase().includes(q);
+        return matchesGenre && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        portalGameGrid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align: center; color: var(--text-muted);">No matching cabinets found. Try another query or genre filter.</div>';
+        return;
+      }
+
+      for (const game of filtered) {
+        const card = document.createElement('a');
+        card.className = 'game-portal-card';
+        card.href = game.id === 'candy-drop' ? 'index.html' : `games/${game.id}/index.html`;
+
+        const badgeColor = game.color || 'var(--accent-pink)';
+        card.innerHTML = `
+          <div class="card-thumb">
+            <img src="${game.id === 'candy-drop' ? 'assets/art/sunset-sprint.svg' : `assets/art/${game.id}.svg`}" alt="${game.title} artwork" loading="lazy">
+          </div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span>${game.group}</span>
+              <span class="card-badge" style="background:${badgeColor}22; color:${badgeColor}; border:1px solid ${badgeColor}66;">${game.duration}</span>
+            </div>
+            <h3 class="card-title">${game.title}</h3>
+            <p class="card-desc">${game.hook}</p>
+            <div class="card-action">
+              <span>${game.tag}</span>
+              <span>PLAY →</span>
+            </div>
+          </div>
+        `;
+        portalGameGrid.appendChild(card);
+      }
+    }
+
+    genreFilters.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-tab');
+      if (!btn) return;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      currentGenre = btn.dataset.genre;
+      renderGames();
+      playSynthSound('click', 1.1);
+    });
+
+    portalSearch.addEventListener('input', () => {
+      renderGames();
+    });
+
+    // Initial Render
+    renderGames();
+  </script>
+</body>
+</html>

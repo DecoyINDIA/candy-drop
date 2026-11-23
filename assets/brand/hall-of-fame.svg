@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="100%" height="100%">
+  
+  <defs>
+    <!-- CRT Scanlines pattern -->
+    <pattern id="crt-scanlines" width="100" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="100" y2="0" stroke="#000000" stroke-width="1.2" opacity="0.32"/>
+    </pattern>
+
+    <!-- Retro Wireframe Grid pattern -->
+    <pattern id="retro-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#2a1f4d" stroke-width="1.2" stroke-opacity="0.6"/>
+    </pattern>
+
+    <!-- Glowing Filters -->
+    <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="8" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-magenta" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="8" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur1"/>
+      <feGaussianBlur stdDeviation="6" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="cabinet-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#02040a" flood-opacity="0.75"/>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="bg-synthwave" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0518"/>
+      <stop offset="45%" stop-color="#140a2e"/>
+      <stop offset="75%" stop-color="#241242"/>
+      <stop offset="100%" stop-color="#0d081e"/>
+    </linearGradient>
+
+    <linearGradient id="neon-text-candy" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3377"/>
+      <stop offset="40%" stop-color="#ff0055"/>
+      <stop offset="70%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#ffe600"/>
+    </linearGradient>
+
+    <linearGradient id="gold-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5a0"/>
+      <stop offset="30%" stop-color="#ffc700"/>
+      <stop offset="70%" stop-color="#d48800"/>
+      <stop offset="100%" stop-color="#fff080"/>
+    </linearGradient>
+
+    <linearGradient id="cabinet-body" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="15%" stop-color="#182234"/>
+      <stop offset="50%" stop-color="#202b40"/>
+      <stop offset="85%" stop-color="#182234"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+
+    <linearGradient id="cabinet-screen-bezel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#101520"/>
+      <stop offset="100%" stop-color="#05080f"/>
+    </linearGradient>
+
+    <radialGradient id="screen-crt-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a3854" stop-opacity="0.8"/>
+      <stop offset="80%" stop-color="#08101a" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#03060a" stop-opacity="1.0"/>
+    </radialGradient>
+  </defs>
+  
+  <style>
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor-blink { animation: blinkCursor 0.9s infinite; }
+  </style>
+
+  <!-- Heavy Arcade Cabinet Bezel Frame -->
+  <rect x="0" y="0" width="800" height="520" fill="#0a0d16" rx="18"/>
+  <rect x="12" y="12" width="776" height="496" rx="14" fill="#141a27" stroke="#334158" stroke-width="3"/>
+
+  <!-- Cabinet Screw Bolts in 4 Corners -->
+  <circle cx="28" cy="28" r="6" fill="#475569" stroke="#1e293b" stroke-width="2"/>
+  <circle cx="772" cy="28" r="6" fill="#475569" stroke="#1e293b" stroke-width="2"/>
+  <circle cx="28" cy="492" r="6" fill="#475569" stroke="#1e293b" stroke-width="2"/>
+  <circle cx="772" cy="492" r="6" fill="#475569" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Curved Recessed CRT Glass Monitor -->
+  <rect x="36" y="36" width="728" height="448" rx="16" fill="url(#screen-crt-glow)" stroke="#00f0ff" stroke-width="2"/>
+  <rect x="36" y="36" width="728" height="448" rx="16" fill="url(#crt-scanlines)"/>
+
+  <!-- Marquee Header Banner -->
+  <g transform="translate(400, 72)">
+    <rect x="-270" y="-20" width="540" height="40" rx="8" fill="#0c0e18" stroke="#ff0077" stroke-width="2"/>
+    <text x="0" y="6" font-family="'Impact', 'Arial Black', sans-serif" font-size="22" font-weight="900" text-anchor="middle" fill="#ff0077" letter-spacing="3">
+      ★ ALL-TIME HALL OF FAME ★
+    </text>
+  </g>
+  <text x="400" y="112" font-family="'Courier New', monospace" font-size="11" font-weight="900" text-anchor="middle" fill="#00f0ff" letter-spacing="2">
+    CANDY ARCADE GLOBAL LEADERBOARD • 100 PLAYABLE TITLES
+  </text>
+
+  <!-- Table Header Bar -->
+  <g transform="translate(400, 138)">
+    <rect x="-330" y="-12" width="660" height="24" rx="4" fill="#182338"/>
+    <text x="-290" y="4" font-family="'Courier New', monospace" font-size="11" font-weight="900" fill="#00f0ff" text-anchor="middle">RANK</text>
+    <text x="-190" y="4" font-family="'Courier New', monospace" font-size="11" font-weight="900" fill="#00f0ff" text-anchor="end">SCORE</text>
+    <text x="-90" y="4" font-family="'Courier New', monospace" font-size="11" font-weight="900" fill="#00f0ff" text-anchor="middle">PILOT</text>
+    <text x="70" y="4" font-family="'Courier New', monospace" font-size="11" font-weight="900" fill="#00f0ff" text-anchor="middle">SIGNATURE GAME</text>
+    <text x="240" y="4" font-family="'Courier New', monospace" font-size="11" font-weight="900" fill="#00f0ff" text-anchor="middle">MEDALS</text>
+  </g>
+
+  <!-- High Scores Rows -->
+  
+      <!-- Row 1 -->
+      <g>
+        <rect x="70" y="155" width="660" height="28" rx="4" fill="#101626" stroke="#ffe600" stroke-width="1.2"/>
+        <text x="110" y="175" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffe600" text-anchor="middle">1ST</text>
+        <text x="210" y="175" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffe600" text-anchor="end">999,990</text>
+        <text x="310" y="175" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#00e575" text-anchor="middle">AAA</text>
+        <text x="470" y="175" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">STARFALL</text>
+        <text x="640" y="175" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ffe600" text-anchor="middle">★★★ GOLD</text>
+      </g>
+    
+
+      <!-- Row 2 -->
+      <g>
+        <rect x="70" y="189" width="660" height="28" rx="4" fill="#0c111e" stroke="#1b2438" stroke-width="0.8"/>
+        <text x="110" y="209" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">2ND</text>
+        <text x="210" y="209" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="end">884,250</text>
+        <text x="310" y="209" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#00e575" text-anchor="middle">NEO</text>
+        <text x="470" y="209" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">SUNSET SPRINT</text>
+        <text x="640" y="209" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ff9900" text-anchor="middle">★★★ GOLD</text>
+      </g>
+    
+
+      <!-- Row 3 -->
+      <g>
+        <rect x="70" y="223" width="660" height="28" rx="4" fill="#101626" stroke="#1b2438" stroke-width="0.8"/>
+        <text x="110" y="243" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">3RD</text>
+        <text x="210" y="243" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="end">772,100</text>
+        <text x="310" y="243" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#00e575" text-anchor="middle">ACE</text>
+        <text x="470" y="243" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">ORBIT GUARD</text>
+        <text x="640" y="243" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ff9900" text-anchor="middle">★★★ GOLD</text>
+      </g>
+    
+
+      <!-- Row 4 -->
+      <g>
+        <rect x="70" y="257" width="660" height="28" rx="4" fill="#0c111e" stroke="#1b2438" stroke-width="0.8"/>
+        <text x="110" y="277" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">4TH</text>
+        <text x="210" y="277" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="end">658,400</text>
+        <text x="310" y="277" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#00e575" text-anchor="middle">VIP</text>
+        <text x="470" y="277" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">MINI GOLF CLUB</text>
+        <text x="640" y="277" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ff9900" text-anchor="middle">★★☆ SILVER</text>
+      </g>
+    
+
+      <!-- Row 5 -->
+      <g>
+        <rect x="70" y="291" width="660" height="28" rx="4" fill="#101626" stroke="#1b2438" stroke-width="0.8"/>
+        <text x="110" y="311" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">5TH</text>
+        <text x="210" y="311" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="end">540,800</text>
+        <text x="310" y="311" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#00e575" text-anchor="middle">MAX</text>
+        <text x="470" y="311" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">BOOMERANG BAY</text>
+        <text x="640" y="311" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ff9900" text-anchor="middle">★★☆ SILVER</text>
+      </g>
+    
+
+      <!-- Row 6 -->
+      <g>
+        <rect x="70" y="325" width="660" height="28" rx="4" fill="#0c111e" stroke="#1b2438" stroke-width="0.8"/>
+        <text x="110" y="345" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">6TH</text>
+        <text x="210" y="345" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="end">495,200</text>
+        <text x="310" y="345" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#00e575" text-anchor="middle">LNK</text>
+        <text x="470" y="345" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">MERGE LAB</text>
+        <text x="640" y="345" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ff9900" text-anchor="middle">★★☆ SILVER</text>
+      </g>
+    
+
+      <!-- Row 7 -->
+      <g>
+        <rect x="70" y="359" width="660" height="28" rx="4" fill="#101626" stroke="#1b2438" stroke-width="0.8"/>
+        <text x="110" y="379" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">7TH</text>
+        <text x="210" y="379" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#ffffff" text-anchor="end">412,900</text>
+        <text x="310" y="379" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#00e575" text-anchor="middle">JOY</text>
+        <text x="470" y="379" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">NEON DOJO</text>
+        <text x="640" y="379" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ff9900" text-anchor="middle">★☆☆ BRONZE</text>
+      </g>
+    
+
+      <!-- Row 8 -->
+      <g>
+        <rect x="70" y="393" width="660" height="28" rx="4" fill="#0c111e" stroke="#1b2438" stroke-width="0.8"/>
+        <text x="110" y="413" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#00f0ff" text-anchor="middle">8TH</text>
+        <text x="210" y="413" font-family="'Courier New', monospace" font-size="14" font-weight="900" fill="#00f0ff" text-anchor="end">380,000</text>
+        <text x="310" y="413" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#00e575" text-anchor="middle">YOU</text>
+        <text x="470" y="413" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">CANDY DROP</text>
+        <text x="640" y="413" font-family="'Courier New', monospace" font-size="13" font-weight="bold" fill="#00f0ff" text-anchor="middle">★☆☆ BRONZE</text>
+      </g>
+    
+
+  <!-- Bottom Interactive Prompt / Blinking Cursor -->
+  <g transform="translate(400, 460)">
+    <rect x="-290" y="-14" width="580" height="28" rx="6" fill="#080c14" stroke="#ffe600" stroke-width="1.5"/>
+    <text x="0" y="4" font-family="'Courier New', monospace" font-size="12" font-weight="bold" text-anchor="middle" fill="#ffe600" letter-spacing="1.5">
+      YOU HOLD RANK #8! INSERT COIN TO CHALLENGE AAA <tspan class="cursor-blink" fill="#00f0ff">_</tspan>
+    </text>
+  </g>
+</svg>

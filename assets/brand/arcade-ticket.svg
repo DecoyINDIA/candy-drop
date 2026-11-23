@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 260" width="100%" height="100%">
+  
+  <defs>
+    <!-- CRT Scanlines pattern -->
+    <pattern id="crt-scanlines" width="100" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="100" y2="0" stroke="#000000" stroke-width="1.2" opacity="0.32"/>
+    </pattern>
+
+    <!-- Retro Wireframe Grid pattern -->
+    <pattern id="retro-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#2a1f4d" stroke-width="1.2" stroke-opacity="0.6"/>
+    </pattern>
+
+    <!-- Glowing Filters -->
+    <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="8" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-magenta" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="8" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur1"/>
+      <feGaussianBlur stdDeviation="6" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="cabinet-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#02040a" flood-opacity="0.75"/>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="bg-synthwave" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0518"/>
+      <stop offset="45%" stop-color="#140a2e"/>
+      <stop offset="75%" stop-color="#241242"/>
+      <stop offset="100%" stop-color="#0d081e"/>
+    </linearGradient>
+
+    <linearGradient id="neon-text-candy" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3377"/>
+      <stop offset="40%" stop-color="#ff0055"/>
+      <stop offset="70%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#ffe600"/>
+    </linearGradient>
+
+    <linearGradient id="gold-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5a0"/>
+      <stop offset="30%" stop-color="#ffc700"/>
+      <stop offset="70%" stop-color="#d48800"/>
+      <stop offset="100%" stop-color="#fff080"/>
+    </linearGradient>
+
+    <linearGradient id="cabinet-body" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="15%" stop-color="#182234"/>
+      <stop offset="50%" stop-color="#202b40"/>
+      <stop offset="85%" stop-color="#182234"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+
+    <linearGradient id="cabinet-screen-bezel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#101520"/>
+      <stop offset="100%" stop-color="#05080f"/>
+    </linearGradient>
+
+    <radialGradient id="screen-crt-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a3854" stop-opacity="0.8"/>
+      <stop offset="80%" stop-color="#08101a" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#03060a" stop-opacity="1.0"/>
+    </radialGradient>
+  </defs>
+  
+  <defs>
+    <!-- Vintage paper texture gradient -->
+    <linearGradient id="ticket-paper" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8e7"/>
+      <stop offset="50%" stop-color="#faebd0"/>
+      <stop offset="100%" stop-color="#f0dac0"/>
+    </linearGradient>
+
+    <!-- Vintage red ink gradient -->
+    <linearGradient id="stamp-ink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b82626"/>
+      <stop offset="100%" stop-color="#8a1818"/>
+    </linearGradient>
+
+    <!-- Die-cut scalloped mask for ticket notches -->
+    <mask id="ticket-notch-mask">
+      <rect x="0" y="0" width="740" height="260" fill="#ffffff"/>
+      <!-- Left edge semi-circle cutouts -->
+      <circle cx="10" cy="50" r="10" fill="#000000"/>
+      <circle cx="10" cy="90" r="10" fill="#000000"/>
+      <circle cx="10" cy="130" r="10" fill="#000000"/>
+      <circle cx="10" cy="170" r="10" fill="#000000"/>
+      <circle cx="10" cy="210" r="10" fill="#000000"/>
+      <!-- Right edge semi-circle cutouts -->
+      <circle cx="730" cy="50" r="10" fill="#000000"/>
+      <circle cx="730" cy="90" r="10" fill="#000000"/>
+      <circle cx="730" cy="130" r="10" fill="#000000"/>
+      <circle cx="730" cy="170" r="10" fill="#000000"/>
+      <circle cx="730" cy="210" r="10" fill="#000000"/>
+      <!-- Middle perforation notch cutouts -->
+      <circle cx="180" cy="10" r="12" fill="#000000"/>
+      <circle cx="180" cy="250" r="12" fill="#000000"/>
+    </mask>
+  </defs>
+
+  <!-- Ticket Outer Body with Notches -->
+  <g mask="url(#ticket-notch-mask)">
+    <rect x="10" y="10" width="720" height="240" rx="10" fill="url(#ticket-paper)" stroke="#9c7b4f" stroke-width="3"/>
+
+    <!-- Guilloche / Security Pattern Borders -->
+    <rect x="20" y="20" width="700" height="220" rx="6" fill="none" stroke="#ba9567" stroke-width="1.5" stroke-dasharray="6 3"/>
+    <rect x="24" y="24" width="692" height="212" rx="4" fill="none" stroke="#7a5833" stroke-width="2"/>
+  </g>
+
+  <!-- Dotted Perforation Line separating Stub from Main Ticket -->
+  <line x1="180" y1="22" x2="180" y2="238" stroke="#7a5833" stroke-width="2.5" stroke-dasharray="5 7"/>
+
+  <!-- ==================== LEFT STUB ("KEEP THIS COUPON") ==================== -->
+  <g transform="translate(100, 130)">
+    <!-- Vertical Text -->
+    <text x="0" y="-72" font-family="'Courier New', monospace" font-size="10" font-weight="900" text-anchor="middle" fill="#7a5833" letter-spacing="2">★ CANDY ARCADE ★</text>
+    <text x="0" y="-48" font-family="'Impact', sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2d2218" letter-spacing="1">ADMIT ONE</text>
+    <text x="0" y="-30" font-family="'Courier New', monospace" font-size="9" font-weight="bold" text-anchor="middle" fill="#b82626">TICKET #00100</text>
+
+    <!-- Stub Barcode Lines -->
+    <g transform="translate(-50, -10)">
+      <line x1="0" y1="0" x2="0" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="4" y1="0" x2="4" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="8" y1="0" x2="8" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="12" y1="0" x2="12" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="16" y1="0" x2="16" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="20" y1="0" x2="20" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="24" y1="0" x2="24" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="28" y1="0" x2="28" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="32" y1="0" x2="32" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="36" y1="0" x2="36" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="40" y1="0" x2="40" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="44" y1="0" x2="44" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="48" y1="0" x2="48" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="52" y1="0" x2="52" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="56" y1="0" x2="56" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="60" y1="0" x2="60" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="64" y1="0" x2="64" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="68" y1="0" x2="68" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="72" y1="0" x2="72" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="76" y1="0" x2="76" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="80" y1="0" x2="80" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="84" y1="0" x2="84" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="88" y1="0" x2="88" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="92" y1="0" x2="92" y2="35" stroke="#2d2218" stroke-width="1.2"/><line x1="96" y1="0" x2="96" y2="35" stroke="#2d2218" stroke-width="2.5"/><line x1="100" y1="0" x2="100" y2="35" stroke="#2d2218" stroke-width="1.2"/>
+    </g>
+
+    <text x="0" y="44" font-family="'Courier New', monospace" font-size="8.5" font-weight="bold" text-anchor="middle" fill="#5c432d">NO REFUNDS</text>
+    <text x="0" y="58" font-family="'Courier New', monospace" font-size="8" font-weight="bold" text-anchor="middle" fill="#7a5833">KEEP THIS STUB</text>
+    <text x="0" y="74" font-family="'Impact', sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#b82626">100 GAMES</text>
+  </g>
+
+  <!-- ==================== MAIN TICKET BODY ==================== -->
+  <!-- Top Marquee Header -->
+  <text x="450" y="52" font-family="'Courier New', monospace" font-size="12" font-weight="900" text-anchor="middle" fill="#7a5833" letter-spacing="3">
+    ★ ARCADE RUN ENTERTAINMENT SYSTEM ★
+  </text>
+
+  <!-- Giant Bold Headline -->
+  <text x="450" y="96" font-family="'Impact', 'Arial Black', sans-serif" font-size="38" font-weight="900" text-anchor="middle" fill="#2d2218" letter-spacing="3">
+    ADMIT ONE : 100 GAMES
+  </text>
+
+  <!-- Core Pillars Tagline -->
+  <g transform="translate(450, 126)">
+    <rect x="-240" y="-14" width="480" height="26" rx="4" fill="#2d2218"/>
+    <text x="0" y="4" font-family="'Courier New', monospace" font-size="12" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="2">
+      ZERO INSTALL • ZERO DEPENDENCIES • INFINITE PLAYS
+    </text>
+  </g>
+
+  <!-- Sub-features row -->
+  <text x="450" y="166" font-family="'Georgia', serif" font-size="12" font-style="italic" text-anchor="middle" fill="#5c432d">
+    Valid for unlimited gameplay across 8 curated arcade wings. 60 FPS guaranteed on desktop and mobile.
+  </text>
+
+  <!-- Vintage Red Circular Stamp -->
+  <g transform="translate(630, 160) rotate(-14)" opacity="0.88">
+    <circle cx="0" cy="0" r="34" fill="none" stroke="url(#stamp-ink)" stroke-width="2.5" stroke-dasharray="4 2"/>
+    <circle cx="0" cy="0" r="30" fill="none" stroke="url(#stamp-ink)" stroke-width="1.2"/>
+    <text x="0" y="-12" font-family="'Courier New', monospace" font-size="7" font-weight="900" text-anchor="middle" fill="#b82626">★ VERIFIED ★</text>
+    <text x="0" y="4" font-family="'Impact', sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#b82626">ZERO-DEP</text>
+    <text x="0" y="16" font-family="'Courier New', monospace" font-size="6.5" font-weight="900" text-anchor="middle" fill="#b82626">60 FPS OK</text>
+  </g>
+
+  <!-- Bottom Barcode & Serial Number -->
+  <g transform="translate(230, 195)">
+    <!-- Barcode lines -->
+    <line x1="0" y1="0" x2="0" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="4.2" y1="0" x2="4.2" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="8.4" y1="0" x2="8.4" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="12.600000000000001" y1="0" x2="12.600000000000001" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="16.8" y1="0" x2="16.8" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="21" y1="0" x2="21" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="25.200000000000003" y1="0" x2="25.200000000000003" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="29.400000000000002" y1="0" x2="29.400000000000002" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="33.6" y1="0" x2="33.6" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="37.800000000000004" y1="0" x2="37.800000000000004" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="42" y1="0" x2="42" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="46.2" y1="0" x2="46.2" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="50.400000000000006" y1="0" x2="50.400000000000006" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="54.6" y1="0" x2="54.6" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="58.800000000000004" y1="0" x2="58.800000000000004" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="63" y1="0" x2="63" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="67.2" y1="0" x2="67.2" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="71.4" y1="0" x2="71.4" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="75.60000000000001" y1="0" x2="75.60000000000001" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="79.8" y1="0" x2="79.8" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="84" y1="0" x2="84" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="88.2" y1="0" x2="88.2" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="92.4" y1="0" x2="92.4" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="96.60000000000001" y1="0" x2="96.60000000000001" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="100.80000000000001" y1="0" x2="100.80000000000001" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="105" y1="0" x2="105" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="109.2" y1="0" x2="109.2" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="113.4" y1="0" x2="113.4" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="117.60000000000001" y1="0" x2="117.60000000000001" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="121.80000000000001" y1="0" x2="121.80000000000001" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="126" y1="0" x2="126" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="130.20000000000002" y1="0" x2="130.20000000000002" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="134.4" y1="0" x2="134.4" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="138.6" y1="0" x2="138.6" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="142.8" y1="0" x2="142.8" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="147" y1="0" x2="147" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="151.20000000000002" y1="0" x2="151.20000000000002" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="155.4" y1="0" x2="155.4" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="159.6" y1="0" x2="159.6" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="163.8" y1="0" x2="163.8" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="168" y1="0" x2="168" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="172.20000000000002" y1="0" x2="172.20000000000002" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="176.4" y1="0" x2="176.4" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="180.6" y1="0" x2="180.6" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="184.8" y1="0" x2="184.8" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="189" y1="0" x2="189" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="193.20000000000002" y1="0" x2="193.20000000000002" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="197.4" y1="0" x2="197.4" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="201.60000000000002" y1="0" x2="201.60000000000002" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="205.8" y1="0" x2="205.8" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="210" y1="0" x2="210" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="214.20000000000002" y1="0" x2="214.20000000000002" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="218.4" y1="0" x2="218.4" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="222.60000000000002" y1="0" x2="222.60000000000002" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="226.8" y1="0" x2="226.8" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="231" y1="0" x2="231" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="235.20000000000002" y1="0" x2="235.20000000000002" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="239.4" y1="0" x2="239.4" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="243.60000000000002" y1="0" x2="243.60000000000002" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="247.8" y1="0" x2="247.8" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="252" y1="0" x2="252" y2="24" stroke="#2d2218" stroke-width="2.8"/><line x1="256.2" y1="0" x2="256.2" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="260.40000000000003" y1="0" x2="260.40000000000003" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="264.6" y1="0" x2="264.6" y2="24" stroke="#2d2218" stroke-width="1.2"/><line x1="268.8" y1="0" x2="268.8" y2="24" stroke="#2d2218" stroke-width="2.8"/>
+  </g>
+  <text x="365" y="232" font-family="'Courier New', monospace" font-size="9" font-weight="bold" text-anchor="middle" fill="#5c432d" letter-spacing="2">
+    SERIAL NO. 2026-ARCADE-RUN-100G-INFINITY
+  </text>
+</svg>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 260" width="100%" height="100%">
+  
+  <defs>
+    <!-- CRT Scanlines pattern -->
+    <pattern id="crt-scanlines" width="100" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="100" y2="0" stroke="#000000" stroke-width="1.2" opacity="0.32"/>
+    </pattern>
+
+    <!-- Retro Wireframe Grid pattern -->
+    <pattern id="retro-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#2a1f4d" stroke-width="1.2" stroke-opacity="0.6"/>
+    </pattern>
+
+    <!-- Glowing Filters -->
+    <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="8" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-magenta" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="8" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur1"/>
+      <feGaussianBlur stdDeviation="6" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="cabinet-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#02040a" flood-opacity="0.75"/>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="bg-synthwave" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0518"/>
+      <stop offset="45%" stop-color="#140a2e"/>
+      <stop offset="75%" stop-color="#241242"/>
+      <stop offset="100%" stop-color="#0d081e"/>
+    </linearGradient>
+
+    <linearGradient id="neon-text-candy" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3377"/>
+      <stop offset="40%" stop-color="#ff0055"/>
+      <stop offset="70%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#ffe600"/>
+    </linearGradient>
+
+    <linearGradient id="gold-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5a0"/>
+      <stop offset="30%" stop-color="#ffc700"/>
+      <stop offset="70%" stop-color="#d48800"/>
+      <stop offset="100%" stop-color="#fff080"/>
+    </linearGradient>
+
+    <linearGradient id="cabinet-body" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="15%" stop-color="#182234"/>
+      <stop offset="50%" stop-color="#202b40"/>
+      <stop offset="85%" stop-color="#182234"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+
+    <linearGradient id="cabinet-screen-bezel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#101520"/>
+      <stop offset="100%" stop-color="#05080f"/>
+    </linearGradient>
+
+    <radialGradient id="screen-crt-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a3854" stop-opacity="0.8"/>
+      <stop offset="80%" stop-color="#08101a" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#03060a" stop-opacity="1.0"/>
+    </radialGradient>
+  </defs>
+  
+
+  <!-- Trophy Rack Background -->
+  <rect x="0" y="0" width="840" height="260" fill="url(#bg-synthwave)" rx="16"/>
+
+  <!-- Border & Neon Trim -->
+  <rect x="10" y="10" width="820" height="240" rx="12" fill="none" stroke="#251a3d" stroke-width="2"/>
+  <rect x="14" y="14" width="812" height="232" rx="8" fill="none" stroke="#ffe600" stroke-width="1.5" stroke-dasharray="12 8" opacity="0.75"/>
+
+  <!-- Header Banner -->
+  <g transform="translate(420, 42)">
+    <rect x="-220" y="-16" width="440" height="32" rx="16" fill="#0d111d" stroke="#ffe600" stroke-width="1.8"/>
+    <text x="0" y="5" font-family="'Courier New', monospace" font-size="12" font-weight="900" text-anchor="middle" fill="#ffe600" letter-spacing="2.5">
+      ★ ARCADE TROPHY ROOM // ACHIEVEMENTS ★
+    </text>
+  </g>
+  <text x="420" y="74" font-family="'Arial', sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#8899aa">
+    Earn retro achievements across all 100 dependency-free browser games!
+  </text>
+
+  <!-- Badges Row -->
+  
+      <!-- Badge 1: coin-hunter -->
+      <g transform="translate(30, 85)">
+        <!-- Shield Background -->
+        <rect x="0" y="0" width="124" height="145" rx="12" fill="#0d121f" stroke="#ffc700" stroke-width="1.5"/>
+        <rect x="4" y="4" width="116" height="137" rx="8" fill="#141a29"/>
+
+        <!-- Circular Icon Well -->
+        <circle cx="62" cy="52" r="32" fill="#0b0f18" stroke="#ffc700" stroke-width="1.5"/>
+        <!-- Mini Icon -->
+        <g transform="translate(-28, -28)">
+          
+      <!-- Treasure Chest with Coins -->
+      <g transform="translate(90, 80)">
+        <!-- Chest Base -->
+        <rect x="-24" y="2" width="48" height="26" rx="4" fill="#6d3916" stroke="#ffc700" stroke-width="2"/>
+        <rect x="-20" y="6" width="40" height="18" rx="2" fill="#422008"/>
+        <!-- Chest Lid (open) -->
+        <path d="M -26 2 Q 0 -18 26 2 Z" fill="#8b4a1e" stroke="#ffc700" stroke-width="2"/>
+        <!-- Gold Coins Overflowing -->
+        <circle cx="-10" cy="0" r="7" fill="#ffea60" stroke="#d48800" stroke-width="1.2"/>
+        <circle cx="8" cy="-2" r="8" fill="#ffd200" stroke="#b87800" stroke-width="1.2"/>
+        <circle cx="-1" cy="-6" r="7.5" fill="#fff080" stroke="#d48800" stroke-width="1.2"/>
+        <circle cx="15" cy="4" r="6" fill="#ffc700" stroke="#996000" stroke-width="1.2"/>
+        <circle cx="-16" cy="4" r="6.5" fill="#ffd200" stroke="#b87800" stroke-width="1.2"/>
+        <!-- Sparkles -->
+        <polygon points="0,-18 3,-12 9,-12 4,-8 6,-2 0,-6 -6,-2 -4,-8 -9,-12 -3,-12" fill="#ffffff"/>
+        <circle cx="-18" cy="-12" r="1.8" fill="#ffffff"/>
+        <circle cx="20" cy="-10" r="1.8" fill="#ffffff"/>
+      </g>
+    
+        </g>
+
+        <!-- Brass Nameplate -->
+        <rect x="10" y="96" width="104" height="18" rx="4" fill="#0c101a" stroke="#ffc700" stroke-width="1"/>
+        <text x="62" y="108" font-family="'Courier New', monospace" font-size="8" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">COIN HUNTER</text>
+
+        <!-- Condition string -->
+        <text x="62" y="125" font-family="'Arial', sans-serif" font-size="7" font-weight="bold" text-anchor="middle" fill="#ff9000">10,000 Arcade Coins</text>
+      </g>
+    
+
+      <!-- Badge 2: gold-medalist -->
+      <g transform="translate(162, 85)">
+        <!-- Shield Background -->
+        <rect x="0" y="0" width="124" height="145" rx="12" fill="#0d121f" stroke="#ffd200" stroke-width="1.5"/>
+        <rect x="4" y="4" width="116" height="137" rx="8" fill="#141a29"/>
+
+        <!-- Circular Icon Well -->
+        <circle cx="62" cy="52" r="32" fill="#0b0f18" stroke="#ffd200" stroke-width="1.5"/>
+        <!-- Mini Icon -->
+        <g transform="translate(-28, -28)">
+          
+      <!-- Laurel Wreath & Gold Star Medal -->
+      <g transform="translate(90, 80)">
+        <!-- Ribbon -->
+        <polygon points="-10,-32 0,-18 -10,12" fill="#b81d3d"/>
+        <polygon points="10,-32 0,-18 10,12" fill="#e62e54"/>
+        <!-- Laurel Wreath -->
+        <path d="M -26 12 C -36 -10 -20 -30 0 -30 C 20 -30 36 -10 26 12" fill="none" stroke="#00e575" stroke-width="3" stroke-dasharray="4 3"/>
+        <!-- Medal Disc -->
+        <circle cx="0" cy="0" r="22" fill="#ffc700" stroke="#8a5500" stroke-width="2"/>
+        <circle cx="0" cy="0" r="18" fill="#ffe066" stroke="#ffc700" stroke-width="1"/>
+        <!-- 5-Point Star -->
+        <polygon points="0,-12 4,-3 13,-3 6,3 9,12 0,6 -9,12 -6,3 -13,-3 -4,-3" fill="#ffffff"/>
+      </g>
+    
+        </g>
+
+        <!-- Brass Nameplate -->
+        <rect x="10" y="96" width="104" height="18" rx="4" fill="#0c101a" stroke="#ffd200" stroke-width="1"/>
+        <text x="62" y="108" font-family="'Courier New', monospace" font-size="8" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">GOLD MEDALIST</text>
+
+        <!-- Condition string -->
+        <text x="62" y="125" font-family="'Arial', sans-serif" font-size="7" font-weight="bold" text-anchor="middle" fill="#ff0055">25 Gold Trophies</text>
+      </g>
+    
+
+      <!-- Badge 3: 100-club -->
+      <g transform="translate(294, 85)">
+        <!-- Shield Background -->
+        <rect x="0" y="0" width="124" height="145" rx="12" fill="#0d121f" stroke="#00f0ff" stroke-width="1.5"/>
+        <rect x="4" y="4" width="116" height="137" rx="8" fill="#141a29"/>
+
+        <!-- Circular Icon Well -->
+        <circle cx="62" cy="52" r="32" fill="#0b0f18" stroke="#00f0ff" stroke-width="1.5"/>
+        <!-- Mini Icon -->
+        <g transform="translate(-28, -28)">
+          
+      <!-- Heavy Hexagonal Token with 100 -->
+      <g transform="translate(90, 80)">
+        <!-- Hexagon -->
+        <polygon points="0,-28 24,-14 24,14 0,28 -24,14 -24,-14" fill="#0c1626" stroke="#00f0ff" stroke-width="3"/>
+        <polygon points="0,-23 20,-11 20,11 0,23 -20,11 -20,-11" fill="#13243c" stroke="#00e575" stroke-width="1.5"/>
+        <!-- Bold 100 -->
+        <text x="0" y="8" font-family="'Impact', 'Arial Black', sans-serif" font-size="20" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="1">100</text>
+        <!-- Star beneath -->
+        <text x="0" y="19" font-family="'Courier New', monospace" font-size="8" font-weight="bold" text-anchor="middle" fill="#00f0ff">★ ★ ★</text>
+      </g>
+    
+        </g>
+
+        <!-- Brass Nameplate -->
+        <rect x="10" y="96" width="104" height="18" rx="4" fill="#0c101a" stroke="#00f0ff" stroke-width="1"/>
+        <text x="62" y="108" font-family="'Courier New', monospace" font-size="8" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">100 CLUB</text>
+
+        <!-- Condition string -->
+        <text x="62" y="125" font-family="'Arial', sans-serif" font-size="7" font-weight="bold" text-anchor="middle" fill="#00e575">Completed All 100 Games</text>
+      </g>
+    
+
+      <!-- Badge 4: daily-champion -->
+      <g transform="translate(426, 85)">
+        <!-- Shield Background -->
+        <rect x="0" y="0" width="124" height="145" rx="12" fill="#0d121f" stroke="#ff9900" stroke-width="1.5"/>
+        <rect x="4" y="4" width="116" height="137" rx="8" fill="#141a29"/>
+
+        <!-- Circular Icon Well -->
+        <circle cx="62" cy="52" r="32" fill="#0b0f18" stroke="#ff9900" stroke-width="1.5"/>
+        <!-- Mini Icon -->
+        <g transform="translate(-28, -28)">
+          
+      <!-- Sunburst & Championship Trophy -->
+      <g transform="translate(90, 80)">
+        <!-- Sunburst Rays -->
+        <circle cx="0" cy="-2" r="24" fill="none" stroke="#ffe600" stroke-width="2" stroke-dasharray="3 4"/>
+        <!-- Trophy Cup -->
+        <path d="M -16 -18 L 16 -18 L 12 4 Q 0 14 -12 4 Z" fill="#ffc700" stroke="#8a5500" stroke-width="1.5"/>
+        <!-- Handles -->
+        <path d="M -16 -14 C -26 -14 -24 0 -12 2" fill="none" stroke="#ffc700" stroke-width="2"/>
+        <path d="M 16 -14 C 26 -14 24 0 12 2" fill="none" stroke="#ffc700" stroke-width="2"/>
+        <!-- Stem & Base -->
+        <rect x="-3" y="12" width="6" height="8" fill="#d48800"/>
+        <rect x="-12" y="20" width="24" height="6" rx="2" fill="#6d3916" stroke="#ffc700" stroke-width="1"/>
+        <!-- Star on cup -->
+        <polygon points="0,-10 2,-4 8,-4 3,0 5,6 0,2 -5,6 -3,0 -8,-4 -2,-4" fill="#ffffff"/>
+      </g>
+    
+        </g>
+
+        <!-- Brass Nameplate -->
+        <rect x="10" y="96" width="104" height="18" rx="4" fill="#0c101a" stroke="#ff9900" stroke-width="1"/>
+        <text x="62" y="108" font-family="'Courier New', monospace" font-size="8" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">DAILY CHAMPION</text>
+
+        <!-- Condition string -->
+        <text x="62" y="125" font-family="'Arial', sans-serif" font-size="7" font-weight="bold" text-anchor="middle" fill="#ffe600">Rank #1 Daily Seed</text>
+      </g>
+    
+
+      <!-- Badge 5: speedrunner -->
+      <g transform="translate(558, 85)">
+        <!-- Shield Background -->
+        <rect x="0" y="0" width="124" height="145" rx="12" fill="#0d121f" stroke="#00f0ff" stroke-width="1.5"/>
+        <rect x="4" y="4" width="116" height="137" rx="8" fill="#141a29"/>
+
+        <!-- Circular Icon Well -->
+        <circle cx="62" cy="52" r="32" fill="#0b0f18" stroke="#00f0ff" stroke-width="1.5"/>
+        <!-- Mini Icon -->
+        <g transform="translate(-28, -28)">
+          
+      <!-- Winged Stopwatch & Lightning -->
+      <g transform="translate(90, 80)">
+        <!-- Left Wing -->
+        <path d="M -14 -4 C -34 -20 -38 10 -18 12" fill="#182c44" stroke="#00f0ff" stroke-width="1.5"/>
+        <!-- Right Wing -->
+        <path d="M 14 -4 C 34 -20 38 10 18 12" fill="#182c44" stroke="#00f0ff" stroke-width="1.5"/>
+        <!-- Stopwatch Body -->
+        <circle cx="0" cy="4" r="18" fill="#101828" stroke="#00f0ff" stroke-width="2"/>
+        <!-- Top Crown Pin -->
+        <rect x="-3" y="-18" width="6" height="5" fill="#a0b8d0"/>
+        <!-- Clock Face -->
+        <circle cx="0" cy="4" r="14" fill="#080e18"/>
+        <!-- Lightning hand -->
+        <polyline points="0,4 3,-2 0,-2 2,-8" fill="none" stroke="#ffe600" stroke-width="2"/>
+        <!-- Sonic boom rings -->
+        <circle cx="0" cy="4" r="22" fill="none" stroke="#ff0077" stroke-width="1" stroke-dasharray="2 4"/>
+      </g>
+    
+        </g>
+
+        <!-- Brass Nameplate -->
+        <rect x="10" y="96" width="104" height="18" rx="4" fill="#0c101a" stroke="#00f0ff" stroke-width="1"/>
+        <text x="62" y="108" font-family="'Courier New', monospace" font-size="8" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">SPEEDRUNNER</text>
+
+        <!-- Condition string -->
+        <text x="62" y="125" font-family="'Arial', sans-serif" font-size="7" font-weight="bold" text-anchor="middle" fill="#ff0077">Sub-60s Speed Clear</text>
+      </g>
+    
+
+      <!-- Badge 6: pixel-perfect -->
+      <g transform="translate(690, 85)">
+        <!-- Shield Background -->
+        <rect x="0" y="0" width="124" height="145" rx="12" fill="#0d121f" stroke="#d600ff" stroke-width="1.5"/>
+        <rect x="4" y="4" width="116" height="137" rx="8" fill="#141a29"/>
+
+        <!-- Circular Icon Well -->
+        <circle cx="62" cy="52" r="32" fill="#0b0f18" stroke="#d600ff" stroke-width="1.5"/>
+        <!-- Mini Icon -->
+        <g transform="translate(-28, -28)">
+          
+      <!-- Prismatic Gem with Crosshairs -->
+      <g transform="translate(90, 80)">
+        <!-- Targeting Crosshair Rings -->
+        <circle cx="0" cy="0" r="25" fill="none" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="-28" y1="0" x2="-20" y2="0" stroke="#00f0ff" stroke-width="2"/>
+        <line x1="20" y1="0" x2="28" y2="0" stroke="#00f0ff" stroke-width="2"/>
+        <line x1="0" y1="-28" x2="0" y2="-20" stroke="#00f0ff" stroke-width="2"/>
+        <line x1="0" y1="20" x2="0" y2="28" stroke="#00f0ff" stroke-width="2"/>
+        <!-- Prismatic Diamond Gem -->
+        <polygon points="0,-18 18,-4 0,18 -18,-4" fill="#a000e0" stroke="#ff77ff" stroke-width="2"/>
+        <polygon points="0,-18 10,-4 0,18" fill="#c020ff"/>
+        <polygon points="0,-18 0,18 -10,-4" fill="#8000b0"/>
+        <!-- Specular Star Sparkle -->
+        <circle cx="0" cy="-4" r="3" fill="#ffffff"/>
+      </g>
+    
+        </g>
+
+        <!-- Brass Nameplate -->
+        <rect x="10" y="96" width="104" height="18" rx="4" fill="#0c101a" stroke="#d600ff" stroke-width="1"/>
+        <text x="62" y="108" font-family="'Courier New', monospace" font-size="8" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">PIXEL PERFECT</text>
+
+        <!-- Condition string -->
+        <text x="62" y="125" font-family="'Arial', sans-serif" font-size="7" font-weight="bold" text-anchor="middle" fill="#00f0ff">100% Accuracy Rating</text>
+      </g>
+    
+</svg>
