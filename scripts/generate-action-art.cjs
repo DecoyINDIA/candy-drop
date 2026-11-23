@@ -183,6 +183,63 @@ const scenes = {};
   scenes['pinball-grove'] = shell('#dbe2cb', '#b9c9ac', s);
 }
 
+// Four further games: spatial inversion, pendulum delivery, flight, and navigation.
+{
+  let s = '';
+  for (let x = 0; x < 620; x += 45) s += line(`M${x} 60V320`, '#9bbbd91a', 1);
+  s += rect(0, 0, 600, 59, 0, '#354c6c') + rect(0, 320, 600, 60, 0, '#634557');
+  s += line('M0 60H600', '#8db8e6', 4) + line('M0 320H600', '#e9a3b1', 4);
+  for (const [x, y, h, color] of [[113, 224, 46, '#d593a7'], [339, 60, 91, '#8caed9'], [492, 228, 92, '#d593a7']]) {
+    const top = x === 113 ? 222 : y, height = x === 113 ? 98 : h;
+    s += rect(x, top, 45, height, 6, color) + rect(x + 7, top + 7, 5, height - 14, 2, '#e4ebef77');
+    s += line(`M${x + 21} ${top + 15}l14 20m-14 3 14 20m-14 3 14 20`, '#31415d44', 2);
+  }
+  s += line('M189 300Q259 288 272 211T315 81', '#cce8d67d', 3, 'stroke-dasharray="5 8"');
+  s += `<g transform="translate(273 201) rotate(25)">${rect(-18, -23, 36, 45, 8, '#addacb')}${rect(-10, -13, 21, 11, 4, '#4b7581')}${rect(11, 11, 15, 7, 3, '#e9d59e')}</g>`;
+  s += line('M223 186V150m-10 12 10-12 10 12M305 233v36m-10-12 10 12 10-12', '#adc8df88', 3);
+  scenes['gravity-shift'] = shell('#223550', '#342b43', s);
+}
+{
+  let s = shape('M0 292H600V380H0Z', '#6c9aa8');
+  for (let i = 0; i < 9; i++) s += rect(i * 77 - 30, 248 - i % 3 * 20, 60, 50 + i % 3 * 20, 0, '#8dabb0');
+  for (let i = 0; i < 13; i++) s += line(`M${i * 61 - 20} ${319 + i % 3 * 18}h32`, '#b7d5d55c', 2);
+  s += rect(68, 48, 13, 273, 1, '#7e867b') + rect(518, 48, 13, 273, 1, '#7e867b') + rect(68, 48, 465, 21, 2, '#b3a474');
+  for (let x = 79; x < 520; x += 34) s += line(`M${x} 50l26 17`, '#7d7d62', 2);
+  s += rect(258, 65, 50, 22, 6, '#627989') + rect(270, 70, 24, 7, 2, '#ddc594');
+  s += line('M283 87L357 218', '#536b75', 3) + line('M283 87L245 229', '#7d959d5c', 2, 'stroke-dasharray="4 6"');
+  s += line('M357 219Q397 246 420 292', '#557b8b99', 2.5, 'stroke-dasharray="4 7"');
+  s += `<g transform="translate(357 228) rotate(-8)">${rect(-23, -22, 46, 44, 2, '#be9162')}${rect(-18, -17, 36, 34, 1, 'none', 'stroke="#e7cd94" stroke-width="3"')}${line('M-18-16L18 16', '#e7cd94', 3)}</g>`;
+  s += shape('M347 304H485L468 330H365Z', '#4b6876') + rect(355, 295, 122, 10, 2, '#d6bd83') + line('M363 288H469', '#f4e6be', 3, 'stroke-dasharray="5 5"');
+  s += rect(116, 296, 90, 24, 2, '#8c9da0') + rect(128, 270, 34, 26, 2, '#b6a078') + rect(166, 282, 29, 14, 2, '#caa57b');
+  scenes['cargo-crane'] = shell('#dde2d6', '#a9c3c9', s);
+}
+{
+  let s = stars('#c9d5eb') + circle(437, 100, 160, 'url(#halo)') + circle(443, 95, 32, '#9bb5b4') + circle(455, 87, 32, '#24324b');
+  s += shape('M0 312L48 289 87 309 126 293 172 321 223 304 264 315 309 301 350 307H459L487 301 525 324 568 296 600 311V380H0Z', '#53546b');
+  s += shape('M0 342L69 322 134 351 213 333 285 350 350 330 431 347 510 329 600 346V380H0Z', '#41475d');
+  for (const [x, y, rx] of [[89, 342, 26], [218, 359, 17], [508, 355, 28]]) s += ellipse(x, y, rx, 7, '#28354b');
+  s += line('M353 307H458', '#a4d7c3', 6) + line('M354 307v-32M457 307v-32', '#cad1d2', 3) + rect(355, 274, 17, 10, 1, '#d2dbad') + rect(439, 274, 17, 10, 1, '#d2dbad');
+  s += line('M146 101Q252 115 300 184T405 283', '#b1bad95c', 2, 'stroke-dasharray="4 8"');
+  s += `<g transform="translate(294 181) rotate(17)">${shape('M-10 19L0 66 10 19Z', '#eab986')}${shape('M-5 19L0 43 5 19Z', '#f9e5b2')}${line('M-13 11L-25 31h-12M13 11L25 31h12', '#b8c6d3', 5)}${shape('M0-37Q-25-21-20 17H20Q25-21 0-37', '#e0d6e7')}${circle(0, -9, 11, '#749bb4')}${circle(-3, -12, 4, '#b4d6de')}</g>`;
+  scenes['rocket-landing'] = shell('#1c2942', '#24344b', s);
+}
+{
+  let s = '';
+  for (let i = 0; i < 32; i++) s += line(`M${i * 127 % 620 - 10} ${33 + i * 61 % 330}q14-4 28 0`, '#d7e9d736', 2);
+  s += shape('M0 251Q48 258 62 287L55 380H0Z', '#a6bd96') + rect(35, 293, 107, 12, 1, '#8d7e60') + rect(35, 336, 107, 12, 1, '#8d7e60') + rect(127, 291, 12, 58, 1, '#8d7e60');
+  for (let x = 43; x < 139; x += 11) s += line(`M${x} 295v8M${x} 338v8`, '#d3c3a1', 1.5);
+  s += circle(142, 319, 38, 'none', 'stroke="#eee4ba" stroke-width="2" stroke-dasharray="5 5"');
+  for (const [x, y, r] of [[226, 174, 55], [409, 187, 59]]) {
+    s += circle(x, y, r + 8, '#c2d3a24d') + circle(x, y, r, '#d9c99d') + circle(x - 2, y - 3, r - 10, '#92b087') + line(`M${x} ${y + 15}l5-31`, '#8f8560', 4);
+    for (let a = 0; a < 360; a += 72) s += ellipse(x + 17, y - 16, 25, 8, '#568b6b', `transform="rotate(${a} ${x + 5} ${y - 16})"`);
+  }
+  const swimmer = (x, y) => circle(x, y, 10, '#e8ac82') + circle(x, y, 7, 'none', 'stroke="#f4e7c7" stroke-width="3"') + circle(x, y - 6, 4.5, '#d5ab87');
+  s += swimmer(319, 91) + swimmer(483, 280) + swimmer(319, 305);
+  s += line('M177 298Q221 321 256 291T311 247', '#d3e6d585', 3, 'stroke-dasharray="4 7"');
+  s += `<g transform="translate(314 244) rotate(-35)">${shape('M30 0Q12-18-27-14V14Q12 18 30 0', '#f0e6cd')}${rect(-19, -11, 22, 22, 2, '#b77771')}${rect(-1, -8, 12, 16, 2, '#9cbfc7')}${circle(-13, 0, 3, '#e2bb8d')}${circle(-5, 0, 3, '#e2bb8d')}</g>`;
+  scenes['harbor-rescue'] = shell('#86bcc4', '#6a9ead', s);
+}
+
 fs.mkdirSync(out, { recursive: true });
 for (const [id, svg] of Object.entries(scenes)) fs.writeFileSync(path.join(out, id + '.svg'), svg);
 console.log(`Generated ${Object.keys(scenes).length} original action card illustrations.`);

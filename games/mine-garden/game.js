@@ -4,7 +4,7 @@
   const N = 9, S = 50, X = 255, Y = 72, MINES = 10;
   Arcade.mount({ id: 'mine-garden', title: 'Mine Garden', category: 'Minesweeper', accent: '#a3d6a4',
     description: 'A quiet garden with ten hidden thorns. Read the numbers. Find every safe square.',
-    howTo: ['Reveal all 71 safe squares. A number counts thorns in the eight neighboring squares. Your first reveal and its neighbors are always safe.', 'Tap a square to use your current tool. Arrows select; Space reveals. F switches between Reveal and Flag tools.', 'Flags protect suspected thorns. Reveal a number again when its neighboring flags match to open the remaining neighbors. Wrong flags can make this risky.'],
+    howTo: ['Reveal all 71 safe squares. A number counts thorns in the eight neighboring squares. Your first reveal and its neighbors are always safe.', 'Tap a square to use your current tool. Arrows select; Space uses the tool. F switches between Reveal and Flag tools.', 'Flags protect suspected thorns. Reveal a number again when its neighboring flags match to open the remaining neighbors. Wrong flags can make this risky.'],
     controls: [{ id:'left',label:'←',keys:['ArrowLeft','KeyA'] },{ id:'up',label:'↑',keys:['ArrowUp','KeyW'] },{ id:'down',label:'↓',keys:['ArrowDown','KeyS'] },{ id:'right',label:'→',keys:['ArrowRight','KeyD'] },{ id:'act',label:'Use tool',keys:['Space','Enter'] },{ id:'tool',label:'Reveal / Flag',keys:['KeyF'] }], medals:[500,1800,2400],
     create(api) {
       let mines = Array(81).fill(false), open = Array(81).fill(false), flags = Array(81).fill(false), counts = Array(81).fill(0);

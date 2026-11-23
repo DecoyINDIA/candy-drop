@@ -330,8 +330,33 @@ async function main() {
     await assertNoOverflow(page); await screenshot(page, `${slug}-mobile.png`, page.locator('#game-shell'));
   });
 
+  await run('Enlarged board touch coordinates and state preservation', { mobile: true }, async (page, context) => {
+    await loadGame(page, 'mine-garden');
+    const initial = await inspect(page);
+    await page.getByRole('button', { name: 'Enlarge board', exact: true }).tap();
+    await step(page, 0);
+    assert.deepEqual(await inspect(page), initial, 'Zoom must not alter the puzzle');
+    const canvas = page.locator('#game'); await canvas.scrollIntoViewIfNeeded();
+    const box = await canvas.boundingBox();
+    assert.ok(Math.abs(box.width / box.height - 1) < .02);
+    assert.ok(box.width / 482 * 50 >= 35, 'An enlarged square must be comfortable to tap');
+    const cdp = await context.newCDPSession(page);
+    const point = { x: box.x + (280 - 239) / 482 * box.width, y: box.y + (97 - 56) / 482 * box.height, id: 1 };
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [point] }); await step(page);
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); await step(page);
+    const played = await inspect(page);
+    assert.equal(played.selected, 0, 'A tap maps back to the intended logical cell');
+    assert.equal(played.open[0], true);
+    await screenshot(page, 'mine-garden-mobile-enlarged.png', page.locator('#game-shell'));
+    await page.getByRole('button', { name: 'Show full scene', exact: true }).tap(); await step(page, 0);
+    assert.deepEqual(await inspect(page), played);
+    const restored = await canvas.boundingBox(); assert.ok(Math.abs(restored.width / restored.height - 1.6) < .02);
+    await assertNoOverflow(page);
+  });
+
   await run('Merge Lab touch swipe and saved result', { mobile: true }, async (page, context) => {
     await loadGame(page, 'merge-lab'); const before = await inspect(page);
+    await page.getByRole('button', { name: 'Enlarge board', exact: true }).tap(); await step(page, 0);
     const left = before.grid.some((value, index) => value && index % 4 > 0);
     const canvas = page.locator('#game'); await canvas.scrollIntoViewIfNeeded(); const box = await canvas.boundingBox();
     const center = { x: box.x + box.width * 0.5, y: box.y + box.height * 0.5 };

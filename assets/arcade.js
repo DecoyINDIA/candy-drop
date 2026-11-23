@@ -18,6 +18,14 @@
       const ctx = canvas.getContext('2d');
       if (!ctx) { $('game-status').textContent = 'This browser does not support canvas. Please try an up-to-date browser.'; return; }
       const w = 960, h = 600;
+      const focusView = Core.CATALOG.find(g => g.id === config.id)?.focus;
+      const focusButton = $('focus-button');
+      let zoomed = false;
+      const view = () => zoomed ? focusView : [0, 0, w, h];
+      function applyView() {
+        const [x, y, width, height] = view();
+        ctx.setTransform(canvas.width / width, 0, 0, canvas.height / height, -x * canvas.width / width, -y * canvas.height / height);
+      }
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       let state = 'menu', mode = new URLSearchParams(location.search).get('mode') === 'daily' ? 'daily' : 'classic';
       let game, api, points = 0, elapsed = 0, hudStamp = '', lastTime = 0, day = Core.dayKey(), pendingHud = null, lastHudTime = -1;
@@ -73,7 +81,7 @@
         const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
         const width = Math.max(1, canvas.clientWidth), height = Math.max(1, canvas.clientHeight);
         canvas.width = Math.round(width * pixelRatio); canvas.height = Math.round(height * pixelRatio);
-        ctx.setTransform(canvas.width / w, 0, 0, canvas.height / h, 0, 0);
+        applyView();
       }
       new ResizeObserver(resize).observe(canvas);
       function paintHud(items) {
@@ -211,8 +219,8 @@
         if (toastRemaining > 0) { toastRemaining -= dt; if (toastRemaining <= 0) $('toast').classList.remove('visible'); }
       }
       function draw() {
-        ctx.setTransform(canvas.width / w, 0, 0, canvas.height / h, 0, 0);
-        ctx.clearRect(0, 0, w, h); ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height); applyView(); ctx.save();
         if (shake > 0) ctx.translate((Math.random() - .5) * shake, (Math.random() - .5) * shake);
         game.draw(ctx); ctx.restore();
         for (const particle of effects) { ctx.globalAlpha = Math.min(1, particle.life * 2); ctx.fillStyle = particle.color; ctx.fillRect(particle.x - 2, particle.y - 2, 4, 4); }
@@ -226,8 +234,9 @@
       }
       function point(event) {
         const rect = canvas.getBoundingClientRect();
-        pointer.x = Math.max(0, Math.min(w, (event.clientX - rect.left) / rect.width * w));
-        pointer.y = Math.max(0, Math.min(h, (event.clientY - rect.top) / rect.height * h));
+        const [x, y, width, height] = view();
+        pointer.x = x + Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)) * width;
+        pointer.y = y + Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height)) * height;
         pointer.inside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
         pointer.active = true;
       }
@@ -271,6 +280,20 @@
         if (document.fullscreenElement !== $('game-shell')) return;
         const chrome = [...$('game-shell').children].filter(node => !node.classList.contains('stage')).reduce((height, node) => height + node.getBoundingClientRect().height, 0);
         $('game-shell').style.setProperty('--game-chrome', Math.ceil(chrome) + 'px');
+      }
+      if (focusButton && Array.isArray(focusView) && focusView.length === 4) {
+        focusButton.hidden = false;
+        focusButton.addEventListener('click', () => {
+          resetInput(); zoomed = !zoomed;
+          const [, , width, height] = view();
+          $('game-shell').style.setProperty('--view-ratio', String(width / height));
+          focusButton.setAttribute('aria-pressed', String(zoomed));
+          focusButton.setAttribute('aria-label', zoomed ? 'Show full scene' : 'Enlarge board');
+          focusButton.title = zoomed ? 'Show full scene' : 'Enlarge board';
+          focusButton.textContent = zoomed ? '−' : '+';
+          fitFullscreen(); resize(); draw();
+          $('game-status').textContent = zoomed ? 'Board enlarged. Game controls are unchanged.' : 'Full scene restored.';
+        });
       }
       document.addEventListener('fullscreenchange', fitFullscreen);
       window.addEventListener('resize', fitFullscreen);

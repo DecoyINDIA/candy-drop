@@ -52,3 +52,13 @@ the shared runtime, card art, and the hub. Only edit your assigned game modules.
 For automation, runtime exposes `window.__arcade = { start(mode), state(), inspect(),
 step(seconds), pause(), resume() }` only when URL includes `?test=1`. `step` advances
 simulation using fixed 1/60-second substeps; normal gameplay uses requestAnimationFrame.
+
+## Optional enlarged board view
+
+Catalog entries can include `focus: [x, y, width, height]` within the 960 × 600 scene.
+The toolbar then offers **Enlarge board / Show full scene**. The runtime crops the view,
+adapts the stage proportions and maps pointer positions back to logical coordinates.
+Game modules continue drawing and handling input in the same coordinate system.
+Keep every required interactive element inside the crop, and put essential status in
+`api.hud`. Test a direct tap or drag in both views. Zoom cancels a pending gesture
+without changing the puzzle or simulation state.

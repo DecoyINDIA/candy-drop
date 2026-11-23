@@ -687,7 +687,7 @@ button {
 }
 .stage {
   position:relative;
-  aspect-ratio:8/5;
+  aspect-ratio:var(--view-ratio,1.6);
   isolation:isolate;
   background:#111722;
 }
@@ -1059,7 +1059,7 @@ kbd {
 .game-shell:fullscreen .stage {
   flex:1;
   min-height:0;
-  width:min(100%,calc((100dvh - 176px)*1.6));
+  width:min(100%,calc((100dvh - 176px)*var(--view-ratio,1.6)));
   aspect-ratio:auto;
 }
 .game-shell:fullscreen canvas {
@@ -1425,14 +1425,14 @@ kbd {
     border-radius:12px;
   }
   .stage {
-    aspect-ratio:8/5;
+    aspect-ratio:var(--view-ratio,1.6);
   }
   .overlay {
     padding:10px;
     position:relative;
     min-height:265px;
     margin-top:-62.5%;
-    aspect-ratio:8/5;
+    aspect-ratio:var(--view-ratio,1.6);
     align-items:center;
     overflow:auto;
   }
@@ -1566,7 +1566,7 @@ kbd {
     aspect-ratio:auto;
   }
   .game-shell:fullscreen .stage {
-    width:min(100%,calc((100dvh - 190px)*1.6));
+    width:min(100%,calc((100dvh - 190px)*var(--view-ratio,1.6)));
   }
 }
 @media(max-width:620px) {
@@ -1642,9 +1642,9 @@ kbd {
 }
 .game-shell:fullscreen .stage,.game-shell:fullscreen .stage.has-overlay {
   flex:none;
-  width:min(100%,calc((100dvh - var(--game-chrome,190px))*1.6));
+  width:min(100%,calc((100dvh - var(--game-chrome,190px))*var(--view-ratio,1.6)));
   height:auto;
-  aspect-ratio:8/5;
+  aspect-ratio:var(--view-ratio,1.6);
   min-height:0;
   margin:auto 0;
 }
@@ -1701,3 +1701,6 @@ kbd {
   .controls { flex-wrap:wrap; justify-content:center; }
   .control-button { flex:0 1 auto; min-width:44px; max-width:100%; }
 }
+
+/* Board zoom changes the view, never the simulation or pointer coordinates. */
+#focus-button[aria-pressed="true"] { color:var(--game-accent); border-color:var(--game-accent); }

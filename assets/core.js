@@ -85,7 +85,13 @@
       "color": "#ffd27b",
       "hook": "Make room for your next big idea.",
       "duration": "At your pace",
-      "tag": "Think a move ahead"
+      "tag": "Think a move ahead",
+      "focus": [
+        220,
+        44,
+        520,
+        520
+      ]
     },
     {
       "id": "four-in-row",
@@ -96,7 +102,13 @@
       "hook": "Build a fork. Connect your four.",
       "duration": "2–4 min",
       "tag": "Find the winning connection",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        100,
+        50,
+        530,
+        500
+      ]
     },
     {
       "id": "prism-breaker",
@@ -118,7 +130,13 @@
       "hook": "Read the numbers. Grow a safe garden.",
       "duration": "3–6 min",
       "tag": "A little careful thinking",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        239,
+        56,
+        482,
+        482
+      ]
     },
     {
       "id": "rooftop-rally",
@@ -140,7 +158,13 @@
       "hook": "A quiet corner can change everything.",
       "duration": "3–5 min",
       "tag": "Turn the board your way",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        220,
+        65,
+        470,
+        470
+      ]
     },
     {
       "id": "serpent-garden",
@@ -162,7 +186,13 @@
       "hook": "Sixteen cards. Eight familiar faces.",
       "duration": "2–4 min",
       "tag": "Remember the little things",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        252,
+        60,
+        460,
+        460
+      ]
     },
     {
       "id": "hoops-minute",
@@ -184,7 +214,13 @@
       "hook": "Find the fleet beneath the silence.",
       "duration": "2–4 min",
       "tag": "Make every sonar count",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        185,
+        70,
+        720,
+        470
+      ]
     },
     {
       "id": "meteor-drift",
@@ -206,7 +242,13 @@
       "hook": "One switch changes the whole idea.",
       "duration": "3–6 min",
       "tag": "Find the quiet in the circuit",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        252,
+        68,
+        456,
+        456
+      ]
     },
     {
       "id": "pocket-bowler",
@@ -228,7 +270,13 @@
       "hook": "Read the jump beyond the jump.",
       "duration": "3–6 min",
       "tag": "Play the long game",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        235,
+        45,
+        502,
+        502
+      ]
     },
     {
       "id": "bubble-bay",
@@ -250,7 +298,13 @@
       "hook": "A place for every crate.",
       "duration": "3–6 min",
       "tag": "Think before you push",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        232,
+        82,
+        496,
+        436
+      ]
     },
     {
       "id": "home-run-hero",
@@ -294,7 +348,13 @@
       "hook": "Fifteen tiles. One little space.",
       "duration": "At your pace",
       "tag": "Put the studio in order",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        235,
+        57,
+        490,
+        490
+      ]
     },
     {
       "id": "wicket-rush",
@@ -338,7 +398,13 @@
       "hook": "Four numbers. A moment of clarity.",
       "duration": "3–5 min",
       "tag": "A number for every nook",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        254,
+        65,
+        452,
+        452
+      ]
     },
     {
       "id": "downhill-dash",
@@ -360,7 +426,13 @@
       "hook": "Thirty-six squares. One winding path.",
       "duration": "At your pace",
       "tag": "Leave yourself a way out",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        225,
+        60,
+        474,
+        474
+      ]
     },
     {
       "id": "lava-lift",
@@ -382,7 +454,13 @@
       "hook": "One corner becomes a whole canvas.",
       "duration": "2–4 min",
       "tag": "Let the color in",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        254,
+        56,
+        452,
+        528
+      ]
     },
     {
       "id": "archery-grove",
@@ -426,7 +504,13 @@
       "hook": "Follow a little trail of letters.",
       "duration": "2–5 min",
       "tag": "A word to the curious",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        250,
+        55,
+        680,
+        462
+      ]
     },
     {
       "id": "curling-cove",
@@ -470,7 +554,13 @@
       "hook": "Turn a few pipes into a flowing idea.",
       "duration": "3–6 min",
       "tag": "Find your own flow",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        228,
+        62,
+        506,
+        466
+      ]
     },
     {
       "id": "sail-sprint",
@@ -514,7 +604,13 @@
       "hook": "The picture is in the numbers.",
       "duration": "3–6 min",
       "tag": "A little revelation",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        236,
+        64,
+        470,
+        474
+      ]
     },
     {
       "id": "orchard-keeper",
@@ -558,7 +654,13 @@
       "hook": "Four colors. One satisfying click.",
       "duration": "3–6 min",
       "tag": "Think your way into the lock",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        274,
+        32,
+        412,
+        552
+      ]
     },
     {
       "id": "cafe-rush",
@@ -602,7 +704,13 @@
       "hook": "A few thoughtful jumps. Just one peg.",
       "duration": "3–6 min",
       "tag": "Less is a little more",
-      "added": "2026-11-23"
+      "added": "2026-11-23",
+      "focus": [
+        242,
+        58,
+        476,
+        476
+      ]
     },
     {
       "id": "colony-balance",
@@ -613,6 +721,257 @@
       "hook": "Twenty decisions. A whole colony depends on you.",
       "duration": "3–5 min",
       "tag": "BALANCE",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "marble-maze",
+      "title": "Marble Maze",
+      "category": "Tilt maze",
+      "group": "Puzzle",
+      "color": "#a9d8be",
+      "hook": "Three keys. One winding way home.",
+      "duration": "2–3 min",
+      "tag": "Roll a little more gently",
+      "added": "2026-11-23",
+      "focus": [
+        128,
+        60,
+        704,
+        485
+      ]
+    },
+    {
+      "id": "gravity-shift",
+      "title": "Gravity Shift",
+      "category": "Gravity runner",
+      "group": "Action",
+      "color": "#93c5fd",
+      "hook": "The floor is a choice. Find your landing.",
+      "duration": "1 min",
+      "tag": "A different point of view",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "laser-lock",
+      "title": "Laser Lock",
+      "category": "Light routing",
+      "group": "Puzzle",
+      "color": "#a8e5df",
+      "hook": "A little reflection opens a whole new room.",
+      "duration": "3–6 min",
+      "tag": "Follow the light",
+      "added": "2026-11-23",
+      "focus": [
+        194,
+        52,
+        570,
+        490
+      ]
+    },
+    {
+      "id": "penalty-keeper",
+      "title": "Penalty Keeper",
+      "category": "Goalkeeping",
+      "group": "Sports",
+      "color": "#c6e2bb",
+      "hook": "Read the shot. Commit to the dive. Own the goal.",
+      "duration": "1 min",
+      "tag": "SAVE",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "treasure-diver",
+      "title": "Treasure Diver",
+      "category": "Exploration",
+      "group": "Action",
+      "color": "#7fd8d3",
+      "hook": "Find something worth bringing home.",
+      "duration": "1–3 min",
+      "tag": "A deeper little adventure",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "cargo-crane",
+      "title": "Cargo Crane",
+      "category": "Pendulum delivery",
+      "group": "Timing",
+      "color": "#f5cc83",
+      "hook": "A little momentum. A careful release.",
+      "duration": "1–2 min",
+      "tag": "Keep the harbor moving",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "word-forge",
+      "title": "Word Forge",
+      "category": "Anagrams",
+      "group": "Puzzle",
+      "color": "#f1c98c",
+      "hook": "Six letters. A workshop of possibilities.",
+      "duration": "4–8 min",
+      "tag": "Make something of it",
+      "added": "2026-11-23",
+      "focus": [
+        210,
+        55,
+        730,
+        492
+      ]
+    },
+    {
+      "id": "rally-courier",
+      "title": "Rally Courier",
+      "category": "Bicycle delivery",
+      "group": "Racing",
+      "color": "#e1c1a0",
+      "hook": "Five parcels and a city of useful shortcuts.",
+      "duration": "1–2 min",
+      "tag": "DELIVER",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "paper-flight",
+      "title": "Paper Flight",
+      "category": "Gliding",
+      "group": "Action",
+      "color": "#f2d5a1",
+      "hook": "Fold some courage. Ride the air.",
+      "duration": "1 min",
+      "tag": "Take the long glide home",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "rocket-landing",
+      "title": "Rocket Landing",
+      "category": "Lunar lander",
+      "group": "Action",
+      "color": "#c4b5fd",
+      "hook": "A quiet moon. Three soft arrivals.",
+      "duration": "1–3 min",
+      "tag": "A quiet approach",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "balance-box",
+      "title": "Balance Box",
+      "category": "Balance puzzle",
+      "group": "Puzzle",
+      "color": "#dfbd91",
+      "hook": "The right weight in the right place.",
+      "duration": "3–6 min",
+      "tag": "A little perspective",
+      "added": "2026-11-23",
+      "focus": [
+        184,
+        154,
+        592,
+        390
+      ]
+    },
+    {
+      "id": "train-yard",
+      "title": "Train Yard",
+      "category": "Railway dispatch",
+      "group": "Strategy",
+      "color": "#c6d9aa",
+      "hook": "Three switches. Eighteen trains. Keep it moving.",
+      "duration": "1–2 min",
+      "tag": "DISPATCH",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "chroma-switch",
+      "title": "Chroma Switch",
+      "category": "Color timing",
+      "group": "Timing",
+      "color": "#a99bdf",
+      "hook": "Read the color. Find your opening.",
+      "duration": "1–2 min",
+      "tag": "Keep rising",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "harbor-rescue",
+      "title": "Harbor Rescue",
+      "category": "Boat rescue",
+      "group": "Action",
+      "color": "#7dd3fc",
+      "hook": "Follow the current. Bring everyone home.",
+      "duration": "1–3 min",
+      "tag": "A harbor worth returning to",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "trail-weaver",
+      "title": "Trail Weaver",
+      "category": "Numberlink",
+      "group": "Puzzle",
+      "color": "#b4cfa5",
+      "hook": "A place for every path.",
+      "duration": "4–8 min",
+      "tag": "A way together",
+      "added": "2026-11-23",
+      "focus": [
+        250,
+        60,
+        460,
+        460
+      ]
+    },
+    {
+      "id": "reef-keeper",
+      "title": "Reef Keeper",
+      "category": "Ecosystem strategy",
+      "group": "Strategy",
+      "color": "#acdacc",
+      "hook": "Sixteen days to give a reef its future.",
+      "duration": "2–4 min",
+      "tag": "RESTORE",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "reaction-lab",
+      "title": "Reaction Lab",
+      "category": "Reaction timing",
+      "group": "Timing",
+      "color": "#b6deb6",
+      "hook": "A quiet moment. One clear signal.",
+      "duration": "1 min",
+      "tag": "Find a calmer rhythm",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "mahjong-meadow",
+      "title": "Mahjong Meadow",
+      "category": "Tile solitaire",
+      "group": "Tabletop",
+      "color": "#b7d39c",
+      "hook": "Make a little space. Match the edges.",
+      "duration": "3–6 min",
+      "tag": "A little room to grow",
+      "focus": [
+        235,
+        40,
+        490,
+        520
+      ],
+      "added": "2026-11-23"
+    },
+    {
+      "id": "ultimate-grid",
+      "title": "Ultimate Grid",
+      "category": "Linked tic-tac-toe",
+      "group": "Tabletop",
+      "color": "#b7b0db",
+      "hook": "Small moves. Much bigger questions.",
+      "duration": "3–6 min",
+      "tag": "Think about their next board",
+      "focus": [
+        219,
+        39,
+        510,
+        510
+      ],
       "added": "2026-11-23"
     },
     {
