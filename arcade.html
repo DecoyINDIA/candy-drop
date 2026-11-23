@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#101219">
-  <meta name="description" content="Nine little browser games, one happy place. Fight, race, score, explore, and chase your next personal best in Candy Arcade.">
+  <meta name="description" content="Dozens of free browser games, one happy place. Action, sports, puzzles, strategy, tabletop and timing games with touch controls and daily challenges.">
   <title>Candy Arcade — Find your next one more try</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/arcade.css">
@@ -22,7 +22,7 @@
       <div class="hero-copy">
         <span class="eyebrow">SMALL GAMES. GREAT LITTLE ESCAPES.</span>
         <h1 id="hero-title">Your next<br><span>one more try.</span></h1>
-        <p>Nine worlds to drop into. A few minutes to make your own. Pick a game and find your flow.</p>
+        <p><span id="hero-game-total">Dozens of</span> little worlds to drop into. A few minutes to make your own. Pick a game and find your flow.</p>
         <div class="hero-actions"><a href="#games" class="button primary">Find your game <span aria-hidden="true">↓</span></a><button class="button secondary" id="surprise-button" type="button">Surprise me <span aria-hidden="true">↗</span></button></div>
         <p class="hero-footnote">No downloads. No account. Just play.</p>
       </div>
@@ -39,27 +39,32 @@
       <a class="button secondary" id="daily-link" href="games/skybound/index.html?mode=daily">Take the challenge →</a>
     </section>
     <section id="games" aria-labelledby="collection-title">
-      <div class="section-heading"><div><h2 id="collection-title">A little something for every mood.</h2><p>Eight new adventures. One original favorite.</p></div><span class="small-link" id="game-count">9 games</span></div>
+      <section id="return-section" class="return-section" aria-label="Jump back in" hidden><h2>Pick up a familiar favorite.</h2><div id="return-links" class="return-links"></div></section>
+      <div class="section-heading"><div><h2 id="collection-title">A little something for every mood.</h2><p>New discoveries. Familiar favorites. Always one more try.</p></div><span class="small-link" id="game-count"></span></div>
       <div class="collection-tools">
         <div class="filters" role="group" aria-label="Filter games by category">
           <button class="filter active" type="button" data-filter="All" aria-pressed="true">All games</button>
+          <button class="filter" type="button" data-filter="New" aria-pressed="false">New games</button>
           <button class="filter" type="button" data-filter="Action" aria-pressed="false">Action</button>
           <button class="filter" type="button" data-filter="Racing" aria-pressed="false">Racing</button>
           <button class="filter" type="button" data-filter="Sports" aria-pressed="false">Sports</button>
           <button class="filter" type="button" data-filter="Strategy" aria-pressed="false">Strategy</button>
           <button class="filter" type="button" data-filter="Puzzle" aria-pressed="false">Puzzle</button>
+          <button class="filter" type="button" data-filter="Tabletop" aria-pressed="false">Tabletop</button>
+          <button class="filter" type="button" data-filter="Timing" aria-pressed="false">Timing</button>
           <button class="filter" type="button" data-filter="Favorites" aria-pressed="false">♡ Saved</button>
         </div>
-        <label class="search"><span aria-hidden="true">⌕</span><input id="game-search" type="search" placeholder="Find a game…" aria-label="Search games" autocomplete="off"></label>
+        <div class="search-sort"><label class="search"><span aria-hidden="true">⌕</span><input id="game-search" type="search" placeholder="Find a game…" aria-label="Search games" autocomplete="off"></label><label class="sort-label"><span class="sr-only">Sort games</span><select id="game-sort" aria-label="Sort games"><option value="discover">Discover</option><option value="az">A–Z</option><option value="unplayed">Not played yet</option><option value="played">Most played</option></select></label></div>
       </div>
       <div class="game-grid" id="game-grid"></div>
+      <div class="collection-pagination"><p id="visible-count" class="local-note"></p><button type="button" id="load-more" class="button secondary">Show more games ↓</button></div>
       <div class="empty-state" id="empty-state" hidden>No games here yet. Try another category or save a favorite.</div>
       <p id="filter-status" class="sr-only" aria-live="polite"></p>
       <noscript><p>Enable JavaScript to play. You can also open <a href="index.html">Candy Drop</a> or any game from the repository’s games folder.</p></noscript>
     </section>
     <section class="progress-section" id="progress" aria-labelledby="progress-title">
       <div class="progress-title"><h2 id="progress-title">Make a little progress.</h2><p>Every game has a new personal best in it.</p></div>
-      <div class="progress-stat"><strong id="stat-explored">0/9</strong><span>games explored</span></div>
+      <div class="progress-stat"><strong id="stat-explored">0</strong><span>games explored</span></div>
       <div class="progress-stat"><strong id="stat-runs">0</strong><span>runs started</span></div>
       <div class="progress-stat"><strong id="stat-medals">0</strong><span>classic medals earned</span></div>
     </section>

@@ -50,9 +50,9 @@ for (const game of CATALOG.filter(g => g.id !== 'candy-drop')) {
     <a class="game-bottom-link" href="../../arcade.html">← Find your next favorite</a>
     <noscript><p>Enable JavaScript to play this game.</p></noscript>
   </main>
-  <footer class="site-footer"><span>Small games. Great little escapes.</span><a href="../../arcade.html">Explore all 9 games ↗</a></footer>
+  <footer class="site-footer"><span>Small games. Great little escapes.</span><a href="../../arcade.html">Explore all ${CATALOG.length} games ↗</a></footer>
 </body>
 </html>
 `);
 }
-console.log('Generated 8 standalone game entry pages.');
+console.log('Generated ' + (CATALOG.length - 1) + ' standalone game entry pages.');

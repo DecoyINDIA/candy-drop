@@ -1677,3 +1677,27 @@ kbd {
     transform:none;
   }
 }
+
+/* Discovery stays compact as the collection grows. */
+.collection-tools { align-items:flex-start; flex-wrap:wrap; }
+.filters { flex:1 1 620px; flex-wrap:wrap; }
+.search-sort { display:flex; flex:1 1 320px; gap:10px; }
+.search-sort .search { flex:1; min-width:150px; }
+.search-sort input { width:100%; }
+#game-sort { min-height:40px; max-width:145px; border:1px solid #313540; border-radius:10px; background:#1b1f29; color:#d8dce8; padding:9px 12px; font:inherit; font-size:12px; }
+.collection-pagination { text-align:center; margin:26px 0 42px; }
+.collection-pagination .local-note { margin-bottom:15px; }
+.return-section { margin:12px 0 36px; padding:24px; border:1px solid #30343e; border-radius:18px; background:#181c25; }
+.return-section h2 { font-size:19px; margin:0 0 16px; }
+.return-links { display:flex; flex-wrap:wrap; gap:12px; }
+.return-link { display:block; border:1px solid #383e49; border-left:3px solid var(--card-accent); border-radius:9px; padding:12px 18px; color:#e4e6eb; font-size:14px; }
+.card-index { max-width:calc(100% - 70px); text-overflow:ellipsis; white-space:nowrap; overflow:hidden; }
+@media(max-width:620px) {
+  .search-sort { width:100%; flex-basis:100%; }
+  #game-sort { min-height:44px; max-width:128px; font-size:11px; padding:8px; }
+  .return-section { padding:18px; }
+  .return-link { font-size:12px; padding:12px; }
+  .filters { flex-basis:100%; }
+  .controls { flex-wrap:wrap; justify-content:center; }
+  .control-button { flex:0 1 auto; min-width:44px; max-width:100%; }
+}

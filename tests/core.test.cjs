@@ -13,9 +13,9 @@ function memoryAdapter(initial = null) {
   };
 }
 
-test('catalog exposes eight new games and preserves the original route', () => {
-  assert.equal(Core.CATALOG.length, 9);
-  assert.equal(new Set(Core.CATALOG.map(game => game.id)).size, 9);
+test('catalog exposes the expanded collection and preserves the original route', () => {
+  assert.ok(Core.CATALOG.length >= 57);
+  assert.equal(new Set(Core.CATALOG.map(game => game.id)).size, Core.CATALOG.length);
   assert.equal(Core.href(Core.CATALOG.find(game => game.id === 'candy-drop')), 'index.html');
   assert.equal(Core.href(Core.CATALOG[0], '../../'), '../../games/neon-dojo/index.html');
 });
@@ -36,7 +36,10 @@ test('daily rotation is stable and dates use UTC boundaries', () => {
   assert.equal(Core.dayKey(new Date('2026-11-16T01:00:00+05:30')), '2026-11-15');
   assert.equal(Core.dayKey(new Date('2026-11-16T00:00:00Z')), '2026-11-16');
   assert.equal(Core.dailyGame('2026-11-15').id, Core.dailyGame('2026-11-15').id);
-  assert.ok(Core.CATALOG.slice(0, 8).includes(Core.dailyGame('2026-11-15')));
+  assert.ok(Core.CATALOG.filter(g => g.id !== 'candy-drop').includes(Core.dailyGame('2026-11-15')));
+  const picks = new Set(Array.from({ length: 730 }, (_, i) => Core.dailyGame(Core.dayKey(new Date(Date.UTC(2026, 0, i + 1)))).id));
+  assert.ok(picks.size > 40, 'the daily pick rotates throughout the expanded collection');
+  assert.ok(!picks.has('candy-drop'));
 });
 
 test('scores and medals handle invalid data and exact boundaries', () => {

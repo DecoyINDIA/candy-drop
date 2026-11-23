@@ -1,4 +1,4 @@
-/* One small runtime for eight independent games. No framework, network or build step. */
+/* One small runtime for the entire arcade. No framework, network or build step. */
 (function () {
   'use strict';
   const Core = window.ArcadeCore;
@@ -190,8 +190,10 @@
           panel.append(row);
         }
         const row = el('div', 'panel-actions'); row.append(button('Play again  ↻', 'button primary', () => start(mode)));
-        const nextIndex = (Core.CATALOG.findIndex(g => g.id === config.id) + 1) % 8;
-        const next = Core.CATALOG[nextIndex]; const link = el('a', 'button secondary', 'Try ' + next.title + ' →'); link.href = Core.href(next, '../../'); row.append(link); panel.append(row);
+        const current = Core.CATALOG.find(g => g.id === config.id), records = save.read().games;
+        const pool = Core.CATALOG.filter(g => g.id !== config.id && g.id !== 'candy-drop');
+        pool.sort((a, b) => Number(!!records[a.id]?.plays) - Number(!!records[b.id]?.plays) || Number(b.group === current?.group) - Number(a.group === current?.group));
+        const next = pool[0] || Core.CATALOG[0]; const link = el('a', 'button secondary', 'Try ' + next.title + ' →'); link.href = Core.href(next, '../../'); row.append(link); panel.append(row);
         const share = button('Copy my score', 'quiet-link', async () => {
           const text = config.title + ': ' + fmt(points) + ' points' + (mode === 'daily' ? ' in the ' + day + ' daily challenge' : '') + '. Can you beat it? ' + location.href.replace(/[?#].*$/, '') + (mode === 'daily' ? '?mode=daily' : '');
           try { await navigator.clipboard.writeText(text); share.textContent = 'Copied!'; }

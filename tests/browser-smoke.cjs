@@ -17,6 +17,10 @@ const OUTPUT = path.join(ROOT, 'test-results');
 const PORT = Number(process.env.SMOKE_PORT || 32000 + process.pid % 20000);
 const BASE = `http://127.0.0.1:${PORT}`;
 const SLUGS = ['neon-dojo', 'sunset-sprint', 'pocket-striker', 'orbit-guard', 'mini-golf-club', 'skybound', 'starfall', 'merge-lab'];
+const { CATALOG } = require('../assets/core.js');
+const ALL_SLUGS = CATALOG.filter(g => g.id !== 'candy-drop').map(g => g.id);
+const EXPANSION_SLUGS = ALL_SLUGS.filter(id => !SLUGS.includes(id));
+const PAGE_SIZE = 12;
 const FIXED_DATE = '2026-11-15T12:00:00Z';
 const results = [];
 let browser, server;
@@ -41,7 +45,7 @@ async function assertNoOverflow(page) {
 async function assertHubLayout(page, mobile) {
   const cardRatio = mobile ? 1.4 : 1.9, heroRatio = mobile ? 1.9 : 1.46;
   const cards = await page.locator('.card-art').evaluateAll(images => images.map(image => ({ width: image.getBoundingClientRect().width, height: image.getBoundingClientRect().height })));
-  assert.equal(cards.length, 9);
+  assert.equal(cards.length, Math.min(PAGE_SIZE, CATALOG.length));
   for (const [index, card] of cards.entries()) {
     assert.ok(card.width > 0 && card.height > 0 && Math.abs(card.width / card.height - cardRatio) < 0.08,
       `Card ${index + 1} art must keep a ${cardRatio}:1 ratio, got ${card.width}×${card.height}`);
@@ -216,17 +220,23 @@ async function main() {
 
   await run('Hub discovery and saved games', {}, async page => {
     await page.goto(BASE + '/arcade.html', { waitUntil: 'load' });
-    assert.equal(await page.locator('.game-card').count(), 9);
-    await page.locator('[data-filter="Action"]').click(); assert.equal(await page.locator('.game-card').count(), 3);
-    await page.locator('[data-filter="Sports"]').click(); assert.equal(await page.locator('.game-card').count(), 2);
+    assert.equal(await page.locator('.game-card').count(), Math.min(PAGE_SIZE, CATALOG.length));
+    await page.locator('[data-filter="Action"]').click(); assert.equal(await page.locator('.game-card').count(), Math.min(PAGE_SIZE, CATALOG.filter(g => g.group === 'Action').length));
+    await page.locator('[data-filter="Sports"]').click(); assert.equal(await page.locator('.game-card').count(), Math.min(PAGE_SIZE, CATALOG.filter(g => g.group === 'Sports').length));
     await page.locator('[data-filter="All"]').click(); await page.locator('#game-search').fill('sunset');
     assert.equal(await page.locator('.game-card').count(), 1); assert.equal(await page.locator('.game-card h3').textContent(), 'Sunset Sprint');
     await page.locator('#game-search').fill('no such game'); assert.equal(await page.locator('.game-card').count(), 0); assert.ok(await page.locator('#empty-state').isVisible());
-    await page.locator('#game-search').fill(''); await page.getByRole('button', { name: 'Save Neon Dojo', exact: true }).click();
-    await page.reload({ waitUntil: 'load' }); assert.equal(await page.getByRole('button', { name: 'Unsave Neon Dojo', exact: true }).getAttribute('aria-pressed'), 'true');
+    await page.locator('#game-search').fill('Neon Dojo'); await page.getByRole('button', { name: 'Save Neon Dojo', exact: true }).click();
+    await page.reload({ waitUntil: 'load' }); await page.locator('#game-search').fill('Neon Dojo'); assert.equal(await page.getByRole('button', { name: 'Unsave Neon Dojo', exact: true }).getAttribute('aria-pressed'), 'true'); await page.locator('#game-search').fill('');
     await page.locator('[data-filter="Favorites"]').click(); assert.equal(await page.locator('.game-card').count(), 1);
     await page.getByRole('button', { name: 'Unsave Neon Dojo', exact: true }).click(); assert.equal(await page.locator('.game-card').count(), 0);
-    await page.locator('[data-filter="All"]').click(); assert.equal(await page.locator('.game-card').count(), 9);
+    await page.locator('[data-filter="All"]').click(); assert.equal(await page.locator('.game-card').count(), Math.min(PAGE_SIZE, CATALOG.length));
+    await page.locator('#load-more').click(); assert.equal(await page.locator('.game-card').count(), Math.min(PAGE_SIZE * 2, CATALOG.length));
+    const links = await page.locator('.card-link').evaluateAll(nodes => nodes.map(n => n.href)); assert.equal(new Set(links).size, links.length);
+    await page.locator('#game-sort').selectOption('az'); assert.equal(await page.locator('.game-card h3').first().textContent(), CATALOG.map(g => g.title).sort((a,b) => a.localeCompare(b))[0]);
+    await page.locator('#game-sort').selectOption('discover');
+    await page.locator('[data-filter="New"]').click(); assert.ok(parseInt(await page.locator('#game-count').textContent(), 10) >= 48);
+    await page.locator('[data-filter="All"]').click();
     // Check every shipped browser asset, including lazy-loaded card art and all game entry points.
     function assets(dir) { return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => entry.name.startsWith('.') || ['node_modules', 'test-results', 'tests', 'scripts', 'docs'].includes(entry.name) ? [] : entry.isDirectory() ? assets(path.join(dir, entry.name)) : /\.(?:html|css|js|svg)$/.test(entry.name) ? [path.join(dir, entry.name)] : []); }
     for (const file of assets(ROOT)) { const url = BASE + '/' + path.relative(ROOT, file).split(path.sep).join('/'); const response = await page.request.get(url); assert.equal(response.status(), 200, `Asset failed: ${url}`); }
@@ -253,6 +263,32 @@ async function main() {
     await endAndReplay(page, slug);
   });
 
+  for (const slug of EXPANSION_SLUGS) await run(`${slug} desktop lifecycle`, {}, async page => {
+    await loadGame(page, slug, { menuScreenshot: false });
+    const first = await page.evaluate(() => { window.__arcade.start('daily'); return window.__arcade.inspect(); });
+    await page.locator('#game').focus();
+    // Exercise a real mapped keyboard key, then real pointer events on the game surface.
+    let config; require('node:vm').runInNewContext(fs.readFileSync(path.join(ROOT, 'games', slug, 'game.js'), 'utf8'), { Arcade: { mount(c) { config = c; } } });
+    const code = config.controls.find(c => c.keys && c.keys.length)?.keys[0];
+    const key = code && (code.startsWith('Key') ? code.slice(3).toLowerCase() : code.startsWith('Digit') ? code.slice(5) : code === 'ShiftLeft' || code === 'ShiftRight' ? 'Shift' : code);
+    if (key) await press(page, key, .08);
+    await step(page, .2);
+    if ((await state(page)).phase === 'ended') await page.evaluate(() => window.__arcade.start('daily'));
+    await page.locator('#pause-button').click(); await assertPhase(page, 'paused');
+    const frozen = await inspect(page); await step(page, 1); await page.clock.runFor(60); assert.deepEqual(await inspect(page), frozen);
+    await page.getByRole('button', { name: /Keep playing/ }).click(); await assertPhase(page, 'playing');
+    await page.clock.runFor(80); assert.ok((await state(page)).time > 0);
+    await page.evaluate(() => window.__arcade.start('daily'));
+    assert.deepEqual(await inspect(page), first, 'daily restarting recreates the same puzzle or course');
+    await step(page);
+    await assertNoOverflow(page);
+    await screenshot(page, `${slug}-desktop.png`, page.locator('#game-shell'));
+    await restartThroughMenu(page);
+    const box = await page.locator('#game').boundingBox();
+    await page.mouse.click(box.x + box.width * .5, box.y + box.height * .5); await step(page, .1);
+    assert.ok(['playing', 'ended'].includes((await state(page)).phase));
+  });
+
   await run('Golf pointer drag and pause cancellation', {}, async page => {
     await loadGame(page, 'mini-golf-club');
     const canvas = page.locator('#game'); await canvas.scrollIntoViewIfNeeded(); const box = await canvas.boundingBox();
@@ -271,15 +307,15 @@ async function main() {
   });
 
   await run('Hub mobile layout', { mobile: true }, async page => {
-    await page.goto(BASE + '/arcade.html', { waitUntil: 'load' }); assert.equal(await page.locator('.game-card').count(), 9);
+    await page.goto(BASE + '/arcade.html', { waitUntil: 'load' }); assert.equal(await page.locator('.game-card').count(), Math.min(PAGE_SIZE, CATALOG.length));
     await page.locator('img').evaluateAll(images => images.forEach(image => { image.loading = 'eager'; }));
     await page.waitForFunction(() => [...document.images].every(image => image.complete && image.naturalWidth > 0));
     await assertNoOverflow(page); await assertHubLayout(page, true); await screenshot(page, 'hub-mobile.png');
   });
-  for (const slug of SLUGS) await run(`${slug} mobile controls`, { mobile: true }, async (page, context) => {
-    await loadGame(page, slug, { menuScreenshot: ['sunset-sprint', 'mini-golf-club'].includes(slug) }); await assertNoOverflow(page);
+  for (const slug of ALL_SLUGS) await run(`${slug} mobile controls`, { mobile: true }, async (page, context) => {
+    await loadGame(page, slug, { menuScreenshot: !SLUGS.includes(slug) || ['sunset-sprint', 'mini-golf-club'].includes(slug) }); await assertNoOverflow(page);
     const targets = await page.locator('.control-button').evaluateAll(buttons => buttons.map(button => ({ label: button.textContent, width: button.getBoundingClientRect().width, height: button.getBoundingClientRect().height })));
-    assert.ok(targets.length >= 2);
+    assert.ok(targets.length >= 1);
     for (const target of targets) assert.ok(target.width >= 43.5 && target.height >= 43.5, `${target.label} touch target is too small: ${target.width}×${target.height}`);
     const box = await page.locator('#game').boundingBox(); assert.ok(Math.abs(box.width / box.height - 1.6) < 0.02, 'Active canvas must preserve its aspect ratio');
     await step(page, slug === 'neon-dojo' ? 1.8 : 0.1);

@@ -1,97 +1,145 @@
 # Candy Arcade
 
-**Candy Drop + eight new browser games.** A collection of quick, original games with distinct mechanics, keyboard and touch controls, personal records, and replayable daily seeds.
+**57 browser games. No signup. No downloads. Just play.**
 
-Open **[arcade.html](arcade.html)** to browse the collection. The original **[Candy Drop](index.html)** stays at its existing `index.html` address.
+## [Play the collection →](https://decoyindia.github.io/candy-drop/arcade.html)
+
+A growing collection of small games with distinct rules, original vector and canvas art, keyboard and touch controls, personal bests, medals and daily challenges. The original [Candy Drop](https://decoyindia.github.io/candy-drop/index.html) remains at its existing address.
 
 ![Sunset Sprint artwork](assets/art/sunset-sprint.svg)
 
-## The collection
+## Find your next game
 
-| Game | Category | The play loop | Typical session |
-| --- | --- | --- | --- |
-| [Neon Dojo](games/neon-dojo/index.html) | Fighting | Read attacks, jump sweeps, parry and break guards across three rooftop bouts. | 1–3 min |
-| [Sunset Sprint](games/sunset-sprint/index.html) | Racing | Steer a 6 km coastal course, draft traffic, manage boost, and reach timed checkpoints. | 1–2 min |
-| [Pocket Striker](games/pocket-striker/index.html) | Football simulation | Move, pass, sprint, tackle, switch players and charge shots against an AI team. | 75-second match |
-| [Orbit Guard](games/orbit-guard/index.html) | Tower defense | Build and upgrade three turret types to protect a reactor across eight waves. | 3–5 min |
-| [Mini Golf Club](games/mini-golf-club/index.html) | Physics / sports | Read the angle and power across six handcrafted holes with walls, sand and water. | 4–6 min |
-| [Skybound](games/skybound/index.html) | Platform runner | Double-jump rooftops, dash through obstacles and collect shards over a 1,200 m route. | About 1 min |
-| [Starfall](games/starfall/index.html) | Space shooter | Dodge, collect upgrades and time shield pulses through four fleets and a mothership. | 2–3 min |
-| [Merge Lab](games/merge-lab/index.html) | Number puzzle | Merge equal tiles toward 2048, plan around limited space, and use one exact undo. | At your pace |
-| [Candy Drop](index.html) | Original arcade | Catch falling candy, avoid bombs, and build combo multipliers. | Score chase |
+The hub includes category filters, full-catalog search, new arrivals, saved favorites, sorting, a rotating daily pick, and a quick route back to familiar games. It shows twelve cards at a time; **Show more games** reveals the next page. Search and sorting always operate on the entire collection.
 
-Session lengths describe normal play, not time limits for every game. Pausing is always available.
+### Action · 10
+
+| Game | What brings you back | Session |
+| --- | --- | --- |
+| [Neon Dojo](https://decoyindia.github.io/candy-drop/games/neon-dojo/index.html) | Read the rival. Land the counter. | 1–3 min |
+| [Skybound](https://decoyindia.github.io/candy-drop/games/skybound/index.html) | Leap the rooftops. Keep your flow. | 1 min |
+| [Starfall](https://decoyindia.github.io/candy-drop/games/starfall/index.html) | A small ship. A very big mission. | 2–3 min |
+| [Prism Breaker](https://decoyindia.github.io/candy-drop/games/prism-breaker/index.html) | Find your angle. Break a little brighter. | 1–3 min |
+| [Serpent Garden](https://decoyindia.github.io/candy-drop/games/serpent-garden/index.html) | A growing appetite. A thoughtful route. | 1–3 min |
+| [Meteor Drift](https://decoyindia.github.io/candy-drop/games/meteor-drift/index.html) | Trust your thrusters. Find clear skies. | 1–3 min |
+| [Lava Lift](https://decoyindia.github.io/candy-drop/games/lava-lift/index.html) | Keep a little sky above you. | 1–2 min |
+| [Ghost Lantern](https://decoyindia.github.io/candy-drop/games/ghost-lantern/index.html) | Carry a little light. Bring it home. | 1–3 min |
+| [Shield Spin](https://decoyindia.github.io/candy-drop/games/shield-spin/index.html) | Keep a little star alive. | 1–2 min |
+| [Blade Bloom](https://decoyindia.github.io/candy-drop/games/blade-bloom/index.html) | A bright harvest. One sweeping gesture. | 1 min |
+
+### Racing · 3
+
+| Game | What brings you back | Session |
+| --- | --- | --- |
+| [Sunset Sprint](https://decoyindia.github.io/candy-drop/games/sunset-sprint/index.html) | Chase the horizon. Beat the clock. | 1–2 min |
+| [Downhill Dash](https://decoyindia.github.io/candy-drop/games/downhill-dash/index.html) | Carve forty gates through a mountain morning. | 1–2 min |
+| [Sail Sprint](https://decoyindia.github.io/candy-drop/games/sail-sprint/index.html) | Six buoys and a breeze that rewards good lines. | 1–2 min |
+
+### Sports · 9
+
+| Game | What brings you back | Session |
+| --- | --- | --- |
+| [Pocket Striker](https://decoyindia.github.io/candy-drop/games/pocket-striker/index.html) | One pitch. Every touch matters. | 75-second match |
+| [Mini Golf Club](https://decoyindia.github.io/candy-drop/games/mini-golf-club/index.html) | Six holes. One perfect little round. | 4–6 min |
+| [Rooftop Rally](https://decoyindia.github.io/candy-drop/games/rooftop-rally/index.html) | Find the paddle edge. Make the rooftop yours. | 1–3 min |
+| [Hoops Minute](https://decoyindia.github.io/candy-drop/games/hoops-minute/index.html) | One minute. A drifting rim. Find your arc. | 1 min |
+| [Pocket Bowler](https://decoyindia.github.io/candy-drop/games/pocket-bowler/index.html) | Read the oil. Pick up the spare. Chase 300. | 2–4 min |
+| [Home Run Hero](https://decoyindia.github.io/candy-drop/games/home-run-hero/index.html) | Twelve pitches, one perfect moment to swing. | 1 min |
+| [Wicket Rush](https://decoyindia.github.io/candy-drop/games/wicket-rush/index.html) | Find the gap and chase 36 in two overs. | 1–2 min |
+| [Archery Grove](https://decoyindia.github.io/candy-drop/games/archery-grove/index.html) | Ten arrows. Read the breeze, trust your aim. | 1–3 min |
+| [Curling Cove](https://decoyindia.github.io/candy-drop/games/curling-cove/index.html) | Three ends. Place, protect, and own the button. | 2–4 min |
+
+### Strategy · 4
+
+| Game | What brings you back | Session |
+| --- | --- | --- |
+| [Orbit Guard](https://decoyindia.github.io/candy-drop/games/orbit-guard/index.html) | Build smart. Hold the final wave. | 3–5 min |
+| [Tidal Tactics](https://decoyindia.github.io/candy-drop/games/tidal-tactics/index.html) | Find the fleet beneath the silence. | 2–4 min |
+| [Orchard Keeper](https://decoyindia.github.io/candy-drop/games/orchard-keeper/index.html) | Nine plots and two minutes to grow a good season. | 2 min |
+| [Colony Balance](https://decoyindia.github.io/candy-drop/games/colony-balance/index.html) | Twenty decisions. A whole colony depends on you. | 3–5 min |
+
+### Puzzle · 17
+
+| Game | What brings you back | Session |
+| --- | --- | --- |
+| [Merge Lab](https://decoyindia.github.io/candy-drop/games/merge-lab/index.html) | Make room for your next big idea. | At your pace |
+| [Mine Garden](https://decoyindia.github.io/candy-drop/games/mine-garden/index.html) | Read the numbers. Grow a safe garden. | 3–6 min |
+| [Memory Lane](https://decoyindia.github.io/candy-drop/games/memory-lane/index.html) | Sixteen cards. Eight familiar faces. | 2–4 min |
+| [Light Circuit](https://decoyindia.github.io/candy-drop/games/light-circuit/index.html) | One switch changes the whole idea. | 3–6 min |
+| [Bubble Bay](https://decoyindia.github.io/candy-drop/games/bubble-bay/index.html) | One bright shot. A whole cluster free. | 1–3 min |
+| [Crate Escape](https://decoyindia.github.io/candy-drop/games/crate-escape/index.html) | A place for every crate. | 3–6 min |
+| [Slide Studio](https://decoyindia.github.io/candy-drop/games/slide-studio/index.html) | Fifteen tiles. One little space. | At your pace |
+| [Number Nook](https://decoyindia.github.io/candy-drop/games/number-nook/index.html) | Four numbers. A moment of clarity. | 3–5 min |
+| [Knight Quest](https://decoyindia.github.io/candy-drop/games/knight-quest/index.html) | Thirty-six squares. One winding path. | At your pace |
+| [Color Flood](https://decoyindia.github.io/candy-drop/games/color-flood/index.html) | One corner becomes a whole canvas. | 2–4 min |
+| [Constellation Link](https://decoyindia.github.io/candy-drop/games/constellation-link/index.html) | Untangle the night, star by star. | At your pace |
+| [Word Trail](https://decoyindia.github.io/candy-drop/games/word-trail/index.html) | Follow a little trail of letters. | 2–5 min |
+| [Ricochet Range](https://decoyindia.github.io/candy-drop/games/ricochet-range/index.html) | One clean shot. A new possibility. | 1–2 min |
+| [Pipe Works](https://decoyindia.github.io/candy-drop/games/pipe-works/index.html) | Turn a few pipes into a flowing idea. | 3–6 min |
+| [Nonogram Nook](https://decoyindia.github.io/candy-drop/games/nonogram-nook/index.html) | The picture is in the numbers. | 3–6 min |
+| [Code Breaker](https://decoyindia.github.io/candy-drop/games/code-breaker/index.html) | Four colors. One satisfying click. | 3–6 min |
+| [Peg Parlor](https://decoyindia.github.io/candy-drop/games/peg-parlor/index.html) | A few thoughtful jumps. Just one peg. | 3–6 min |
+
+### Tabletop · 6
+
+| Game | What brings you back | Session |
+| --- | --- | --- |
+| [Four in a Row](https://decoyindia.github.io/candy-drop/games/four-in-row/index.html) | Build a fork. Connect your four. | 2–4 min |
+| [Reversi Room](https://decoyindia.github.io/candy-drop/games/reversi-room/index.html) | A quiet corner can change everything. | 3–5 min |
+| [Royal Checkers](https://decoyindia.github.io/candy-drop/games/royal-checkers/index.html) | Read the jump beyond the jump. | 3–6 min |
+| [Dice District](https://decoyindia.github.io/candy-drop/games/dice-district/index.html) | Five dice. Thirteen good decisions. | 3–5 min |
+| [Domino Trail](https://decoyindia.github.io/candy-drop/games/domino-trail/index.html) | Follow the numbers. Clear your hand. | 2–5 min |
+| [Pinball Grove](https://decoyindia.github.io/candy-drop/games/pinball-grove/index.html) | Five flowers. One more ball. | 1–3 min |
+
+### Timing · 7
+
+| Game | What brings you back | Session |
+| --- | --- | --- |
+| [Flappy Fin](https://decoyindia.github.io/candy-drop/games/flappy-fin/index.html) | A tiny fin. A perfect little rhythm. | 1 min |
+| [Tunnel Dash](https://decoyindia.github.io/candy-drop/games/tunnel-dash/index.html) | Read the opening. Stay one gate ahead. | 1 min |
+| [Rhythm Rail](https://decoyindia.github.io/candy-drop/games/rhythm-rail/index.html) | Four rails. Find your little groove. | 43 seconds |
+| [Stack Harbor](https://decoyindia.github.io/candy-drop/games/stack-harbor/index.html) | Build a little higher. Land cleaner. | 1–2 min |
+| [Perfect Pour](https://decoyindia.github.io/candy-drop/games/perfect-pour/index.html) | A steady hand. Just enough. | 1 min |
+| [Café Rush](https://decoyindia.github.io/candy-drop/games/cafe-rush/index.html) | Brew, froth, finish. Keep the morning moving. | 90 sec |
+| [Orbit Hop](https://decoyindia.github.io/candy-drop/games/orbit-hop/index.html) | Let go. Find a new world. | 1–2 min |
+
+### Original · 1
+
+| Game | What brings you back | Session |
+| --- | --- | --- |
+| [Candy Drop](https://decoyindia.github.io/candy-drop/index.html) | Catch the candy. Chase the combo. | One more try |
 
 ## Play locally
 
-No installation, account, external assets, API keys or build step is needed to play. Open `arcade.html` in a modern browser, or serve the folder using one of these options:
+All runtime files are local. Open **arcade.html** directly in a modern browser, or serve the repository with either option:
 
 ```bash
-# Node 22+; no npm install needed for the server
+# Node 22+; the server needs no npm install
 npm start
 
 # Or Python 3
 python3 -m http.server 8321
 ```
 
-Visit **http://localhost:8321/arcade.html**. The included Node server also opens the hub at `/`; ordinary static hosting keeps the original Candy Drop at `/index.html`.
+Visit **http://localhost:8321/arcade.html**. The included Node server serves the hub at /; normal static hosting keeps Candy Drop at /index.html. Relative asset paths work on GitHub Pages repository subpaths. No bundler, API key, database or server application is needed.
 
-All links are relative, so the collection works under a GitHub Pages repository subpath or on any static host. Publish the repository files without a bundler. No server application or database is required.
+## Controls and comfort
 
-## Controls
+Each game begins with its own rules and has visible touch buttons plus an expandable keyboard guide. Board games support selecting cells with the keyboard as well as tapping them. Drag gestures have keyboard alternatives. **P / Escape** pauses or resumes; leaving the tab automatically pauses and clears held input.
 
-Every new game has visible touch buttons, a short introduction, and an expandable control guide. Mouse/touch gestures supplement the keyboard controls where appropriate.
+The shared runtime includes mute, fullscreen, reduced-motion support, independent pointer and keyboard tracking, cancellation of unfinished gestures, and immediate replay. For dense boards on a phone, landscape and fullscreen provide more room. These are visually played canvas games; menus and controls have semantic labels, but board contents are not fully screen-reader navigable.
 
-| Game | Keyboard |
-| --- | --- |
-| Neon Dojo | A/D or ←/→ move; Space/↑ jump; J jab; K kick; L guard. |
-| Sunset Sprint | A/D or ←/→ steer; W/↑ throttle; S/↓ brake; Space boost. |
-| Pocket Striker | WASD/arrows move; Space charges and releases a shot; E passes/switches; Shift sprints. Move into an opponent to tackle. |
-| Orbit Guard | ←/→ select a build pad; T cycles turret type; B/Space builds; U upgrades; X sells; N launches a wave. |
-| Mini Golf Club | ←/→ aim; ↑/↓ set power; Space putt; R returns to the tee for one penalty. Drag back from the ball to aim with touch or mouse. Holes advance automatically. |
-| Skybound | Space/↑ jump, then jump again in the air; Shift/X dash. |
-| Starfall | WASD/arrows move; Space/X pulse shield. Weapons fire automatically. Drag the ship with touch/mouse. |
-| Merge Lab | WASD/arrows or swipe to move; U/Z undo once; F banks the current score. |
-| Candy Drop | Mouse/touch, A/D or ←/→ move; Enter/Space starts. |
+## Progress and daily play
 
-**P / Escape** pauses and resumes. Leaving the tab pauses active games and clears held controls. Sound can be muted; all eight new games have a fullscreen control. The games honor reduced-motion preferences for shake and decorative particles.
+- Personal bests and bronze, silver and gold targets reward improvement.
+- Classic and daily scores are saved separately. Daily seeds use the UTC date and reset at **00:00 UTC**; fixed authored levels remain fixed.
+- The daily featured game rotates through the full modern collection.
+- Result screens suggest an unplayed game, favoring the same category, and let the player copy a score and link.
+- Games explored, runs, completed sessions, medals and favorites stay in this browser. Existing Candy Drop and Candy Arcade progress is retained.
 
-## Reasons to come back
+Progress uses localStorage with a page-lifetime memory fallback when storage is blocked or full. There is no account sync, public leaderboard, score verification service or telemetry. Clearing browser data removes local records.
 
-- **Different skills:** timing, precision, steering, tactics, spatial planning and puzzle strategy each have their own game.
-- **Quick starts and immediate retries:** no signup or loading screen; replay is one click from results.
-- **Personal bests and three medal goals per game:** visible targets make improvement concrete.
-- **Daily runs:** the eight new games offer a date-based seed, with daily records stored separately from classic records. The same game and UTC date reproduce the initial course/board and random stream. Player actions still affect outcomes.
-- **Discovery:** category filters, search, saved favorites, a rotating daily pick and a suggested next game at the end of a run.
-- **Local progress:** games explored, runs started, medals and records remain on the device. Candy Drop keeps its original `candydrop_best` record and also reports new completed runs to the hub.
-- **Shareable results:** copy a score and game link. Sharing is initiated by the player; the app sends no messages or telemetry.
-
-Progress is stored in `localStorage`. If storage is blocked or full, gameplay continues with a page-lifetime memory fallback. There is no account sync, global leaderboard or server-side score validation. Daily reset is **00:00 UTC**. Browser/device data clearing removes saved progress.
-
-## Project layout
-
-```text
-arcade.html                    Collection hub
-index.html                     Original Candy Drop, with arcade navigation/pause/mute
-assets/core.js                 Catalog, seeded randomness and resilient local progress
-assets/arcade.js               Shared canvas lifecycle, input, menus, audio and results
-assets/arcade.css              Responsive hub and game UI
-assets/hub.js                  Discovery, favorites and local statistics
-assets/art/*.svg               Nine original vector illustrations
-games/<game>/index.html        Direct entry page
-games/<game>/game.js           Independent simulation and canvas drawing
-scripts/serve.cjs              Optional dependency-free local server
-scripts/generate-pages.cjs     Rebuild committed game entry pages
-scripts/generate-art.py        Rebuild original SVG artwork
-tests/                        Simulation, storage and real-browser checks
-docs/game-api.md               Contract for adding another game
-```
-
-The eight new games share a 960 × 600 logical canvas. The runtime scales it to the display, caps pixel density, limits particle counts and throttles DOM HUD updates. Each game owns only its simulation and drawing; one runtime owns time, events and storage. Paused time never advances the simulation. Game code and vector art are local; audio uses a small Web Audio synthesizer.
-
-## Development and checks
-
-The games do not need development dependencies at runtime. For contributors:
+## Development and verification
 
 ```bash
 npm ci
@@ -100,8 +148,28 @@ npx playwright install chromium
 npm run test:browser
 ```
 
-`npm test` exercises deterministic state, game mechanics, meaningful victory/loss transitions, and progress storage. `npm run test:browser` starts a temporary static server and checks actual browser input, menus, replay, daily reset, touch interactions, asset loading and mobile layouts. Set `CHROMIUM_PATH` to use an existing Chromium installation.
+The game tests exercise meaningful rules and results: solvable puzzle construction, actual winning input sequences, AI turns, scoring, collisions, resources, input cancellation, seeded behavior and storage edge cases. Every game is checked for finite rendering, repeatable initialization, and drawing that leaves the simulation and random stream unchanged.
 
-The GitHub Actions workflow runs both suites on pushes and pull requests. Browser screenshots and failure diagnostics are retained as workflow artifacts for visual review. Test-only simulation hooks are exposed only with `?test=1`.
+The browser suite checks the hub, every modern game on desktop and a 390px touch viewport, start/pause/resume/restart, reproducible daily state, asset loading, image proportions, touch-target sizes and mobile instructions. It also retains the original Candy Drop checks. GitHub Actions runs both suites and retains browser screenshots and failure diagnostics as artifacts. Use CHROMIUM_PATH to point at an existing Chromium installation.
 
-To regenerate pages after catalog changes, run `npm run pages`. To regenerate the card artwork, run `python3 scripts/generate-art.py`. Both outputs are committed so deployment remains build-free.
+Test-only simulation and inspection hooks are available only with **?test=1**. They do not affect normal play. Automated checks establish rule and interface behavior; human playtesting is still useful for difficulty and pacing.
+
+## Project layout
+
+| Location | Purpose |
+| --- | --- |
+| arcade.html | Collection hub |
+| index.html | Original Candy Drop |
+| assets/core.js | Catalog, seeded randomness, resilient local progress |
+| assets/arcade.js | Shared canvas lifecycle, input, audio, menus and results |
+| assets/arcade.css, assets/hub.js | Responsive collection and game interfaces |
+| assets/art/ | Original SVG card illustrations |
+| games/&lt;slug&gt;/game.js | Independent game simulation and drawing |
+| games/&lt;slug&gt;/index.html | Committed standalone entry page |
+| scripts/ | Local server and page/art/documentation generators |
+| tests/ | Rule tests and real-browser integration checks |
+| docs/game-api.md | Contract for adding another game |
+
+The runtime uses a 960 × 600 logical canvas, caps pixel density and particles, throttles DOM HUD updates, and does not advance paused simulation time. Game modules own their rules and canvas drawings; the shared runtime owns events, timing and persistence.
+
+After catalog edits, run **npm run pages** and **node scripts/generate-readme.cjs**. Original card art can be regenerated with **python3 scripts/generate-art.py**; expansion scenes have dedicated **scripts/generate-*-art.cjs** generators. All generated outputs are committed, so publishing remains build-free.
