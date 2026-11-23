@@ -87,13 +87,13 @@ async function loadGame(page, slug, options = {}) {
   await assertPhase(page, 'playing');
   await step(page, 0); // Exercise the initial draw immediately, without advancing the simulation.
 }
-async function restartThroughMenu(page) {
+async function restartThroughMenu(page, expectedScore = 0) {
   if ((await state(page)).phase === 'playing') await page.locator('#pause-button').click();
   await assertPhase(page, 'paused');
   await page.getByRole('button', { name: 'Restart run', exact: true }).click();
   await assertPhase(page, 'playing');
   assert.equal((await state(page)).time, 0);
-  assert.equal((await state(page)).score, 0);
+  assert.equal((await state(page)).score, expectedScore, 'restart restores the game-specific initial score');
 }
 
 async function run(name, options, fn) {
@@ -202,7 +202,7 @@ async function endAndReplay(page, slug) {
   assert.ok(saved.games[slug].completed >= 1, 'A completed run must persist');
   assert.ok(saved.games[slug].best >= ended.score, 'Personal best must include the completed score');
   await page.getByRole('button', { name: /Play again/ }).click();
-  await assertPhase(page, 'playing'); assert.equal((await state(page)).score, 0); assert.equal((await state(page)).time, 0);
+  await assertPhase(page, 'playing'); assert.equal((await state(page)).score, expectedScore, 'restart restores the game-specific initial score'); assert.equal((await state(page)).time, 0);
 }
 
 async function main() {
@@ -266,6 +266,7 @@ async function main() {
   for (const slug of EXPANSION_SLUGS) await run(`${slug} desktop lifecycle`, {}, async page => {
     await loadGame(page, slug, { menuScreenshot: false });
     const first = await page.evaluate(() => { window.__arcade.start('daily'); return window.__arcade.inspect(); });
+    const initialScore = (await state(page)).score;
     await page.locator('#game').focus();
     // Exercise a real mapped keyboard key, then real pointer events on the game surface.
     let config; require('node:vm').runInNewContext(fs.readFileSync(path.join(ROOT, 'games', slug, 'game.js'), 'utf8'), { Arcade: { mount(c) { config = c; } } });
@@ -283,7 +284,7 @@ async function main() {
     await step(page);
     await assertNoOverflow(page);
     await screenshot(page, `${slug}-desktop.png`, page.locator('#game-shell'));
-    await restartThroughMenu(page);
+    await restartThroughMenu(page, initialScore);
     const box = await page.locator('#game').boundingBox();
     await page.mouse.click(box.x + box.width * .5, box.y + box.height * .5); await step(page, .1);
     assert.ok(['playing', 'ended'].includes((await state(page)).phase));
